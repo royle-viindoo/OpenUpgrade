@@ -51,7 +51,7 @@ renamed_modules = {
     "to_foreign_trade_currency_rate": "viin_foreign_trade_currency_rate",
     "to_l10n_vn_foreign_trade": "viin_l10n_vn_foreign_trade",
     "to_transit_loc_accounts": "viin_stock_internal_transit_valuation",
-    "viin_transit_loc_accounts_specific_identification": "viin_stock_internal_transit_valuation_specific_identification",
+    "viin_transit_loc_accounts_specific_identification": "viin_stock_internal_transit_valuation_specific_identification",  # noqa: B950
     "to_partner_share_holder": "viin_partner_shareholder",
     # Viindoo/erponline-enterprise
     "to_enterprice_marks_account": "to_enterprise_marks_account",
@@ -91,10 +91,10 @@ merged_modules = {
     # OCA/...
     # Viindoo/tvtmaaddons
     "to_l10n_vn_qweb_layout": "l10n_vn_common",
-    "to_l10n_vn_account_detail_sheet": "to_account_reports_l10n_vn", # (moved to Viindoo/erponline-enterprise)
-    "to_l10n_vn_general_ledger": "to_account_reports_l10n_vn",  # (moved to Viindoo/erponline-enterprise)
-    "viin_l10n_vn_account_cash_book": "to_account_reports_l10n_vn", # (moved to Viindoo/erponline-enterprise)
-    "viin_l10n_vn_invoice_declaration": "to_account_reports_l10n_vn", # (moved to Viindoo/erponline-enterprise)
+    "to_l10n_vn_account_detail_sheet": "to_account_reports_l10n_vn",
+    "to_l10n_vn_general_ledger": "to_account_reports_l10n_vn",
+    "viin_l10n_vn_account_cash_book": "to_account_reports_l10n_vn",
+    "viin_l10n_vn_invoice_declaration": "to_account_reports_l10n_vn",
     "to_foreign_trade": "viin_foreign_trade",
     "to_foreign_trade_landed_cost": "viin_foreign_trade",
     "to_einvoice_common": "l10n_vn_edi",
