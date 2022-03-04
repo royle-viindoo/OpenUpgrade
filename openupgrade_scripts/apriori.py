@@ -58,6 +58,9 @@ renamed_modules = {
     "account_bank_statement_import": "viin_account_bank_statement_import",
     "to_foreign_trade": "viin_foreign_trade",
     "to_l10n_vn_employee_advance": "viin_l10n_vn_hr_account",
+    "to_einvoice_common": "l10n_vn_edi",
+    "to_accounting_sinvoice": "viin_l10n_vn_accounting_sinvoice",
+    "to_accounting_vninvoice": "viin_l10n_vn_accounting_vninvoice",
     # Viindoo/erponline-enterprise
     "to_enterprice_marks_account": "to_enterprise_marks_account",
     "to_enterprice_marks_mrp": "to_enterprise_marks_mrp",
@@ -103,7 +106,6 @@ merged_modules = {
     "viin_l10n_vn_account_cash_book": "to_account_reports_l10n_vn",
     "viin_l10n_vn_invoice_declaration": "to_account_reports_l10n_vn",
     "to_foreign_trade_landed_cost": "viin_foreign_trade",
-    "to_einvoice_common": "l10n_vn_edi",
     "viin_l10n_vn_einvoice_common": "l10n_vn_edi",
     "to_warehouse_imp": "viin_stock",
     "to_l10n_vn_state_group": "to_res_state_group",
@@ -137,11 +139,16 @@ renamed_models = {
     "openupgrade.generate.records.wizard": "upgrade.generate.record.wizard",
     "openupgrade.install.all.wizard": "upgrade.install.wizard",
     # Viindoo/tvtmaaddons
-    "account.sinvoice.serial": "account.einvoice.serial",
-    "account.vninvoice.serial": "account.einvoice.serial",
     # Viindoo/erponline-enterprise
     "account.asset.asset.add.wizard": "asset.fill.missing.values.wizard",
 }
 
 # only used here for upgrade_analysis
-merged_models = {}
+merged_models = {
+    "account.sinvoice.serial": "account.einvoice.serial",
+    "account.sinvoice.template": "account.einvoice.template",
+    "account.sinvoice.type": "account.einvoice.type",
+    "account.vninvoice.serial": "account.einvoice.serial",
+    "account.vninvoice.template": "account.einvoice.template",
+    "account.vninvoice.type": "account.einvoice.type",
+}
