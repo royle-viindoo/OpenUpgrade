@@ -21,7 +21,11 @@ hr_holidays  / hr.leave                 / employee_id (many2one)        : now a 
 hr_holidays  / hr.leave                 / holiday_status_id (many2one)  : now a function
 hr_holidays  / hr.leave                 / manager_id (many2one)         : now a function
 hr_holidays  / hr.leave                 / mode_company_id (many2one)    : now a function
+# NOTHING TO DO
+
 hr_holidays  / hr.leave                 / name (char)                   : not stored anymore
+# DONE: pre-migration: rename name > private_name
+
 hr_holidays  / hr.leave                 / name (char)                   : now a function
 hr_holidays  / hr.leave                 / number_of_days (float)        : now a function
 hr_holidays  / hr.leave                 / request_unit_custom (boolean) : now a function
@@ -37,7 +41,11 @@ hr_holidays  / hr.leave.allocation      / interval_number (integer)     : now a 
 hr_holidays  / hr.leave.allocation      / interval_unit (selection)     : now a function
 hr_holidays  / hr.leave.allocation      / manager_id (many2one)         : now a function
 hr_holidays  / hr.leave.allocation      / mode_company_id (many2one)    : now a function
+# NOTHING TO DO
+
 hr_holidays  / hr.leave.allocation      / name (char)                   : not stored anymore
+# DONE: pre-migration: rename name > private_name
+
 hr_holidays  / hr.leave.allocation      / name (char)                   : now a function
 hr_holidays  / hr.leave.allocation      / number_of_days (float)        : now a function
 hr_holidays  / hr.leave.allocation      / number_per_interval (float)   : now a function
