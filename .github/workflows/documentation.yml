@@ -12,25 +12,25 @@ jobs:
   documentation:
     runs-on: ubuntu-latest
     env:
-      DB: "openupgrade"
+      DB: "viin_upgrade"
       DB_HOST: "localhost"
-      DB_PASSWORD: "odoo"
+      DB_PASSWORD: "viindoo"
       DB_PORT: 5432
-      DB_USERNAME: "odoo"
-      DOWNLOADS: https://github.com/OCA/OpenUpgrade/releases/download/databases
+      DB_USERNAME: "viindoo"
+      DOWNLOADS: https://github.com/Viindoo/OpenUpgrade/releases/download/databases
       ODOO: "./odoo/odoo-bin"
       PGHOST: "localhost"
-      PGPASSWORD: "odoo"
-      PGUSER: "odoo"
+      PGPASSWORD: "viindoo"
+      PGUSER: "viindoo"
     steps:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7
+          python-version: 3.8
       - name: Check out Odoo
         uses: actions/checkout@v2
         with:
-          repository: odoo/odoo
+          repository: Viindoo/odoo
           ref: "15.0"
           fetch-depth: 1
           path: odoo

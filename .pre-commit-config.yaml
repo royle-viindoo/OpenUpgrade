@@ -40,7 +40,7 @@ repos:
       - id: autoflake
         args: ["-i", "--ignore-init-module-imports"]
   - repo: https://github.com/psf/black
-    rev: 21.9b0
+    rev: 22.3.0
     hooks:
       - id: black
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -107,12 +107,12 @@ repos:
       - id: flake8
         name: flake8 except __init__.py
         exclude: /__init__\.py$
-        additional_dependencies: ["flake8-bugbear==20.1.4"]
+        additional_dependencies: ["flake8-bugbear==21.9.2"]
       - id: flake8
         name: flake8 only __init__.py
         args: ["--extend-ignore=F401"] # ignore unused imports in __init__.py
         files: /__init__\.py$
-        additional_dependencies: ["flake8-bugbear==20.1.4"]
+        additional_dependencies: ["flake8-bugbear==21.9.2"]
   - repo: https://github.com/PyCQA/pylint
     rev: v2.11.1
     hooks:
@@ -123,7 +123,7 @@ repos:
           - --exit-zero
         verbose: true
         additional_dependencies: &pylint_deps
-          - pylint-odoo==5.0.4
+          - pylint-odoo==5.0.5
       - id: pylint
         name: pylint with mandatory checks
         args:
