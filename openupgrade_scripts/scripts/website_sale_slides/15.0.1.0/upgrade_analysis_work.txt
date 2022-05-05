@@ -1,0 +1,7 @@
+---Models in module 'website_sale_slides'---
+---Fields in module 'website_sale_slides'---
+---XML records in module 'website_sale_slides'---
+DEL ir.model.constraint: website_sale_slides.constraint_slide_channel_product_id_check
+DEL ir.ui.view: website_sale_slides.assets_frontend
+DEL ir.ui.view: website_sale_slides.course_slides_cards_buy_course
+# NOTHING TO DO: noupdate="0" records

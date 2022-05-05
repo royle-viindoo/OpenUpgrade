@@ -1,0 +1,5 @@
+---Models in module 'pos_six'---
+---Fields in module 'pos_six'---
+---XML records in module 'pos_six'---
+DEL ir.ui.view: pos_six.assets
+# NOTHING TO DO: handled by ORM
