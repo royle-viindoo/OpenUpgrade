@@ -5,7 +5,8 @@ NEW ir.asset: website_blog.s_blog_posts_000_js
 NEW ir.asset: website_blog.s_blog_posts_000_scss
 NEW ir.filters: website_blog.dynamic_snippet_latest_blog_post_filter
 NEW ir.filters: website_blog.dynamic_snippet_most_viewed_blog_post_filter
-ir.ui.view: website_blog.blog_post_template_new_post (noupdate) (noupdate switched)
+DEL ir.model.constraint: website_blog.constraint_blog_tag_category_name_uniq
+DEL ir.model.constraint: website_blog.constraint_blog_tag_name_uniq
 NEW ir.ui.view: website_blog.blog_searchbar_input_snippet_options
 NEW ir.ui.view: website_blog.dynamic_filter_template_blog_post_big_picture
 NEW ir.ui.view: website_blog.dynamic_filter_template_blog_post_card

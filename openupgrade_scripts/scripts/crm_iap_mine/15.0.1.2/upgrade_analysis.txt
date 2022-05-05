@@ -123,8 +123,11 @@ DEL ir.model.access: crm_iap_lead.access_crm_iap_lead_industry [renamed to crm_i
 DEL ir.model.access: crm_iap_lead.access_crm_iap_lead_mining_request [renamed to crm_iap_mine module]
 DEL ir.model.access: crm_iap_lead.access_crm_iap_lead_role [renamed to crm_iap_mine module]
 DEL ir.model.access: crm_iap_lead.access_crm_iap_lead_seniority [renamed to crm_iap_mine module]
-NEW ir.sequence: crm_iap_mine.ir_sequence_crm_iap_mine (noupdate)
-DEL ir.sequence: crm_iap_lead.seq_crm_iap_lead_mining_request (noupdate)
+DEL ir.model.constraint: crm_iap_lead.constraint_crm_iap_lead_industry_name_uniq
+DEL ir.model.constraint: crm_iap_lead.constraint_crm_iap_lead_role_name_uniq
+DEL ir.model.constraint: crm_iap_lead.constraint_crm_iap_lead_seniority_name_uniq
+NEW ir.sequence: crm_iap_mine.ir_sequence_crm_iap_mine
+DEL ir.sequence: crm_iap_lead.seq_crm_iap_lead_mining_request
 NEW ir.ui.menu: crm_iap_mine.crm_iap_lead_mining_request_menu_action [renamed from crm_iap_lead module]
 NEW ir.ui.menu: crm_iap_mine.crm_menu_lead_generation [renamed from crm_iap_lead module]
 DEL ir.ui.menu: crm_iap_lead.crm_iap_lead_mining_request_menu_action [renamed to crm_iap_mine module]
@@ -148,5 +151,5 @@ DEL ir.ui.view: crm_iap_lead.crm_iap_opportunity_kanban
 DEL ir.ui.view: crm_iap_lead.crm_iap_opportunity_tree
 DEL ir.ui.view: crm_iap_lead.enrich_company
 DEL ir.ui.view: crm_iap_lead.res_config_settings_view_form
-NEW mail.template: crm_iap_mine.lead_generation_no_credits [renamed from crm_iap_lead module] (noupdate)
-DEL mail.template: crm_iap_lead.lead_generation_no_credits [renamed to crm_iap_mine module] (noupdate)
+NEW mail.template: crm_iap_mine.lead_generation_no_credits [renamed from crm_iap_lead module]
+DEL mail.template: crm_iap_lead.lead_generation_no_credits [renamed to crm_iap_mine module]

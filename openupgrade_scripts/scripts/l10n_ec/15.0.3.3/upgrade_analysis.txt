@@ -468,7 +468,7 @@ NEW account.account.template: l10n_ec.ec_vat_withhold_30
 NEW account.account.template: l10n_ec.ec_vat_withhold_50
 NEW account.account.template: l10n_ec.ec_vat_withhold_70
 NEW account.account.template: l10n_ec.ec_vat_withhold_others
-NEW account.account.template: l10n_ec.l10n_ec_ifrs_liquidity_transfer (noupdate)
+NEW account.account.template: l10n_ec.l10n_ec_ifrs_liquidity_transfer
 NEW account.account.template: l10n_ec.ret_ir_10x100
 NEW account.account.template: l10n_ec.ret_ir_15x100
 NEW account.account.template: l10n_ec.ret_ir_1_75x100
@@ -767,7 +767,7 @@ DEL account.account.template: l10n_ec.7402020403
 DEL account.account.template: l10n_ec.7402020404
 DEL account.account.template: l10n_ec.74020301
 DEL account.account.template: l10n_ec.74020302
-NEW account.chart.template: l10n_ec.l10n_ec_ifrs (noupdate)
+NEW account.chart.template: l10n_ec.l10n_ec_ifrs
 DEL account.chart.template: l10n_ec.ec_chart_template
 NEW account.fiscal.position.template: l10n_ec.fp_companies
 NEW account.fiscal.position.template: l10n_ec.fp_foreing_company_exports
@@ -895,22 +895,22 @@ NEW account.group.template: l10n_ec.ec52022818
 NEW account.group.template: l10n_ec.ec5203
 NEW account.group.template: l10n_ec.ec5204
 NEW account.group.template: l10n_ec.ec520402
-NEW account.tax.group: l10n_ec.tax_group_ice (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_irbpnr (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_others (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_outflows (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_vat0 (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_vat14 (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_vat_12 (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_vat_excempt (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_vat_not_charged (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_withhold_income (noupdate)
-NEW account.tax.group: l10n_ec.tax_group_withhold_vat (noupdate)
-DEL account.tax.group: l10n_ec.tax_group_iva_12 (noupdate)
-DEL account.tax.group: l10n_ec.tax_group_ret_100 (noupdate)
-DEL account.tax.group: l10n_ec.tax_group_ret_30 (noupdate)
-DEL account.tax.group: l10n_ec.tax_group_ret_70 (noupdate)
-DEL account.tax.group: l10n_ec.tax_group_ret_8 (noupdate)
+NEW account.tax.group: l10n_ec.tax_group_ice
+NEW account.tax.group: l10n_ec.tax_group_irbpnr
+NEW account.tax.group: l10n_ec.tax_group_others
+NEW account.tax.group: l10n_ec.tax_group_outflows
+NEW account.tax.group: l10n_ec.tax_group_vat0
+NEW account.tax.group: l10n_ec.tax_group_vat14
+NEW account.tax.group: l10n_ec.tax_group_vat_12
+NEW account.tax.group: l10n_ec.tax_group_vat_excempt
+NEW account.tax.group: l10n_ec.tax_group_vat_not_charged
+NEW account.tax.group: l10n_ec.tax_group_withhold_income
+NEW account.tax.group: l10n_ec.tax_group_withhold_vat
+DEL account.tax.group: l10n_ec.tax_group_iva_12
+DEL account.tax.group: l10n_ec.tax_group_ret_100
+DEL account.tax.group: l10n_ec.tax_group_ret_30
+DEL account.tax.group: l10n_ec.tax_group_ret_70
+DEL account.tax.group: l10n_ec.tax_group_ret_8
 NEW account.tax.report: l10n_ec.tax_report_103
 NEW account.tax.report: l10n_ec.tax_report_104
 NEW account.tax.report.line: l10n_ec.tax_report_line_103_302

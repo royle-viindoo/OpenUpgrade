@@ -55,8 +55,8 @@ NEW account.group.template: l10n_il.il_group_200200
 NEW account.group.template: l10n_il.il_group_201000
 NEW account.group.template: l10n_il.il_group_202000
 NEW account.group.template: l10n_il.il_group_300000
-NEW account.tax.group: l10n_il.tax_group_vat_exempt_purchase (noupdate)
-DEL account.tax.group: l10n_il.tax_group_retention_purchase (noupdate)
+NEW account.tax.group: l10n_il.tax_group_vat_exempt_purchase
+DEL account.tax.group: l10n_il.tax_group_retention_purchase
 NEW account.tax.template: l10n_il.il_vat_only_purchase
 NEW account.tax.template: l10n_il.il_vat_purchase_zero
 NEW account.tax.template: l10n_il.il_vat_sales_zero

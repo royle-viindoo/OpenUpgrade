@@ -103,6 +103,18 @@ NEW ir.model.access: account.access_account_payment_method_line
 NEW ir.model.access: account.access_account_payment_method_line_readonly
 NEW ir.model.access: account.access_account_tax_carryover_line_ac_user
 NEW ir.model.access: account.access_account_tax_carryover_line_readonly
+DEL ir.model.constraint: account.constraint_account_account_code_company_uniq
+DEL ir.model.constraint: account.constraint_account_fiscal_position_account_account_src_dest_uniq
+DEL ir.model.constraint: account.constraint_account_fiscal_position_tax_tax_src_dest_uniq
+DEL ir.model.constraint: account.constraint_account_group_check_length_prefix
+DEL ir.model.constraint: account.constraint_account_journal_code_company_uniq
+DEL ir.model.constraint: account.constraint_account_move_line_check_accountable_required_fields
+DEL ir.model.constraint: account.constraint_account_move_line_check_amount_currency_balance_sign
+DEL ir.model.constraint: account.constraint_account_move_line_check_credit_debit
+DEL ir.model.constraint: account.constraint_account_move_line_check_non_accountable_fields_null
+DEL ir.model.constraint: account.constraint_account_payment_check_amount_not_negative
+DEL ir.model.constraint: account.constraint_account_tax_name_company_uniq
+DEL ir.model.constraint: account.constraint_account_tax_template_name_company_uniq
 NEW ir.rule: account.account_tax_carryover_line_comp_rule (noupdate)
 NEW ir.ui.menu: account.menu_action_tax_group
 NEW ir.ui.view: account.account_analytic_account_view_form_inherit

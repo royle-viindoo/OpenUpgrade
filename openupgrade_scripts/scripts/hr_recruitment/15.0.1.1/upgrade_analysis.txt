@@ -6,6 +6,8 @@ hr_recruitment / hr.applicant.refuse.reason / template_id (many2one)        : NE
 hr_recruitment / hr.job                   / _order                        : _order is now 'sequence, state desc, name asc' ('state desc, name asc')
 hr_recruitment / hr.recruitment.stage     / hired_stage (boolean)         : NEW
 ---XML records in module 'hr_recruitment'---
+DEL ir.model.constraint: hr_recruitment.constraint_hr_applicant_category_name_uniq
+DEL ir.model.constraint: hr_recruitment.constraint_hr_recruitment_degree_name_uniq
 ir.ui.view: hr_recruitment.applicant_hired_template (noupdate) (noupdate switched)
 NEW ir.ui.view: hr_recruitment.hr_recruitment_source_kanban
 DEL ir.ui.view: hr_recruitment.assets_backend

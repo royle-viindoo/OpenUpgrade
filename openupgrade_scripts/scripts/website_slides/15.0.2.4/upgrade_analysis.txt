@@ -7,7 +7,9 @@ website_slides / slide.slide              / description (text)            : type
 website_slides / slide.slide              / embed_code (text)             : type is now 'html' ('text')
 ---XML records in module 'website_slides'---
 NEW ir.actions.act_window: website_slides.slide_channel_partner_action_report
-NEW ir.rule: website_slides.rule_slide_channel_tag_public (noupdate)
+DEL ir.model.constraint: website_slides.constraint_slide_slide_exclusion_html_content_and_url
+DEL ir.model.constraint: website_slides.constraint_slide_tag_slide_tag_unique
+NEW ir.rule: website_slides.rule_slide_channel_tag_public
 NEW ir.ui.menu: website_slides.website_slides_menu_report_attendees
 NEW ir.ui.view: website_slides.slide_channel_partner_view_kanban
 NEW ir.ui.view: website_slides.slide_searchbar_input_snippet_options
@@ -17,4 +19,4 @@ DEL ir.ui.view: website_slides.assets_frontend
 DEL ir.ui.view: website_slides.assets_tests
 DEL ir.ui.view: website_slides.slide_embed_assets
 DEL ir.ui.view: website_slides.website_slides_tests
-NEW mail.template: website_slides.mail_template_channel_completed (noupdate)
+NEW mail.template: website_slides.mail_template_channel_completed

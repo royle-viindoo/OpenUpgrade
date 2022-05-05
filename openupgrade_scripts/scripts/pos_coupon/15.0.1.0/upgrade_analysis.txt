@@ -16,7 +16,7 @@ pos_coupon   / pos.order.line           / coupon_id (many2one)          : NEW re
 pos_coupon   / pos.order.line           / is_program_reward (boolean)   : NEW
 pos_coupon   / pos.order.line           / program_id (many2one)         : NEW relation: coupon.program
 ---XML records in module 'pos_coupon'---
-NEW barcode.rule: pos_coupon.barcode_rule_coupon (noupdate)
+NEW barcode.rule: pos_coupon.barcode_rule_coupon
 NEW ir.model.access: pos_coupon.access_coupon_generate_wizard
 NEW ir.model.access: pos_coupon.access_coupon_pos_manager
 NEW ir.model.access: pos_coupon.access_coupon_pos_user
@@ -33,4 +33,4 @@ NEW ir.ui.view: pos_coupon.pos_coupon_program_view_coupon_program_form
 NEW ir.ui.view: pos_coupon.pos_coupon_program_view_promo_program_form
 NEW ir.ui.view: pos_coupon.pos_coupon_view_form
 NEW ir.ui.view: pos_coupon.res_config_view_form_inherit_pos_coupon
-NEW mail.template: pos_coupon.mail_coupon_template (noupdate)
+NEW mail.template: pos_coupon.mail_coupon_template

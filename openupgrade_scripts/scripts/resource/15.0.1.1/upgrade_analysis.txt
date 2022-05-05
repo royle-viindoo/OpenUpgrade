@@ -4,6 +4,7 @@ resource     / resource.calendar.leaves / company_id (many2one)         : not re
 resource     / resource.calendar.leaves / company_id (many2one)         : now a function
 resource     / resource.resource        / _order                        : _order is now 'name' ('id')
 ---XML records in module 'resource'---
+DEL ir.model.constraint: resource.constraint_resource_resource_check_time_efficiency
 NEW ir.rule: resource.resource_calendar_leaves_rule_multi_company (noupdate)
 NEW ir.rule: resource.resource_resource_multi_company (noupdate)
 DEL ir.ui.view: resource.assets_backend

@@ -11,10 +11,11 @@ NEW ir.actions.act_window.view: hr_timesheet.timesheet_action_view_report_by_pro
 NEW ir.actions.act_window.view: hr_timesheet.timesheet_action_view_report_by_task_kanban
 NEW ir.actions.report: hr_timesheet.timesheet_report_project
 NEW ir.actions.report: hr_timesheet.timesheet_report_task
-DEL ir.config_parameter: hr_timesheet.ir_config_parameter_timesheet_min_duration (noupdate)
-DEL ir.config_parameter: hr_timesheet.ir_config_parameter_timesheet_rounding (noupdate)
-NEW ir.model.access: hr_timesheet.access_account_analytic_line_portal_user (noupdate)
-NEW ir.rule: hr_timesheet.timesheet_line_rule_portal_user (noupdate)
+DEL ir.config_parameter: hr_timesheet.ir_config_parameter_timesheet_min_duration
+DEL ir.config_parameter: hr_timesheet.ir_config_parameter_timesheet_rounding
+NEW ir.model.access: hr_timesheet.access_account_analytic_line_portal_user
+DEL ir.model.constraint: hr_timesheet.constraint_project_task_create_timesheet_time_positive
+NEW ir.rule: hr_timesheet.timesheet_line_rule_portal_user
 NEW ir.ui.menu: hr_timesheet.timesheet_menu_activity_user
 DEL ir.ui.menu: hr_timesheet.hr_timesheet_config_settings_menu_action
 NEW ir.ui.view: hr_timesheet.portal_my_task_planned_hours_template

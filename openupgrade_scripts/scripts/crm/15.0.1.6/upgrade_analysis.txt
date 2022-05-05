@@ -30,6 +30,9 @@ NEW ir.actions.act_window.view: crm.crm_lead_action_forecast_view_tree
 NEW ir.actions.server: crm.action_opportunity_forecast
 NEW ir.cron: crm.ir_cron_crm_lead_assign (noupdate)
 NEW ir.model.access: crm.crm_lead_pls_update_access_system
+DEL ir.model.access: crm.access_crm_lead_partner_manager
+DEL ir.model.constraint: crm.constraint_crm_lead_check_probability
+DEL ir.model.constraint: crm.constraint_crm_recurring_plan_check_number_of_months
 NEW ir.ui.menu: crm.crm_menu_forecast
 NEW ir.ui.menu: crm.crm_team_member_config
 NEW ir.ui.view: crm.crm_action_helper

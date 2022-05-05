@@ -65,11 +65,12 @@ DEL ir.model.access: payment.payment_method_all
 DEL ir.model.access: payment.payment_method_portal
 DEL ir.model.access: payment.payment_method_system
 DEL ir.model.access: payment.payment_method_user
-NEW ir.rule: payment.payment_acquirer_company_rule (noupdate)
-NEW ir.rule: payment.payment_token_billing_rule (noupdate)
-NEW ir.rule: payment.payment_token_company_rule (noupdate)
-NEW ir.rule: payment.transaction_company_rule (noupdate)
-DEL ir.rule: payment.payment_token_salesman_rule (noupdate)
+DEL ir.model.constraint: payment.constraint_payment_transaction_reference_uniq
+NEW ir.rule: payment.payment_acquirer_company_rule
+NEW ir.rule: payment.payment_token_billing_rule
+NEW ir.rule: payment.payment_token_company_rule
+NEW ir.rule: payment.transaction_company_rule
+DEL ir.rule: payment.payment_token_salesman_rule
 NEW ir.ui.view: payment.checkout
 NEW ir.ui.view: payment.footer
 NEW ir.ui.view: payment.icon_list
@@ -101,7 +102,7 @@ DEL ir.ui.view: payment.acquirer_list
 DEL ir.ui.view: payment.acquirer_search
 DEL ir.ui.view: payment.assets_backend
 DEL ir.ui.view: payment.assets_frontend
-DEL ir.ui.view: payment.default_acquirer_button (noupdate)
+DEL ir.ui.view: payment.default_acquirer_button
 DEL ir.ui.view: payment.pay_methods
 DEL ir.ui.view: payment.payment_confirmation_status
 DEL ir.ui.view: payment.payment_icon_form_view
@@ -115,13 +116,13 @@ DEL ir.ui.view: payment.transaction_form
 DEL ir.ui.view: payment.transaction_list
 DEL ir.ui.view: payment.transaction_view_kanban
 DEL ir.ui.view: payment_fix_register_token.view_account_payment_register_form_inherit_payment
-NEW payment.acquirer: payment.payment_acquirer_mollie (noupdate)
-NEW payment.acquirer: payment.payment_acquirer_ogone (noupdate)
-NEW payment.acquirer: payment.payment_acquirer_payumoney (noupdate)
-NEW payment.acquirer: payment.payment_acquirer_test (noupdate)
-DEL payment.acquirer: payment.payment_acquirer_ingenico (noupdate)
-DEL payment.acquirer: payment.payment_acquirer_odoo_by_adyen (noupdate)
-DEL payment.acquirer: payment.payment_acquirer_payu (noupdate)
+NEW payment.acquirer: payment.payment_acquirer_mollie
+NEW payment.acquirer: payment.payment_acquirer_ogone
+NEW payment.acquirer: payment.payment_acquirer_payumoney
+NEW payment.acquirer: payment.payment_acquirer_test
+DEL payment.acquirer: payment.payment_acquirer_ingenico
+DEL payment.acquirer: payment.payment_acquirer_odoo_by_adyen
+DEL payment.acquirer: payment.payment_acquirer_payu
 NEW payment.icon: payment.payment_icon_apple_pay
 NEW payment.icon: payment.payment_icon_kbc
 NEW payment.icon: payment.payment_icon_paypal

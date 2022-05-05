@@ -60,8 +60,11 @@ lunch        / lunch.topping            / supplier_id (many2one)        : NEW re
 DEL ir.cron: lunch.ir_cron_lunch (noupdate)
 DEL ir.cron: lunch.ir_cron_lunch_alerts (noupdate)
 DEL ir.model.access: lunch.lunch_product_report_user
+DEL ir.model.constraint: lunch.constraint_lunch_alert_notification_time_range
+DEL ir.model.constraint: lunch.constraint_lunch_supplier_automatic_email_time_range
 NEW ir.rule: lunch.ir_rule_lunch_order_multi_company (noupdate)
 DEL ir.rule: lunch.ir_rule_lunch_product_report_multi_company (noupdate)
+NEW ir.ui.view: lunch.lunch_product_view_tree_order
 DEL ir.ui.view: lunch.assets_backend
 DEL ir.ui.view: lunch.lunch_product_report_view_search
 DEL ir.ui.view: lunch.lunch_product_report_view_tree

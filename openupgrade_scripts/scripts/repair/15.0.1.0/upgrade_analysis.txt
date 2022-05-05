@@ -11,4 +11,6 @@ repair       / repair.order             / state (selection)             : select
 ---XML records in module 'repair'---
 NEW ir.actions.act_window: repair.action_repair_move_lines
 DEL ir.model.access: repair.access_stock_production_lot_user
+DEL ir.model.constraint: repair.constraint_repair_order_name
+DEL ir.model.constraint: repair.constraint_repair_tags_name_uniq
 NEW ir.ui.view: repair.stock_production_lot_view_form

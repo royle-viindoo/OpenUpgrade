@@ -10,6 +10,7 @@ NEW ir.actions.act_window.view: im_livechat.rating_rating_action_livechat_report
 NEW ir.actions.act_window.view: im_livechat.rating_rating_action_livechat_report_view_kanban
 NEW ir.actions.act_window.view: im_livechat.rating_rating_action_livechat_view_form
 NEW ir.actions.act_window.view: im_livechat.rating_rating_action_livechat_view_kanban
+DEL ir.model.constraint: im_livechat.constraint_mail_channel_livechat_operator_id
 NEW ir.ui.view: im_livechat.rating_rating_view_form_livechat
 DEL ir.ui.view: im_livechat.assets_backend
 DEL ir.ui.view: im_livechat.external_lib

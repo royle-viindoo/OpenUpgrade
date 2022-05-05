@@ -7,4 +7,4 @@ NEW ir.ui.view: payment_transfer.payment_acquirer_form
 NEW ir.ui.view: payment_transfer.redirect_form
 NEW ir.ui.view: payment_transfer.transfer_transaction_status
 DEL ir.ui.view: payment_transfer.payment_acquirer_view_form_inherit_transfer
-DEL ir.ui.view: payment_transfer.transfer_form (noupdate)
+DEL ir.ui.view: payment_transfer.transfer_form

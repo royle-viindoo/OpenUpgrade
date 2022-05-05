@@ -16,7 +16,7 @@ event_booth_sale / event.booth.registration / contact_phone (char)          : NE
 event_booth_sale / event.booth.registration / event_booth_id (many2one)     : NEW relation: event.booth, required
 event_booth_sale / event.booth.registration / partner_id (many2one)         : NEW relation: res.partner, isrelated: related, stored
 event_booth_sale / event.booth.registration / sale_order_line_id (many2one) : NEW relation: sale.order.line, required
-event_booth_sale / product.template         / detailed_type (False)         : NEW selection_keys: ['consu', 'event', 'event_booth', 'gift', 'product', 'service'], mode: modify
+event_booth_sale / product.template         / detailed_type (False)         : NEW selection_keys: ['consu', 'equipment', 'event', 'event_booth', 'gift', 'product', 'service'], mode: modify
 event_booth_sale / sale.order               / event_booth_ids (one2many)    : NEW relation: event.booth
 event_booth_sale / sale.order.line          / event_booth_category_id (many2one): NEW relation: event.booth.category
 event_booth_sale / sale.order.line          / event_booth_ids (one2many)    : NEW relation: event.booth

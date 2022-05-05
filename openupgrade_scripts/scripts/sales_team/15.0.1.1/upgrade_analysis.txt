@@ -26,6 +26,7 @@ DEL ir.actions.act_window: sales_team.sales_team_config_action
 NEW ir.model.access: sales_team.access_crm_team_member_all
 NEW ir.model.access: sales_team.access_crm_team_member_manager
 NEW ir.model.access: sales_team.access_crm_team_member_user
+DEL ir.model.constraint: sales_team.constraint_crm_tag_name_uniq
 NEW ir.ui.view: sales_team.crm_team_member_view_form
 NEW ir.ui.view: sales_team.crm_team_member_view_form_from_team
 NEW ir.ui.view: sales_team.crm_team_member_view_kanban

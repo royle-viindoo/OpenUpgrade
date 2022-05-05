@@ -59,6 +59,7 @@ NEW ir.model.access: point_of_sale.access_account_payment_method_line_pos_user
 NEW ir.model.access: point_of_sale.access_pos_bill
 NEW ir.model.access: point_of_sale.access_pos_close_session_wizard
 DEL ir.model.access: point_of_sale.access_closing_balance_confirm_wizard
+DEL ir.model.constraint: point_of_sale.constraint_pos_session_uniq_name
 NEW ir.ui.menu: point_of_sale.menu_pos_bill
 NEW ir.ui.view: point_of_sale.product_product_tree_view
 NEW ir.ui.view: point_of_sale.product_template_only_form_view
@@ -78,18 +79,18 @@ DEL ir.ui.view: point_of_sale.qunit_suite_tests
 DEL ir.ui.view: point_of_sale.report_invoice
 DEL ir.ui.view: point_of_sale.view_account_bnk_stmt_cashbox
 DEL ir.ui.view: point_of_sale.view_account_bnk_stmt_cashbox_footer
-NEW pos.bill: point_of_sale.0_01 (noupdate)
-NEW pos.bill: point_of_sale.0_02 (noupdate)
-NEW pos.bill: point_of_sale.0_05 (noupdate)
-NEW pos.bill: point_of_sale.0_10 (noupdate)
-NEW pos.bill: point_of_sale.0_20 (noupdate)
-NEW pos.bill: point_of_sale.0_50 (noupdate)
-NEW pos.bill: point_of_sale.100_00 (noupdate)
-NEW pos.bill: point_of_sale.10_00 (noupdate)
-NEW pos.bill: point_of_sale.1_00 (noupdate)
-NEW pos.bill: point_of_sale.200_00 (noupdate)
-NEW pos.bill: point_of_sale.20_00 (noupdate)
-NEW pos.bill: point_of_sale.2_00 (noupdate)
-NEW pos.bill: point_of_sale.500_00 (noupdate)
-NEW pos.bill: point_of_sale.50_00 (noupdate)
-NEW pos.bill: point_of_sale.5_00 (noupdate)
+NEW pos.bill: point_of_sale.0_01
+NEW pos.bill: point_of_sale.0_02
+NEW pos.bill: point_of_sale.0_05
+NEW pos.bill: point_of_sale.0_10
+NEW pos.bill: point_of_sale.0_20
+NEW pos.bill: point_of_sale.0_50
+NEW pos.bill: point_of_sale.100_00
+NEW pos.bill: point_of_sale.10_00
+NEW pos.bill: point_of_sale.1_00
+NEW pos.bill: point_of_sale.200_00
+NEW pos.bill: point_of_sale.20_00
+NEW pos.bill: point_of_sale.2_00
+NEW pos.bill: point_of_sale.500_00
+NEW pos.bill: point_of_sale.50_00
+NEW pos.bill: point_of_sale.5_00

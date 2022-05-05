@@ -4,6 +4,9 @@ uom          / uom.category             / reference_uom_id (many2one)   : NEW re
 uom          / uom.category             / uom_ids (one2many)            : NEW relation: uom.uom
 uom          / uom.uom                  / _order                        : _order is now 'factor DESC, id' ('name')
 ---XML records in module 'uom'---
+DEL ir.model.constraint: uom.constraint_uom_uom_factor_gt_zero
+DEL ir.model.constraint: uom.constraint_uom_uom_factor_reference_is_one
+DEL ir.model.constraint: uom.constraint_uom_uom_rounding_gt_zero
 NEW ir.ui.view: uom.uom_categ_view_search
 NEW uom.category: uom.uom_categ_surface (noupdate)
 NEW uom.uom: uom.product_uom_millimeter (noupdate)

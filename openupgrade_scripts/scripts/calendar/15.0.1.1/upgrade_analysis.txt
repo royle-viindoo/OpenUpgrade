@@ -41,6 +41,9 @@ NEW ir.model.access: calendar.access_calendar_filters
 NEW ir.model.access: calendar.access_calendar_filters_all
 DEL ir.model.access: calendar.access_calendar_contacts
 DEL ir.model.access: calendar.access_calendar_contacts_all
+DEL ir.model.constraint: calendar.constraint_calendar_contacts_user_id_partner_id_unique
+DEL ir.model.constraint: calendar.constraint_calendar_event_type_name_uniq
+DEL ir.model.constraint: calendar.constraint_calendar_recurrence_month_day
 NEW ir.ui.menu: calendar.calendar_menu_config
 NEW ir.ui.menu: calendar.calendar_submenu_reminders
 NEW ir.ui.view: calendar.res_partner_kanban_view

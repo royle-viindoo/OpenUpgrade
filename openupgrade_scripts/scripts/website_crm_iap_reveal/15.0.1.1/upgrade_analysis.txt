@@ -43,15 +43,15 @@ website_crm_iap_reveal / crm.reveal.view          / reveal_state (selection)    
 ---XML records in module 'website_crm_iap_reveal'---
 NEW ir.actions.act_window: website_crm_iap_reveal.crm_reveal_rule_action [renamed from crm_iap_lead_website module]
 NEW ir.actions.act_window: website_crm_iap_reveal.crm_reveal_view_action [renamed from crm_iap_lead_website module]
-NEW ir.cron: website_crm_iap_reveal.ir_cron_crm_reveal_lead [renamed from crm_iap_lead_website module] (noupdate)
+NEW ir.cron: website_crm_iap_reveal.ir_cron_crm_reveal_lead [renamed from crm_iap_lead_website module]
 NEW ir.model.access: website_crm_iap_reveal.access_crm_reveal_rule_manager
 NEW ir.model.access: website_crm_iap_reveal.access_crm_reveal_rule_salesman
 NEW ir.model.access: website_crm_iap_reveal.access_crm_reveal_view_manager
 NEW ir.model.access: website_crm_iap_reveal.access_crm_reveal_view_salesman
-NEW ir.rule: website_crm_iap_reveal.ir_rule_crm_reveal_rule_all (noupdate)
-NEW ir.rule: website_crm_iap_reveal.ir_rule_crm_reveal_rule_salesman (noupdate)
-NEW ir.rule: website_crm_iap_reveal.ir_rule_crm_reveal_view_all (noupdate)
-NEW ir.rule: website_crm_iap_reveal.ir_rule_crm_reveal_view_salesman (noupdate)
+NEW ir.rule: website_crm_iap_reveal.ir_rule_crm_reveal_rule_all
+NEW ir.rule: website_crm_iap_reveal.ir_rule_crm_reveal_rule_salesman
+NEW ir.rule: website_crm_iap_reveal.ir_rule_crm_reveal_view_all
+NEW ir.rule: website_crm_iap_reveal.ir_rule_crm_reveal_view_salesman
 NEW ir.ui.menu: website_crm_iap_reveal.crm_reveal_rule_menu_action [renamed from crm_iap_lead_website module]
 NEW ir.ui.menu: website_crm_iap_reveal.crm_reveal_view_menu_action [renamed from crm_iap_lead_website module]
 NEW ir.ui.view: website_crm_iap_reveal.crm_lead_view_graph

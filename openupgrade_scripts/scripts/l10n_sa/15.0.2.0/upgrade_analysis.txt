@@ -225,9 +225,9 @@ DEL account.account.template: l10n_sa.base_miscexpense
 DEL account.account.template: l10n_sa.base_miscincome
 NEW account.chart.template: l10n_sa.sa_chart_template_standard
 DEL account.chart.template: l10n_sa.account_arabic_coa_general
-NEW account.fiscal.position.template: l10n_sa.l10n_sa_account_fiscal_position_gcc (noupdate)
-NEW account.fiscal.position.template: l10n_sa.l10n_sa_account_fiscal_position_ksa (noupdate)
-NEW account.fiscal.position.template: l10n_sa.l10n_sa_account_fiscal_position_non_gcc (noupdate)
+NEW account.fiscal.position.template: l10n_sa.l10n_sa_account_fiscal_position_gcc
+NEW account.fiscal.position.template: l10n_sa.l10n_sa_account_fiscal_position_ksa
+NEW account.fiscal.position.template: l10n_sa.l10n_sa_account_fiscal_position_non_gcc
 NEW account.tax.group: l10n_sa.sa_tax_group_taxes_15
 NEW account.tax.group: l10n_sa.sa_tax_group_taxes_other
 NEW account.tax.group: l10n_sa.sa_tax_group_taxes_withholding

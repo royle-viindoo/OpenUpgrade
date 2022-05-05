@@ -15,8 +15,10 @@ DEL ir.actions.server: hr_expense.hr_expense_sheet_approve_action_server
 DEL ir.actions.server: hr_expense.hr_expense_sheet_post_action_server
 DEL ir.actions.server: hr_expense.hr_expense_submit_action_server
 NEW ir.model.access: hr_expense.access_hr_expense_approve_duplicate
+DEL ir.model.constraint: hr_expense.constraint_hr_expense_sheet_journal_id_required_posted
 NEW ir.ui.view: hr_expense.hr_expense_approve_duplicate_view_form
 NEW ir.ui.view: hr_expense.product_template_search_view_inherit_hr_expense
 DEL ir.ui.view: hr_expense.assets_backend
 DEL ir.ui.view: hr_expense.assets_tests
 DEL ir.ui.view: hr_expense.view_product_hr_expense_form
+NEW product.product: hr_expense.product_product_zero_cost

@@ -11,4 +11,4 @@ NEW ir.ui.view: stock_account.view_category_property_form_stock
 NEW ir.ui.view: stock_account.view_stock_quant_tree_inventory_editable_inherit_stock_account
 DEL ir.ui.view: stock_account.view_inventory_form_inherit
 DEL ir.ui.view: stock_account.view_inventory_tree
-NEW res.groups: stock_account.group_lot_on_invoice [renamed from sale_stock module] (noupdate) (noupdate switched)
+NEW res.groups: stock_account.group_lot_on_invoice [renamed from sale_stock module]

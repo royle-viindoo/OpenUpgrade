@@ -38,6 +38,7 @@ base         / res.company              / mobile (char)                 : NEW is
 base         / res.company              / report_footer (text)          : type is now 'html' ('text')
 base         / res.company              / report_header (text)          : type is now 'html' ('text')
 base         / res.currency             / full_name (char)              : NEW
+base         / res.currency             / inverse_rate (float)          : NEW not stored anymore
 base         / res.partner              / comment (text)                : type is now 'html' ('text')
 base         / res.partner              / country_code (char)           : previously in module l10n_id_efaktur
 base         / res.users                / comment (text)                : type is now 'html' ('text')
@@ -54,6 +55,34 @@ NEW ir.model.access: base.access_base_enable_profiling_wizard
 NEW ir.model.access: base.access_ir_asset_group_system
 NEW ir.model.access: base.access_ir_cron_trigger_group_cron
 NEW ir.model.access: base.access_ir_profile
+DEL ir.model.constraint: base.constraint_decimal_precision_name_uniq
+DEL ir.model.constraint: base.constraint_ir_config_parameter_key_uniq
+DEL ir.model.constraint: base.constraint_ir_filters_name_model_uid_unique
+DEL ir.model.constraint: base.constraint_ir_model_constraint_module_name_uniq
+DEL ir.model.constraint: base.constraint_ir_model_data_name_nospaces
+DEL ir.model.constraint: base.constraint_ir_model_fields_name_unique
+DEL ir.model.constraint: base.constraint_ir_model_fields_selection_selection_field_uniq
+DEL ir.model.constraint: base.constraint_ir_model_fields_size_gt_zero
+DEL ir.model.constraint: base.constraint_ir_model_obj_name_uniq
+DEL ir.model.constraint: base.constraint_ir_module_module_name_uniq
+DEL ir.model.constraint: base.constraint_ir_rule_no_access_rights
+DEL ir.model.constraint: base.constraint_ir_translation_lang_fkey_res_lang
+DEL ir.model.constraint: base.constraint_ir_ui_view_inheritance_mode
+DEL ir.model.constraint: base.constraint_ir_ui_view_qweb_required_key
+DEL ir.model.constraint: base.constraint_res_company_name_uniq
+DEL ir.model.constraint: base.constraint_res_country_code_uniq
+DEL ir.model.constraint: base.constraint_res_country_name_uniq
+DEL ir.model.constraint: base.constraint_res_country_state_name_code_uniq
+DEL ir.model.constraint: base.constraint_res_currency_rate_currency_rate_check
+DEL ir.model.constraint: base.constraint_res_currency_rounding_gt_zero
+DEL ir.model.constraint: base.constraint_res_currency_unique_name
+DEL ir.model.constraint: base.constraint_res_groups_name_uniq
+DEL ir.model.constraint: base.constraint_res_lang_code_uniq
+DEL ir.model.constraint: base.constraint_res_lang_name_uniq
+DEL ir.model.constraint: base.constraint_res_lang_url_code_uniq
+DEL ir.model.constraint: base.constraint_res_partner_bank_unique_number
+DEL ir.model.constraint: base.constraint_res_partner_check_name
+DEL ir.model.constraint: base.constraint_res_users_login_key
 NEW ir.module.category: base.module_category_services_field_service
 NEW ir.module.module: base.module_appointment (noupdate)
 NEW ir.module.module: base.module_industry_fsm (noupdate)

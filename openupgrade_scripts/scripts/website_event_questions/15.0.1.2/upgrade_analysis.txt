@@ -13,4 +13,5 @@ DEL ir.model.access: website_event_questions.event_question_answer_all
 DEL ir.model.access: website_event_questions.event_question_answer_event_user
 DEL ir.model.access: website_event_questions.event_question_event_user
 DEL ir.model.access: website_event_questions.event_registration_answer_event_user
+DEL ir.model.constraint: website_event_questions.constraint_event_registration_answer_value_check
 DEL ir.ui.view: website_event_questions.assets_tests

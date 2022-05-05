@@ -7,7 +7,13 @@ sale         / sale.order.line          / product_packaging_qty (float) : NEW
 ---XML records in module 'sale'---
 NEW ir.actions.act_window: sale.action_accrued_revenue_entry
 NEW ir.actions.act_window: sale.action_sale_order_form_view
+NEW ir.cron: sale.send_invoice_cron
 DEL ir.model.access: sale.access_product_group_res_partner_sale_manager
+DEL ir.model.constraint: sale.constraint_product_attribute_custom_value_sol_custom_value_unique
+DEL ir.model.constraint: sale.constraint_res_company_check_quotation_validity_days
+DEL ir.model.constraint: sale.constraint_sale_order_date_order_conditional_required
+DEL ir.model.constraint: sale.constraint_sale_order_line_accountable_required_fields
+DEL ir.model.constraint: sale.constraint_sale_order_line_non_accountable_null_fields
 NEW ir.ui.view: sale.account_invoice_report_view_tree
 NEW ir.ui.view: sale.badge_extra_price
 NEW ir.ui.view: sale.crm_team_view_kanban_dashboard

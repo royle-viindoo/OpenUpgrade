@@ -3,7 +3,9 @@
 payment_ingenico / payment.acquirer         / ogone_alias_usage (char)      : DEL
 payment_ingenico / payment.acquirer         / provider (False)              : selection_keys is now '['adyen', 'alipay', 'authorize', 'buckaroo', 'mollie', 'none', 'ogone']' ('['adyen', 'alipay', 'authorize', 'buckaroo', 'manual', 'ogone']')
 ---XML records in module 'payment_ogone'---
-NEW account.payment.method: payment_ogone.payment_method_ogone (noupdate)
+NEW account.payment.method: payment_ogone.payment_method_ogone
+NEW ir.config_parameter: payment_ogone.payment_ogone_hash_function [renamed from payment_ingenico module]
+DEL ir.config_parameter: payment_ingenico.payment_ogone_hash_function [renamed to payment_ogone module]
 NEW ir.ui.view: payment_ogone.payment_acquirer_form
 NEW ir.ui.view: payment_ogone.redirect_form
 DEL ir.ui.view: payment_ingenico.acquirer_form_ogone

@@ -7,7 +7,7 @@ website_event_booth / event.type               / booth_menu (boolean)          :
 website_event_booth / website.event.menu       / menu_type (False)             : NEW selection_keys: ['booth', 'community', 'introduction', 'location', 'register'], mode: modify
 ---XML records in module 'website_event_booth'---
 NEW ir.model.access: website_event_booth.access_event_booth_all
-NEW ir.rule: website_event_booth.ir_rule_event_booth_public (noupdate)
+NEW ir.rule: website_event_booth.ir_rule_event_booth_public
 NEW ir.ui.view: website_event_booth.event_booth_layout
 NEW ir.ui.view: website_event_booth.event_booth_registration
 NEW ir.ui.view: website_event_booth.event_booth_registration_complete

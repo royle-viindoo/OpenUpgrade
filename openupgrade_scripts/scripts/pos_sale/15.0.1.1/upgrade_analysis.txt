@@ -13,4 +13,4 @@ NEW ir.ui.view: pos_sale.report_invoice_document
 NEW ir.ui.view: pos_sale.view_order_form_inherit_pos_sale
 NEW ir.ui.view: pos_sale.view_pos_order_form_inherit_pos_sale
 DEL ir.ui.view: pos_sale.crm_team_salesteams_view_kanban_inherit_pos_sale
-NEW product.product: pos_sale.default_downpayment_product (noupdate)
+NEW product.product: pos_sale.default_downpayment_product

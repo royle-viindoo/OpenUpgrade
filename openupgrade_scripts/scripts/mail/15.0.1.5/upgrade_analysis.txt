@@ -132,6 +132,13 @@ NEW ir.model.access: mail.access_res_users_settings_user
 NEW ir.model.access: mail.access_res_users_settings_volumes_all
 NEW ir.model.access: mail.access_res_users_settings_volumes_user
 DEL ir.model.access: mail.access_mail_moderation_user
+DEL ir.model.constraint: mail.constraint_mail_alias_alias_unique
+DEL ir.model.constraint: mail.constraint_mail_blacklist_unique_email
+DEL ir.model.constraint: mail.constraint_mail_followers_mail_followers_res_channel_res_model_id_uniq
+DEL ir.model.constraint: mail.constraint_mail_followers_mail_followers_res_partner_res_model_id_uniq
+DEL ir.model.constraint: mail.constraint_mail_followers_partner_xor_channel
+DEL ir.model.constraint: mail.constraint_mail_message_res_partner_needaction_rel_notification_partner_required
+DEL ir.model.constraint: mail.constraint_mail_moderation_channel_email_uniq
 NEW ir.rule: mail.res_users_settings_rule_admin (noupdate)
 NEW ir.rule: mail.res_users_settings_rule_user (noupdate)
 NEW ir.rule: mail.res_users_settings_volumes_rule_admin (noupdate)

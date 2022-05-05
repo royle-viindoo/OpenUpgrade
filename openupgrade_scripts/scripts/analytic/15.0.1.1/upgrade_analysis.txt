@@ -2,3 +2,4 @@
 ---Fields in module 'analytic'---
 analytic     / account.analytic.line    / category (selection)          : NEW selection_keys: ['other'], hasdefault
 ---XML records in module 'analytic'---
+DEL ir.model.constraint: analytic.constraint_account_analytic_distribution_check_percentage
