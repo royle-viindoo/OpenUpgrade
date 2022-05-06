@@ -34,6 +34,10 @@ def migrate(cr, version):
             "recommended to run the Odoo with --load=openupgrade_framework "
             "when migrating your database."
         )
+    # Perform module renames and merges
+    openupgrade.update_module_names(cr, renamed_modules.items())
+    openupgrade.update_module_names(cr, merged_modules.items(), merge_modules=True)
+
     openupgrade.rename_xmlids(
         cr,
         [
