@@ -18,13 +18,14 @@ def _check_xml(self):
 
 
 def _check(self, view):
-    """Don't raise AttributeError in NameManager.check,
-    because info is None but it is called to info.get('select')
+    """Because we captured the exception in _raise_view_error and archived that view,
+    so info is None, but it is called to info.get('select') in NameManager.check,
+    which will raise an exception AttributeError, so we need to override to not raise an exception
     """
     try:
         return NameManager.check._original_method(self, view)
-    except AttributeError:
-        if not view.active:
+    except AttributeError as e:
+        if not view.active or e.args[0] == "'NoneType' object has no attribute 'get'":
             pass
         else:
             raise
@@ -47,21 +48,18 @@ def _raise_view_error(
                 from_exception=from_exception,
                 from_traceback=from_traceback,
             )
-        except ValueError:
+        except ValueError as e:
             _logger.warning(
                 "Can't render custom view %s for model %s. "
                 "Assuming you are migrating between major versions of "
                 "Odoo, this view is now set to inactive. Please "
-                "review the view contents manually after the migration.",
+                "review the view contents manually after the migration.\n"
+                "Error: %s",
                 self.xml_id,
                 self.model,
+                e,
             )
             self.write({"active": False})
-
-
-def _postprocess_view(self, node, model, editable=True):
-    """Don't validate views, _raise_view_error is mutted"""
-    return View._postprocess_view._original_method(self, node, model, editable=editable)
 
 
 _check_xml._original_method = View._check_xml
@@ -70,5 +68,3 @@ _check._original_method = NameManager.check
 NameManager.check = _check
 _raise_view_error._original_method = View._raise_view_error
 View._raise_view_error = _raise_view_error
-_postprocess_view._original_method = View._postprocess_view
-View._postprocess_view = _postprocess_view
