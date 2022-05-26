@@ -28,14 +28,14 @@
   </record>
   <record id="payment_acquirer_authorize" model="payment.acquirer">
     <field name="payment_icon_ids" eval="[(6, 0, [                    ref('payment.payment_icon_cc_maestro'),                    ref('payment.payment_icon_cc_mastercard'),                    ref('payment.payment_icon_cc_discover'),                    ref('payment.payment_icon_cc_diners_club_intl'),                    ref('payment.payment_icon_cc_jcb'),                    ref('payment.payment_icon_cc_visa'),                ])]"/>
-    <field name="sequence"/>
+    <!--<field name="sequence"/>-->
   </record>
   <record id="payment_acquirer_buckaroo" model="payment.acquirer">
     <field name="payment_icon_ids" eval="[(6, 0, [                    ref('payment.payment_icon_cc_bancontact'),                    ref('payment.payment_icon_cc_maestro'),                    ref('payment.payment_icon_cc_mastercard'),                    ref('payment.payment_icon_cc_visa'),                    ref('payment.payment_icon_cc_american_express'),                ])]"/>
   </record>
   <record id="payment_acquirer_paypal" model="payment.acquirer">
     <field name="payment_icon_ids" eval="[(6, 0, [                    ref('payment.payment_icon_cc_maestro'),                    ref('payment.payment_icon_cc_mastercard'),                    ref('payment.payment_icon_cc_discover'),                    ref('payment.payment_icon_cc_diners_club_intl'),                    ref('payment.payment_icon_cc_jcb'),                    ref('payment.payment_icon_cc_american_express'),                    ref('payment.payment_icon_cc_unionpay'),                    ref('payment.payment_icon_cc_visa'),                ])]"/>
-    <field name="sequence"/>
+    <!--<field name="sequence"/>-->
   </record>
   <record id="payment_acquirer_payulatam" model="payment.acquirer">
     <field name="description" type="html">
@@ -80,7 +80,7 @@
     <field name="payment_icon_ids" eval="[(6, 0, [                    ref('payment.payment_icon_cc_maestro'),                    ref('payment.payment_icon_cc_mastercard'),                    ref('payment.payment_icon_cc_discover'),                    ref('payment.payment_icon_cc_diners_club_intl'),                    ref('payment.payment_icon_cc_jcb'),                    ref('payment.payment_icon_cc_american_express'),                    ref('payment.payment_icon_cc_visa'),                ])]"/>
   </record>
   <record id="payment_acquirer_transfer" model="payment.acquirer">
-    <field name="pending_msg"/>
+    <!--field name="pending_msg"/>-->
     <field name="sequence">30</field>
   </record>
   <record id="payment_token_user_rule" model="ir.rule">

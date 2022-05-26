@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
   <record id="payment.payment_acquirer_ogone" model="payment.acquirer">
+    <field name="company_id" ref="base.main_company"/>
     <field name="allow_tokenization">True</field>
     <field name="provider">ogone</field>
     <field name="redirect_form_view_id" ref="redirect_form"/>
