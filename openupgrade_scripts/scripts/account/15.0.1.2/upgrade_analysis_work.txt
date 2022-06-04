@@ -83,6 +83,8 @@ account      / account.payment          / outstanding_account_id (many2one): NEW
 
 account      / account.payment          / destination_journal_id (many2one): NEW relation: account.journal
 account      / account.payment          / paired_internal_transfer_payment_id (many2one): NEW relation: account.payment
+# NOTHING TO DO: handled by the module that provides the reconciliation feature
+
 account      / account.payment          / payment_method_id (many2one)  : not a function anymore
 account      / account.payment          / payment_method_id (many2one)  : now related
 # NOTHING TO DO
