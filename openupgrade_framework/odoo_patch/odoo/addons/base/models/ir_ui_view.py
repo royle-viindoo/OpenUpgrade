@@ -20,7 +20,8 @@ def _check_xml(self):
 def _check(self, view):
     """Because we captured the exception in _raise_view_error and archived that view,
     so info is None, but it is called to info.get('select') in NameManager.check,
-    which will raise an exception AttributeError, so we need to override to not raise an exception
+    which will raise an exception AttributeError,
+    so we need to override to not raise an exception
     """
     try:
         return NameManager.check._original_method(self, view)
