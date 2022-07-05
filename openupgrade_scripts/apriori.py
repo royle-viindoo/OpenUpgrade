@@ -21,6 +21,8 @@ renamed_modules = {
     "to_l10n_vn_hr_payroll": "l10n_vn_viin_hr_payroll",
     "to_l10n_vn_picking_operation": "l10n_vn_viin_picking_operation",
     "to_l10n_vn_account_balance_carry_forward": "l10n_vn_viin_account_balance_carry_forward",
+    "l10n_vn_edi": "l10n_vn_viin_edi",
+    "viin_l10n_vn_accounting_sinvoice": "l10n_vn_viin_accounting_sinvoice",
     # Viindoo/erponline-enterprise
     "to_enterprise_marks_account": "viin_hide_ent_modules_account",
     "viin_mobile_notification_firebase": "viin_mobile_firebase",
@@ -66,6 +68,9 @@ merged_modules = {
     "l10n_vn_common": "l10n_vn_viin",
     "to_account_financial_income": "viin_account",
     "to_account_income_deduct": "viin_account",
+    "viin_l10n_vn_account_move_print": "l10n_vn_viin",
+    "viin_l10n_vn_payment_print": "l10n_vn_viin",
+    "viin_payment_mediate": "viin_account",
     # Viindoo/odoo-tvtma
     "to_tvtma_crm": "viin_crm",
     "to_tvtma_sales": "viin_sale",
