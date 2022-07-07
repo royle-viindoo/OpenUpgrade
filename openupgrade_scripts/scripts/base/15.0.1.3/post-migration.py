@@ -34,7 +34,6 @@ def migrate(env, version):
             """
             UPDATE ir_module_module
             SET state='to install'
-            WHERE name IN {} AND state='uninstalled'""".format(
-                str(tuple(uninstalled_dependencies.mapped("name")))
-            ),
+            WHERE name IN %s AND state='uninstalled'""",
+            (tuple(uninstalled_dependencies.mapped("name")),),
         )
