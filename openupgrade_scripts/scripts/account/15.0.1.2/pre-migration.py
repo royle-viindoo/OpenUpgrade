@@ -272,6 +272,11 @@ def _create_account_payment_method_line(env):
         FROM account_payment_method apm
         JOIN account_journal aj ON aj.type IN ('bank', 'cash')
         WHERE apm.code = 'manual'
+            AND (
+                SELECT COUNT (*)
+                FROM payment_acquirer pa
+                WHERE pa.provider NOT IN ('none', 'manual')
+                    AND aj.id = pa.journal_id LIMIT 1) = 0
         """,
     )
 
@@ -359,43 +364,14 @@ def _fill_res_company_account_journal_payment_debit_account_id(env):
     )
 
 
-def _fast_fill_account_payment_outstanding_account_id(env):
+def _create_account_payment_outstanding_account_id(env):
+    # Manually create column for avoiding the automatic launch of the compute
+    # Fill value in end-migration
     openupgrade.logged_query(
         env.cr,
         """
         ALTER TABLE account_payment
         ADD COLUMN IF NOT EXISTS outstanding_account_id INTEGER""",
-    )
-    openupgrade.logged_query(
-        env.cr,
-        """
-        UPDATE account_payment ap
-        SET outstanding_account_id = CASE
-            WHEN apml.payment_account_id IS NOT NULL
-                THEN apml.payment_account_id
-            END
-        FROM account_payment_method_line apml
-        WHERE ap.payment_method_line_id IS NOT NULL
-            AND apml.id = ap.payment_method_line_id
-        """,
-    )
-    openupgrade.logged_query(
-        env.cr,
-        """
-        UPDATE account_payment ap
-        SET outstanding_account_id = CASE
-            WHEN ap.payment_type = 'inbound'
-                AND c.account_journal_payment_debit_account_id IS NOT NULL
-                THEN c.account_journal_payment_debit_account_id
-            WHEN ap.payment_type = 'outbound'
-                AND c.account_journal_payment_credit_account_id IS NOT NULL
-                THEN c.account_journal_payment_credit_account_id
-            END
-        FROM account_move am
-        JOIN account_journal aj ON am.journal_id = aj.id
-        JOIN res_company c ON c.id = aj.company_id
-        WHERE ap.move_id = am.id AND ap.payment_method_line_id IS NULL
-        """,
     )
 
 
@@ -432,6 +408,6 @@ def migrate(env, version):
     _fast_fill_account_payment_payment_method_line_id(env)
     _fill_res_company_account_journal_payment_credit_account_id(env)
     _fill_res_company_account_journal_payment_debit_account_id(env)
-    _fast_fill_account_payment_outstanding_account_id(env)
+    _create_account_payment_outstanding_account_id(env)
     _fill_account_tax_country_id(env)
     _delete_records_conflict(env)

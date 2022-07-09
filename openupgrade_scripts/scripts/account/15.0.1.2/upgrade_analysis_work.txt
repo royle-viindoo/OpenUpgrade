@@ -79,7 +79,7 @@ account      / account.payment          / narration (text) : type is now 'html' 
 # NOTHING TO DO: inherited from account.move
 
 account      / account.payment          / outstanding_account_id (many2one): NEW relation: account.account, isfunction: function, stored
-# DONE: pre-migration: fill value for outstanding_account_id
+# DONE: pre-migration: manually create column for avoiding the automatic launch of the compute, fill value in end-migration
 
 account      / account.payment          / destination_journal_id (many2one): NEW relation: account.journal
 account      / account.payment          / paired_internal_transfer_payment_id (many2one): NEW relation: account.payment
@@ -101,7 +101,7 @@ account      / account.payment.method.line / name (char)                   : NEW
 account      / account.payment.method.line / payment_account_id (many2one) : NEW relation: account.account
 account      / account.payment.method.line / payment_method_id (many2one)  : NEW relation: account.payment.method, required
 account      / account.payment.method.line / sequence (integer)            : NEW hasdefault
-# NOTHING TO DO: new model
+# DONE: create account.payment.method.line record in pre-migration and fill payment_account_id in end-migration
 
 account      / account.payment.term     / note (text)                   : type is now 'html' ('text')
 # DONE: pre-migration: convert to html

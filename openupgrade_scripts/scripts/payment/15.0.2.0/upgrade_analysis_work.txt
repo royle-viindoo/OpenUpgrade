@@ -7,7 +7,7 @@ payment      / account.payment          / source_payment_id (many2one)  : NEW re
 # DONE: pre-migration: create source_payment_id column
 
 payment      / account.payment.method.line / payment_acquirer_id (many2one): NEW relation: payment.acquirer, isfunction: function, stored
-# NOTHING TO DO
+# DONE: fill payment_acquirer_id in end-migration
 
 payment      / payment.acquirer         / _order                        : _order is now 'module_state, state desc, sequence, name' ('module_state, state, sequence, name')
 payment      / payment.acquirer         / allow_tokenization (boolean)  : NEW
