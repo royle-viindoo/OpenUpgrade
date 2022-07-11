@@ -26,7 +26,7 @@ def _check(self, view):
     try:
         return NameManager.check._original_method(self, view)
     except AttributeError as e:
-        if not view.active or e.args[0] == "'NoneType' object has no attribute 'get'":
+        if e.args[0] == "'NoneType' object has no attribute 'get'":
             pass
         else:
             raise
@@ -49,8 +49,16 @@ def _raise_view_error(
                 from_exception=from_exception,
                 from_traceback=from_traceback,
             )
-        except ValueError:
-            self.write({"active": False})
+        except ValueError as e:
+            _logger.warning(
+                "Can't render custom view %s for model %s. "
+                "Assuming you are migrating between major versions of Odoo. "
+                "Please review the view contents manually after the migration.\n"
+                "Error: %s",
+                self.xml_id,
+                self.model,
+                e,
+            )
 
 
 _check_xml._original_method = View._check_xml
