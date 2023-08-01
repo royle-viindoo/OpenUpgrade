@@ -34,6 +34,7 @@ renamed_modules = {
     # because of some technical problem but they have been brought back in viindoo yeahh
     "google_drive": "viin_google_drive",
     "google_spreadsheet": "viin_google_spreadsheet",
+    "viin_product_categ_mail_thread": "viin_mail_thread_account",
     "viin_product_categ_mail_thread_purchase": "viin_mail_thread_purchase",
     "viin_product_categ_mail_thread_stock_account": "viin_mail_thread_stock_account",
     "viin_webp": "viin_web_editor",

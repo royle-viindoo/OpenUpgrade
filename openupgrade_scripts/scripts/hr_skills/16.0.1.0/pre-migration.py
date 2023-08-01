@@ -2,14 +2,33 @@ from openupgradelib import openupgrade
 
 
 def fill_skill_type_id_data(env):
-    openupgrade.logged_query(
-        env.cr,
+    env.cr.execute(
         """
-        INSERT INTO hr_skill_type
-        (name) VALUES ('Dummy Skill Type')
-        RETURNING id;
-        """,
+        SELECT f.translate
+        FROM ir_model_fields f
+        WHERE f.name = 'name' AND f.model = 'hr.skill.type'
+        LIMIT 1
+        """
     )
+    res = env.cr.fetchall()
+    if res and res[0][0]:
+        openupgrade.logged_query(
+            env.cr,
+            """
+            INSERT INTO hr_skill_type
+            (name) SELECT jsonb_object_agg('en_US', 'Dummy Skill Type')
+            RETURNING id;
+            """,
+        )
+    else:
+        openupgrade.logged_query(
+            env.cr,
+            """
+            INSERT INTO hr_skill_type
+            (name) VALUES ('Dummy Skill Type')
+            RETURNING id;
+            """,
+        )
 
     skill_type_id = env.cr.fetchall()[0][0]
 
