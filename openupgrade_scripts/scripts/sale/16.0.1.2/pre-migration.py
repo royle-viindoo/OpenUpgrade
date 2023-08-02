@@ -115,6 +115,23 @@ def _fast_fill_analytic_distribution_on_sale_order_line(env):
     )
 
 
+def _create_ir_model_data_sale_default_invoice_email_template(env):
+    openupgrade.logged_query(
+        env.cr,
+        """
+        INSERT INTO ir_model_data (name, res_id, module, model, noupdate)
+        SELECT
+            'default_invoice_email_template',
+            ir_config_parameter.id,
+            'sale',
+            'ir.config_parameter',
+            TRUE
+        FROM ir_config_parameter
+        WHERE key = 'sale.default_invoice_email_template'
+        """,
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     openupgrade.rename_models(env.cr, _models_renames)
@@ -124,3 +141,4 @@ def migrate(env, version):
     _noupdate_switch(env)
     _remove_table_constraints(env)
     _fast_fill_analytic_distribution_on_sale_order_line(env)
+    _create_ir_model_data_sale_default_invoice_email_template(env)

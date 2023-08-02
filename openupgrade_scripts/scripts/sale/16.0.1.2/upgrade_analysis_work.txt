@@ -52,7 +52,7 @@ ir.actions.server: sale.model_sale_order_action_share (noupdate switched)
 # DONE: pre-migration: noupdate switched to 0
 
 NEW ir.config_parameter: sale.default_invoice_email_template (noupdate)
-# NOTHING TODO
+# DONE: pre-migration: create noupdated record in ir_model_data
 
 NEW ir.model.access: sale.access_product_product_attribute_custom_value_sale_user
 NEW ir.model.access: sale.access_product_tag_sale_manager
