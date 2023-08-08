@@ -43,8 +43,10 @@ def analytic_account_set_group_id_if_null(env):
         env.cr,
         """
         WITH inserted_group AS (
-            INSERT INTO account_analytic_group (name, default_applicability)
-            SELECT 'Dummy Analytic Plan', 'unavailable'
+            INSERT INTO account_analytic_group (
+                name, default_applicability, complete_name
+            )
+            SELECT 'Dummy Analytic Plan', 'unavailable', 'Dummy Analytic Plan'
             RETURNING id
         )
         UPDATE account_analytic_account aaa
