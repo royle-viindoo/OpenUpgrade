@@ -285,7 +285,7 @@ def _fill_loyalty_reward_program_id(env):
         env.cr,
         """
         UPDATE loyalty_reward reward
-            SET program_id = prog.reward_id
+            SET program_id = prog.id
         FROM loyalty_program prog
         WHERE reward.id = prog.reward_id
         """,
@@ -355,7 +355,7 @@ def _fill_loyalty_rule_program_id(env):
         env.cr,
         """
         UPDATE loyalty_rule rule
-            SET program_id = prog.rule_id
+            SET program_id = prog.id
         FROM loyalty_program prog
         WHERE rule.id = prog.rule_id
         """,
