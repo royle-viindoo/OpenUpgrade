@@ -46,6 +46,28 @@ def load_modules(registry, force_demo=False, status=None, update_module=False):
                 FROM tbl;
                 """,
             )
+        # create a technical table
+        # to track res.group per user before and after the migration
+        if not openupgrade.table_exists(cr, "openupgrade_track_user_group"):
+            cr.execute(
+                """
+                CREATE TABLE IF NOT EXISTS openupgrade_track_user_group (
+                    id serial NOT NULL,
+                    uid integer NOT NULL,
+                    gid integer NOT NULL
+                );
+                """,
+            )
+            # update old groups of users before running the migration
+            cr.execute(
+                """
+                INSERT INTO openupgrade_track_user_group (uid, gid)
+                SELECT
+                  grp_user_rel.uid,
+                  grp_user_rel.gid
+                FROM res_groups_users_rel grp_user_rel;
+                """,
+            )
 
     load_modules._original_method(
         registry,
@@ -79,6 +101,7 @@ def load_modules(registry, force_demo=False, status=None, update_module=False):
             """,
         )
     with registry.cursor() as cr:
+        # Report
         cr.execute(
             """
             SELECT table_name, old_row_count, new_row_count
@@ -105,6 +128,64 @@ def load_modules(registry, force_demo=False, status=None, update_module=False):
             _logger.warning(
                 "The following tables have different number of rows:\n" "%s\n" % msg_all
             )
+        # Report
+        cr.execute(
+            """
+            SELECT uid, array_agg(gid) as gids
+            FROM openupgrade_track_user_group
+            GROUP BY uid
+            """,
+        )
+        old_groups = cr.dictfetchall()
+        cr.execute(
+            """
+            SELECT uid, array_agg(gid) as gids
+            FROM res_groups_users_rel
+            GROUP BY uid
+            """,
+        )
+        new_groups = cr.dictfetchall()
+        if bool(old_groups) and bool(new_groups):
+
+            def msg(col1, col2, col3, col4):
+                return "%s%s| %s%s| %s%s| %s%s\n" % (
+                    col1,
+                    " " * (20 - len(col1)),
+                    col2,
+                    " " * (30 - len(str(col2))),
+                    col3,
+                    " " * (30 - len(str(col3))),
+                    col4,
+                    " " * (30 - len(str(col4))),
+                )
+
+            msg_all = msg("Users", "Removed Groups", "Added Groups", "Notes")
+            for old_data in old_groups:
+                new_data = [d for d in new_groups if d["uid"] == old_data["uid"]]
+                if not new_data:
+                    msg_all += msg(
+                        str(old_data["uid"]),
+                        "",
+                        "",
+                        "User has been deleted",
+                    )
+                removed_grps = list(set(old_data["gids"]) - set(new_data[0]["gids"]))
+                if removed_grps:
+                    msg_all += msg(str(old_data["uid"]), str(removed_grps), "", "")
+                added_grps = list(set(new_data[0]["gids"]) - set(old_data["gids"]))
+                if added_grps:
+                    msg_all += msg(str(old_data["uid"]), "", str(added_grps), "")
+            old_users = {[d["uid"] for d in old_groups]}
+            new_users = {[d["uid"] for d in new_groups]}
+            for u in list(old_users - new_users):
+                msg_all += msg(str(u), "", "", "New user")
+            _logger.warning("The following users have different:\n" "%s\n" % msg_all)
+        cr.execute(
+            """
+            DROP TABLE IF EXISTS openupgrade_track_row_count;
+            DROP TABLE IF EXISTS openupgrade_track_user_group;
+            """,
+        )
 
 
 load_modules._original_method = odoo.modules.load_modules
