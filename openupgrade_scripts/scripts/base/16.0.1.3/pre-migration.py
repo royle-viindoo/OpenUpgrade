@@ -65,4 +65,11 @@ def migrate(cr, version):
     # See https://github.com/odoo/odoo/pull/97692 for more details.
     # Odoo provides a method _get_translation_upgrade_queries returning queries
     # to execute to migrate all the translations of a particular field.
+    openupgrade.logged_query(
+        cr,
+        """
+        DELETE FROM ir_translation
+        WHERE src IS NULL OR src = '' OR value IS NULL OR value = ''
+        """,
+    )
     openupgrade.rename_tables(cr, [("ir_translation", "_ir_translation")])
