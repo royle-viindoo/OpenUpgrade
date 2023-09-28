@@ -37,6 +37,40 @@ def _migrate_translations_to_jsonb(env):
         WHERE state != 'translated'
         """,
     )
+    # insert missing translations for src
+    langs = env["res.lang"].search_read(
+        [("active", "=", True), ("code", "!=", "en_US")],
+        ["code"],
+    )
+    for lang in langs:
+        env.cr.execute(
+            """
+            SELECT it1.lang, it1.name, it1.res_id, it1.module, it1.src, it1.value
+            FROM ir_translation it1
+            WHERE it1.type = 'model' AND it1.lang = 'en_US' AND NOT EXISTS (
+                SELECT 1 FROM ir_translation it2
+                WHERE it2.lang != 'en_US' AND it1.name = it2.name
+                    AND it1.res_id = it2.res_id
+            )
+            """
+        )
+        for tran in env.cr.dictfetchall():
+            env.cr.execute(
+                """
+                INSERT INTO ir_translation (
+                    lang, type, name, res_id, src, value, module, state)
+                VALUES(%(lang)s, 'model', %(name)s, %(res_id)s, %(src)s, %(value)s,
+                    %(module)s, 'translated')
+                """,
+                {
+                    "lang": lang["code"],
+                    "name": tran["name"],
+                    "res_id": tran["res_id"],
+                    "src": tran["value"],
+                    "value": tran["src"],
+                    "module": tran["module"],
+                },
+            )
     openupgrade.rename_tables(env.cr, [("ir_translation", "_ir_translation")])
     # update all translatable fields
     # specialized implementation for converting from/to translated fields
@@ -64,6 +98,8 @@ def _migrate_translations_to_jsonb(env):
             for query in itertools.chain.from_iterable(
                 _get_translation_upgrade_queries(env.cr, field)
             ):
+                if 'DELETE FROM' in query:
+                    continue
                 # We want to take the translation value instead
                 query = query.replace(
                     't.value || m."%s"' % field.name,
