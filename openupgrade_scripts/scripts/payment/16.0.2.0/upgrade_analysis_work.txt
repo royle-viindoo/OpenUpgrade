@@ -193,7 +193,7 @@ payment      / payment.provider         / inline_form_view_id (many2one): NEW re
 # NOTHING TO DO: From payment.acquirer. See comment above.
 
 payment      / payment.provider         / is_published (boolean)        : NEW
-# NOTHING TO DO: new feature.
+# DONE: set as True if state in ['enabled', 'test'] in post-migration
 
 payment      / payment.provider         / maximum_amount (float)        : NEW
 # NOTHING TO DO: new feature.
