@@ -98,7 +98,7 @@ def _migrate_translations_to_jsonb(env):
             for query in itertools.chain.from_iterable(
                 _get_translation_upgrade_queries(env.cr, field)
             ):
-                if 'DELETE FROM' in query:
+                if "DELETE FROM" in query:
                     continue
                 # We want to take the translation value instead
                 query = query.replace(
