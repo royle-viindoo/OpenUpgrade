@@ -299,6 +299,14 @@ def _fill_loyalty_reward_program_id(env):
         WHERE reward.id = prog.reward_id
         """,
     )
+    # remove junk records
+    openupgrade.logged_query(
+        env.cr,
+        """
+        DELETE FROM loyalty_reward
+        WHERE program_id IS NULL
+        """,
+    )
 
 
 def _fill_loyalty_discount_applicability(env):
@@ -367,6 +375,14 @@ def _fill_loyalty_rule_program_id(env):
             SET program_id = prog.id
         FROM loyalty_program prog
         WHERE rule.id = prog.rule_id
+        """,
+    )
+    # remove junk records
+    openupgrade.logged_query(
+        env.cr,
+        """
+        DELETE FROM loyalty_rule
+        WHERE program_id IS NULL
         """,
     )
 
