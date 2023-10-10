@@ -150,7 +150,7 @@ def _correct_mail_channel_group_public_id(env):
         """
         UPDATE mail_channel mc
         SET group_public_id = NULL
-        WHERE mc.channel_type != 'channel' AND mc.group_public_id IS NOT NULL 
+        WHERE mc.channel_type != 'channel' AND mc.group_public_id IS NOT NULL
         """,
     )
 

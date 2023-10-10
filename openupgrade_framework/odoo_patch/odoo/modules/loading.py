@@ -1,3 +1,4 @@
+# flake8: noqa: C901
 import logging
 
 from openupgradelib import openupgrade
