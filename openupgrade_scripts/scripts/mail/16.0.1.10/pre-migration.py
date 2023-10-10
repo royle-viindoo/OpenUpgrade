@@ -155,6 +155,18 @@ def _correct_mail_channel_group_public_id(env):
     )
 
 
+def _correct_res_users_notification_type(env):
+    # to add new constraint res_users_notification_type
+    openupgrade.logged_query(
+        env.cr,
+        """
+        UPDATE res_users
+        SET notification_type = 'email'
+        WHERE notification_type != 'email' AND share
+        """,
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _update_mail_channel_name(env)
@@ -173,3 +185,4 @@ def migrate(env, version):
     _to_mail_notif_and_email_create_mail_notification_index(env)
     _force_install_viin_mail_channel_privacy_module(env)
     _correct_mail_channel_group_public_id(env)
+    _correct_res_users_notification_type(env)

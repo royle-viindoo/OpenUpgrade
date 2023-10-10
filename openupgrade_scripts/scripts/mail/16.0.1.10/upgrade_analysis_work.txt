@@ -173,11 +173,11 @@ NEW ir.model.constraint: mail.constraint_mail_activity_check_res_id_is_set
 NEW ir.model.constraint: mail.constraint_mail_channel_channel_type_not_null
 
 NEW ir.model.constraint: mail.constraint_mail_channel_group_public_id_check
+NEW ir.model.constraint: mail.constraint_res_users_notification_type
 # DONE: pre-migration: correct data
 
 NEW ir.model.constraint: mail.constraint_mail_channel_member_partner_or_guest_exists
 NEW ir.model.constraint: mail.constraint_mail_channel_rtc_session_channel_member_unique
-NEW ir.model.constraint: mail.constraint_res_users_notification_type
 # NOTHING TODO
 
 DEL ir.model.constraint: mail.constraint_mail_channel_partner_partner_or_guest_exists
