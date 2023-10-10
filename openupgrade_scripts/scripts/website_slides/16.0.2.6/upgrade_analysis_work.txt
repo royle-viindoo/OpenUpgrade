@@ -100,6 +100,8 @@ DEL ir.model.access: website_slides.access_slide_slide_link_officer
 # NOTHING TO DO
 
 NEW ir.model.constraint: website_slides.constraint_slide_channel_partner_channel_partner_uniq
+# DONE: pre-migration: delete slide_channel_partner duplicate records
+
 NEW ir.model.constraint: website_slides.constraint_slide_channel_partner_check_completion
 NEW ir.model.constraint: website_slides.constraint_slide_slide_partner_check_vote
 NEW ir.model.constraint: website_slides.constraint_slide_slide_partner_slide_partner_uniq

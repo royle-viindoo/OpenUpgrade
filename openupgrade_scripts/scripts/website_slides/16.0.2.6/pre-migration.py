@@ -122,6 +122,21 @@ def _create_nbr_article_on_slide_slide(env):
     )
 
 
+def _delete_slide_channel_partner_duplicate_records(env):
+    # Cleanup potential duplicates to comply with
+    # the new constraint slide_channel_partner_channel_partner_uniq
+    openupgrade.logged_query(
+        env.cr,
+        """
+        DELETE FROM slide_channel_partner scp1
+        USING slide_channel_partner scp2
+        WHERE scp1.id < scp2.id
+            AND scp1.partner_id = scp2.partner_id
+            AND scp1.channel_id = scp2.channel_id;
+        """,
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     openupgrade.rename_fields(env, renamed_fields)
@@ -131,3 +146,4 @@ def migrate(env, version):
     create_and_fill_data_for_source_type(env)
     _create_nbr_article_on_slide_channel(env)
     _create_nbr_article_on_slide_slide(env)
+    _delete_slide_channel_partner_duplicate_records(env)
