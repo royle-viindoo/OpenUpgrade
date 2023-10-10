@@ -143,6 +143,18 @@ def _force_install_viin_mail_channel_privacy_module(env):
         viin_mail_channel_privacy_module.button_install()
 
 
+def _correct_mail_channel_group_public_id(env):
+    # to add new constraint mail_channel_group_public_id_check
+    openupgrade.logged_query(
+        env.cr,
+        """
+        UPDATE mail_channel mc
+        SET group_public_id = NULL
+        WHERE mc.channel_type != 'channel' AND mc.group_public_id IS NOT NULL 
+        """,
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _update_mail_channel_name(env)
@@ -160,3 +172,4 @@ def migrate(env, version):
     # Technical reason
     _to_mail_notif_and_email_create_mail_notification_index(env)
     _force_install_viin_mail_channel_privacy_module(env)
+    _correct_mail_channel_group_public_id(env)
