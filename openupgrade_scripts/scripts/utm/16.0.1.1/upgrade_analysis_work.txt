@@ -9,7 +9,9 @@ utm          / utm.campaign             / title (char)                  : NEW re
 ---XML records in module 'utm'---
 NEW ir.model.access: utm.access_utm_medium_system
 NEW ir.model.access: utm.access_utm_source_system
+# NOTHING TO DO
+
 NEW ir.model.constraint: utm.constraint_utm_campaign_unique_name
 NEW ir.model.constraint: utm.constraint_utm_medium_unique_name
 NEW ir.model.constraint: utm.constraint_utm_source_unique_name
-# NOTHING TO DO
+# DONE: post-migration: correct data
