@@ -390,7 +390,11 @@ def _account_analytic_distribution_model_generate(env):
             aa.code,
             aad.partner_id,
             aad.product_id,
-            aad.company_id,
+            CASE
+                WHEN aad.company_id IS NOT NULL
+                THEN aad.company_id
+                ELSE aaa.company_id
+            END AS company_id,
             aad.create_date,
             aad.write_date,
             aad.create_uid,
@@ -399,6 +403,7 @@ def _account_analytic_distribution_model_generate(env):
         FROM
             distribution_data dist
         JOIN account_analytic_default aad ON aad.id = dist.analytic_default_id
+        LEFT JOIN account_analytic_account aaa ON aaa.id = aad.analytic_id
         LEFT JOIN account_account aa ON aa.id = aad.account_id
     """,
     )
