@@ -49,30 +49,48 @@ def _load_records(self, data_list, update=False):
         xml_id = vals.get("xml_id", False)
         original_record = self.env.ref(xml_id, raise_if_not_found=False)
         arch_db = (vals.get("values") or {}).get("arch", False)
+        customize_show = (vals.get("values") or {}).get("customize_show", False)
         if (
             xml_id
-            and arch_db
             and original_record
             and hasattr(original_record, "_name")
             and original_record._name == "ir.ui.view"
-            and "website_id" in original_record._fields
         ):
-            related_records = self.env["ir.ui.view"].search(
-                [
-                    ("id", "!=", original_record.id),
-                    ("type", "=", "qweb"),
-                    ("website_id", "!=", False),
-                    ("key", "=", original_record.key),
-                    "|",
-                    ("key", "in", NEED_UPDATED_VIEWS_KEYS),
-                    "&",
-                    ("arch_db", "=", original_record.arch_db),
-                    ("inherit_id", "!=", False),
-                ]
-            )
-            for rec in related_records:
-                if not rec.model_data_id and not rec.xml_id:
-                    rec.arch_db = arch_db
+            # Update custom_show because some modules have removed it from the
+            # data file. E.g. v15 customize_show = "True" -> v16: removed instead
+            # of customize_show = "False"
+            if (
+                "customize_show" in original_record._fields
+                and original_record.customize_show != customize_show
+            ):
+                customize_show_views = (
+                    self.env["ir.ui.view"]
+                    .with_context(active_test=False)
+                    .search(
+                        [
+                            ("type", "=", "qweb"),
+                            ("key", "=", original_record.key),
+                        ]
+                    )
+                )
+                customize_show_views.customize_show = customize_show
+            if arch_db and "website_id" in original_record._fields:
+                related_records = self.env["ir.ui.view"].search(
+                    [
+                        ("id", "!=", original_record.id),
+                        ("type", "=", "qweb"),
+                        ("website_id", "!=", False),
+                        ("key", "=", original_record.key),
+                        "|",
+                        ("key", "in", NEED_UPDATED_VIEWS_KEYS),
+                        "&",
+                        ("arch_db", "=", original_record.arch_db),
+                        ("inherit_id", "!=", False),
+                    ]
+                )
+                for rec in related_records:
+                    if not rec.model_data_id and not rec.xml_id:
+                        rec.arch_db = arch_db
     return BaseModel._load_records._original_method(self, data_list, update)
 
 
