@@ -34,7 +34,11 @@ IrModel._drop_table = _drop_table
 def _drop_column(self):
     """Never drop columns"""
     for field in self:
-        if field.name in models.MAGIC_COLUMNS:
+        if (
+            not field.store
+            or field.name in models.MAGIC_COLUMNS
+            or self.env.get(field.model) is None
+        ):
             continue
         openupgrade.message(
             self.env.cr,
