@@ -15,6 +15,8 @@ def migrate_module(self, pkg, stage):
     to_install = pkg.state == "to install"
     if to_install:
         pkg.state = "to upgrade"
+    if not getattr(pkg, "load_version", pkg.installed_version):
+        pkg.installed_version = "16.0.0.0.1"
     MigrationManager.migrate_module._original_method(self, pkg, stage)
     if to_install:
         pkg.state = "to install"
