@@ -542,7 +542,10 @@ def _force_install_viin_analytic_tag_module(env):
         [("name", "=", "viin_analytic_tag")]
     )
     if viin_analytic_tag_module:
-        viin_analytic_tag_module.button_install()
+        if viin_analytic_tag_module.state not in ("installed", "to upgrade"):
+            # We trick Odoo into running the pre-migration scripts of viin_analytic_tag module
+            viin_analytic_tag_module.state = "installed"
+            viin_analytic_tag_module.button_upgrade()
 
 
 @openupgrade.migrate()
