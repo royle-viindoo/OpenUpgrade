@@ -45,7 +45,7 @@ def _correct_utm_medium_name(env):
             )
             SELECT ARRAY_AGG(uc1.id)
             FROM utm_medium uc1
-            JOIN utm_medium uc2 ON uc1.name = uc2.name
+            JOIN utm_medium_tmp uc2 ON uc1.name = uc2.name
             GROUP BY uc1.name
         """
     )
@@ -75,7 +75,7 @@ def _correct_utm_source_name(env):
             )
             SELECT ARRAY_AGG(uc1.id)
             FROM utm_source uc1
-            JOIN utm_source uc2 ON uc1.name = uc2.name
+            JOIN utm_source_tmp uc2 ON uc1.name = uc2.name
             GROUP BY uc1.name
         """
     )
