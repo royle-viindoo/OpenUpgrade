@@ -4,20 +4,16 @@
 from openupgradelib import openupgrade
 
 
-def set_allocation_validation_type(env):
-    """Operate like the _compute_allocation_validation_type() function.
-
-    It set "no" by default except if employee_request is set to "no"
-    where it set "officer".
-    """
+def _map_hr_leave_type_allocation_validation_type(env):
     openupgrade.logged_query(
         env.cr,
         """
         UPDATE hr_leave_type
             SET allocation_validation_type = CASE
-                WHEN employee_requests = 'no' THEN 'officer'
+                WHEN responsible_id IS NOT NULL THEN 'officer'
                 ELSE 'no'
                 END
+        WHERE allocation_validation_type = 'set'
         """,
     )
 
@@ -38,6 +34,6 @@ def _fix_number_of_days_allocation(env):
 
 @openupgrade.migrate()
 def migrate(env, version):
-    set_allocation_validation_type(env)
+    _map_hr_leave_type_allocation_validation_type(env)
     openupgrade.load_data(env.cr, "hr_holidays", "16.0.1.5/noupdate_changes.xml")
     _fix_number_of_days_allocation(env)
