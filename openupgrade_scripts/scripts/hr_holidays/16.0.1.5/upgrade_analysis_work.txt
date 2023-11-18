@@ -19,7 +19,8 @@ hr_holidays  / hr.leave.stress.day      / resource_calendar_id (many2one): NEW r
 hr_holidays  / hr.leave.stress.day      / start_date (date)             : NEW required
 # NOTHING TO DO: new feature
 hr_holidays  / hr.leave.type            / allocation_validation_type (selection): selection_keys is now '['no', 'officer']' ('['no', 'officer', 'set']')
-# DONE: compute new value for allocation_validation_type
+# DONE: map 'set' to 'officer' if responsible_id else 'no'
+
 ---XML records in module 'hr_holidays'---
 NEW ir.actions.act_window: hr_holidays.hr_leave_stress_day_action
 DEL ir.actions.act_window.view: hr_holidays.hr_leave_action_my_view_form
