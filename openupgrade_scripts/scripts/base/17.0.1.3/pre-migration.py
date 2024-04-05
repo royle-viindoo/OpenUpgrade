@@ -221,6 +221,7 @@ def migrate(cr, version):
         )
     openupgrade.update_module_names(cr, renamed_modules.items())
     openupgrade.update_module_names(cr, merged_modules.items(), merge_modules=True)
+    openupgrade.clean_transient_models(cr)
     openupgrade.rename_xmlids(cr, _xmlids_renames)
     openupgrade.rename_columns(cr, _column_renames)
     _fill_ir_server_object_lines_into_action_server(cr)
