@@ -494,11 +494,20 @@ def _account_tax_migration(env):
     )
 
     for tax_group_id, company_ids in env.cr.fetchall():
-        first_company_id = company_ids[:1]
+        first_company_id = company_ids[:1] and company_ids[0]
 
+        openupgrade.logged_query(
+            env.cr,
+            f"""
+            UPDATE account_tax_group
+            SET company_id = {first_company_id}
+            WHERE id = {tax_group_id}
+            """,
+        )
         imd = env["ir.model.data"].search(
             [("res_id", "=", tax_group_id), ("model", "=", "account.tax.group")]
         )
+        tax_group_name = imd.name
         imd.write({"name": f"{first_company_id}_{imd.name}"})
 
         for company_id in company_ids[1:]:
@@ -513,8 +522,8 @@ def _account_tax_migration(env):
             )
 
             new_tax_group_id = env.cr.fetchone()[0]
-            vals = {"res_id": new_tax_group_id, "name": f"{company_id}_{imd.name}"}
-            imd.copy(default=vals)
+            new_imp = imd.copy(default={"res_id": new_tax_group_id})
+            new_imp.write({"name": f"{company_id}_{tax_group_name}"})
 
             openupgrade.logged_query(
                 env.cr,
