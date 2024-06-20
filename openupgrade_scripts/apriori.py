@@ -9,6 +9,9 @@ renamed_modules = {
     "website_sale_delivery_mondialrelay": "website_sale_mondialrelay",
     # odoo/enterprise
     # OCA/...
+    # Viindoo/tvtmaaddons
+    "to_website_recaptcha_signup": "viin_recaptcha_signup",
+    "viin_mail_channel_privacy": "viin_discuss_channel_privacy",
 }
 
 # Merged modules contain a mapping from old module names to other,
@@ -40,6 +43,21 @@ merged_modules = {
     "web_advanced_search": "web",
     "web_listview_range_select": "web",
     # OCA/...
+    # Viindoo/tvtmaaddons
+    "to_location_warehouse": "viin_stock",
+    "to_sale_loyalty_patch_1": "viin_loyalty_sale",
+    "to_stock_report_common": "viin_stock",
+    "viin_account_auto_transfer_patch_1": "viin_account_auto_transfer",
+    "viin_affiliate_website_patch": "viin_affiliate_website",
+    "viin_helpdesk_team_ticket_type": "viin_helpdesk",
+    "viin_helpdesk_ticket_properties": "viin_helpdesk",
+    "viin_hr_overtime_timeoff": "viin_hr_overtime",
+    "viin_resource_calendar_rate": "viin_hr_work_entry",
+    "viin_wallet_affiliate": "to_wallet",
+    "viin_website_form_helpdesk": "viin_website_helpdesk",
+    "viin_website_helpdesk_ticket_properties": "viin_website_helpdesk",
+    # Viindoo/erponline-enterprise
+    "viin_stock_patch1": "viin_stock",
 }
 
 # only used here for upgrade_analysis
