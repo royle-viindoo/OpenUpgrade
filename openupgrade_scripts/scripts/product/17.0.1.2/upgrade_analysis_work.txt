@@ -20,7 +20,7 @@ product      / product.category         / product_properties_definition (propert
 product      / product.document         / _inherits                     : NEW _inherits: {'ir.attachment': 'ir_attachment_id'}
 product      / product.document         / active (boolean)              : NEW hasdefault: default
 product      / product.document         / ir_attachment_id (many2one)   : NEW relation: ir.attachment, required
-# NOTHING TO DO: fields in new model
+# DONE: populated in post-migration with attachments on products
 
 product      / product.packaging        / product_id (many2one)         : now required
 # NOTHING TO DO
@@ -37,8 +37,10 @@ product      / product.pricelist.item   / active (boolean)              : DEL
 product      / product.product          / activity_user_id (many2one)   : not related anymore
 product      / product.product          / activity_user_id (many2one)   : now a function
 product      / product.product          / message_main_attachment_id (many2one): DEL relation: ir.attachment
-product      / product.product          / product_document_ids (one2many): NEW relation: product.document
 # NOTHING TO DO
+
+product      / product.product          / product_document_ids (one2many): NEW relation: product.document
+# DONE: populated in post-migration with attachments on products
 
 product      / product.supplierinfo     / discount (float)              : NEW
 # NOTHING TO DO
@@ -49,9 +51,11 @@ product      / product.tag              / color (integer)               : type i
 product      / product.template         / activity_user_id (many2one)   : not related anymore
 product      / product.template         / activity_user_id (many2one)   : now a function
 product      / product.template         / message_main_attachment_id (many2one): DEL relation: ir.attachment
-product      / product.template         / product_document_ids (one2many): NEW relation: product.document
 product      / product.template         / product_properties (properties): NEW hasdefault: compute
 # NOTHING TO DO
+
+product      / product.template         / product_document_ids (one2many): NEW relation: product.document
+# DONE: populated in post-migration with attachments on products
 
 product      / product.template.attribute.line / _order                        : _order is now 'sequence, attribute_id, id' ('attribute_id, id')
 product      / product.template.attribute.line / sequence (integer)            : NEW hasdefault: default
