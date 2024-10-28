@@ -10,6 +10,7 @@ def migrate(env, version):
         env,
         "digest",
         [
+            "digest_tip_digest_0",
             "digest_tip_digest_1",
             "digest_tip_digest_2",
             "digest_tip_digest_3",
