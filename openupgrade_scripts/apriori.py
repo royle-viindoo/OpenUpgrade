@@ -40,6 +40,7 @@ merged_modules = {
     "l10n_es_irnr": "l10n_es",
     "l10n_es_irnr_sii": "l10n_es_aeat_sii_oca",
     # OCA/maintenance
+    "base_maintenance_config": "maintenance",
     "maintenance_plan": "maintenance",
     # OCA/purchase-workflow
     "purchase_discount": "purchase",
