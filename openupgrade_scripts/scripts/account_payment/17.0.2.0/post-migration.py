@@ -2,7 +2,7 @@
 
 from openupgradelib import openupgrade
 
-_deleted_xml_records = ['account_payment.payment_transaction_billing_rule']
+_deleted_xml_records = ["account_payment.payment_transaction_billing_rule"]
 
 
 @openupgrade.migrate()
