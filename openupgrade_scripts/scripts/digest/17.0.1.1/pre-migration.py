@@ -5,7 +5,6 @@ from openupgradelib import openupgrade
 
 @openupgrade.migrate()
 def migrate(env, version):
-    openupgrade.load_data(env, "digest", "17.0.1.1/noupdate_changes.xml")
     openupgrade.set_xml_ids_noupdate_value(
         env,
         "digest",
