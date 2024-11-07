@@ -4,7 +4,7 @@ resource     / resource.calendar        / hours_per_day (float)         : now a 
 # Nothing To Do, compute non-stored
 
 resource     / resource.calendar.attendance / _order                        : _order is now 'sequence, week_type, dayofweek, hour_from' ('week_type, dayofweek, hour_from')
-# Nothing To Do, default order when search
+# DONE: pre-migration: Reset the sequence field to its default value for preserving the order.
 
 resource     / resource.calendar.attendance / day_period (selection)        : selection_keys is now '['afternoon', 'lunch', 'morning']' ('['afternoon', 'morning']')
 # Nothing To Do, new option: lunch
