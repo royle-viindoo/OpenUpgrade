@@ -42,6 +42,7 @@ merged_modules = {
     # OCA/web
     "web_advanced_search": "web",
     "web_listview_range_select": "web",
+    "web_pwa_oca": "web",
     # OCA/...
 }
 
