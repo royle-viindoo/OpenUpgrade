@@ -8,7 +8,7 @@ obsolete model account.reconcile.model.line.template
 obsolete model account.reconcile.model.template
 obsolete model account.tax.repartition.line.template
 obsolete model account.tax.template
-# NOTHING TO DO: these models has been converted to CSV definition and existing company records XML-ID follow the same logic
+# DONE: these models has been converted to CSV definition and existing company records XML-ID follow the same logic. Removed all constraints from tables
 
 obsolete model account.invoice.send [transient]
 new model account.move.send [transient]
@@ -140,6 +140,9 @@ account      / account.move             / delivery_date (date)          : NEW is
 account      / account.move             / incoterm_location (char)      : NEW hasdefault: compute
 # DONE: pre-migration: Pre-create the column for not triggering the method. Modules modifying the computation (sale_stock and purchase_stock) will fill the value. More info at https://github.com/odoo/odoo/pull/118954
 
+account      / account.move             / invoice_payment_term_id (many2one): now a function
+# NOTHING TO DO: inverse function added, compute function unchanged
+
 account      / account.move             / invoice_pdf_report_file (binary): NEW attachment: True
 # DONE: post-migration: update message_main_attachment_id with res_field and res_id of each invoice, see '_link_invoice_documents' in 'account.move.send'
 
@@ -148,6 +151,9 @@ account      / account.move             / rating_ids (one2many)         : NEW re
 
 account      / account.move             / send_and_print_values (json)  : NEW
 # NOTHING TO DO: This field is for storing transient data to indicate that the invoice is "programmed" to be sent, which is a new feature, so empty is OK.
+
+account      / account.move             / show_update_fpos (boolean)    : NEW
+# NOTHING TO DO: Used in UI
 
 account      / account.move.line        / discount_percentage (float)   : DEL
 # NOTHING TO DO: Auxiliary field for Early Payment discounts from payment terms that seems unused.
@@ -241,12 +247,13 @@ account      / account.reconcile.model.template / rule_type (selection)         
 account      / account.reconcile.model.template / sequence (integer)            : DEL required
 account      / account.reconcile.model.template / to_check (boolean)            : DEL
 account      / account.report           / _order                        : _order is now 'sequence, id' ('id')
-account      / account.report           / active (boolean)              : NEW hasdefault: default
 # NOTHING TO DO
+account      / account.report           / active (boolean)              : NEW hasdefault: default
+# DONE: precreated with value True
 
 account      / account.report           / chart_template (selection)    : NEW selection_keys: function
 account      / account.report           / chart_template_id (many2one)  : DEL relation: account.chart.template
-# DONE: map chart_template_id > chart_template in pre-migration
+# DONE: map chart_template_id > chart_template in post-migration
 
 account      / account.report           / default_opening_date_filter (selection): selection_keys is now '['last_month', 'last_quarter', 'last_tax_period', 'last_year', 'this_month', 'this_quarter', 'this_tax_period', 'this_year', 'today']' ('['last_month', 'last_quarter', 'last_year', 'this_month', 'this_quarter', 'this_year', 'today']')
 # NOTHING TO DO: new feature
@@ -361,7 +368,7 @@ account      / res.company              / account_discount_income_allocation_id 
 
 account      / res.company              / chart_template (selection)    : NEW selection_keys: function
 account      / res.company              / chart_template_id (many2one)  : DEL relation: account.chart.template
-# DONE: map chart_template_id > chart_template in pre-migration
+# DONE: map chart_template_id > chart_template in post-migration
 
 account      / res.company              / display_invoice_amount_total_words (boolean): NEW
 # NOTHING TO DO: new feature
@@ -381,12 +388,8 @@ account      / res.company              / property_stock_valuation_account_id (m
 account      / res.company              / rating_ids (one2many)         : NEW relation: rating.rating
 account      / res.partner.bank         / activity_user_id (many2one)   : not related anymore
 account      / res.partner.bank         / activity_user_id (many2one)   : now a function
-# NOTHING TO DO
-
 account      / res.partner.bank         / has_iban_warning (boolean)    : NEW isfunction: function, stored
 account      / res.partner.bank         / has_money_transfer_warning (boolean): NEW isfunction: function, stored
-# DONE create column in pre-migration and compute using orm in end-migration
-
 account      / res.partner.bank         / message_main_attachment_id (many2one): DEL relation: ir.attachment
 account      / res.partner.bank         / rating_ids (one2many)         : NEW relation: rating.rating
 account      / res.partner.bank         / related_moves (one2many)      : NEW relation: account.move
@@ -430,18 +433,6 @@ DEL ir.model.access: account.access_account_tax_template
 DEL ir.model.access: account.access_product_template_account_manager
 DEL ir.model.constraint: account.constraint_account_account_code_company_uniq
 DEL ir.model.constraint: account.constraint_account_fiscal_position_account_account_src_dest_uniq
-DEL ir.model.constraint: account.constraint_account_fiscal_position_tax_tax_src_dest_uniq
-DEL ir.model.constraint: account.constraint_account_group_check_length_prefix
-DEL ir.model.constraint: account.constraint_account_journal_code_company_uniq
-DEL ir.model.constraint: account.constraint_account_journal_group_uniq_name
-DEL ir.model.constraint: account.constraint_account_move_line_check_accountable_required_fields
-DEL ir.model.constraint: account.constraint_account_move_line_check_amount_currency_balance_sign
-DEL ir.model.constraint: account.constraint_account_move_line_check_credit_debit
-DEL ir.model.constraint: account.constraint_account_move_line_check_non_accountable_fields_null
-DEL ir.model.constraint: account.constraint_account_payment_check_amount_not_negative
-DEL ir.model.constraint: account.constraint_account_payment_method_name_code_unique
-DEL ir.model.constraint: account.constraint_account_reconcile_model_name_unique
-DEL ir.model.constraint: account.constraint_account_report_line_code_uniq
 DEL ir.model.constraint: account.constraint_account_tax_name_company_uniq
 DEL ir.model.constraint: account.constraint_account_tax_template_name_company_uniq
 DEL ir.model.constraint: account_sequence.constraint_account_move_unique_name
