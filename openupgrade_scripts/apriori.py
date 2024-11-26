@@ -31,6 +31,7 @@ merged_modules = {
     "purchase_price_diff": "purchase_stock",
     "web_kanban_gauge": "web",
     "website_event_crm_questions": "website_event_crm",
+    "website_event_questions": "website_event",
     "website_sale_delivery": "website_sale",
     "website_sale_loyalty_delivery": "website_sale_loyalty",
     "website_sale_stock_product_configurator": "website_sale_product_configurator",
