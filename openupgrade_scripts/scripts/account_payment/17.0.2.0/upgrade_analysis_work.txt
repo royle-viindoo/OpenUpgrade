@@ -3,7 +3,7 @@
 ---XML records in module 'account_payment'---
 NEW ir.config_parameter: account_payment.enable_portal_payment [renamed from account_payment_invoice_online_payment_patch module] (noupdate)
 DEL ir.config_parameter: account_payment_invoice_online_payment_patch.enable_portal_payment [renamed to account_payment module] (noupdate)
-# DONE pre-migration rename XML-IDs
+# NOTHING TO DO: Done in apriori.py
 
 NEW ir.model.access: account_payment.payment_transaction_user [renamed from payment module]
 # NOTHING TO DO
