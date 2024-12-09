@@ -18,7 +18,7 @@ sale         / res.company              / sale_quotation_onboarding_state (selec
 # NOTHING TO DO
 
 sale         / sale.order               / locked (boolean)              : NEW hasdefault: default
-# DONE pre-migration:
+# DONE post-migration: set locked if SO was created by a user in the auto done group
 
 sale         / sale.order               / activity_user_id (many2one)   : not related anymore
 sale         / sale.order               / activity_user_id (many2one)   : now a function
@@ -30,7 +30,7 @@ sale         / sale.order               / message_main_attachment_id (many2one):
 sale         / sale.order               / prepayment_percent (float)    : NEW hasdefault: compute
 sale         / sale.order               / rating_ids (one2many)         : NEW relation: rating.rating
 sale         / sale.order               / state (selection)             : selection_keys is now '['cancel', 'draft', 'sale', 'sent']' ('['cancel', 'done', 'draft', 'sale', 'sent']')
-# NOTHING TO DO
+# DONE post-migration: map state 'done' to 'sale', lock as described above
 
 sale         / sale.order.line          / price_reduce (float)          : DEL
 # NOTHING TO DO
@@ -54,7 +54,7 @@ DEL ir.model.access: sale.access_account_invoice_send_salesman
 
 ir.model.constraint: sale.constraint_res_company_check_quotation_validity_days (changed definition: is now 'check(quotation_validity_days >= 0)' ('check(quotation_validity_days > 0)'))
 ir.model.constraint: sale.constraint_sale_order_date_order_conditional_required (changed definition: is now 'check((state = 'sale' and date_order is not null) or state != 'sale')' ('check((state in('sale','done') and date_order is not null) or state not in('sale','done'))'))
-# DONE pre-migration: safely delete constraint to recreate it
+# NOTHING TO DO
 
 NEW ir.rule: sale.mail_plan_rule_group_sale_manager (noupdate)
 NEW ir.rule: sale.mail_plan_template_rule_group_sale_manager (noupdate)
