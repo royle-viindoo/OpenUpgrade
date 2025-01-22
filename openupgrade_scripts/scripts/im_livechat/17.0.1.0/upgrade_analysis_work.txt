@@ -34,7 +34,6 @@ im_livechat  / res.users.settings       / livechat_lang_ids (many2many) : NEW re
 im_livechat  / res.users.settings       / livechat_username (char)      : NEW
 # NOTHING TO DO
 
-
 ---XML records in module 'im_livechat'---
 NEW ir.actions.act_window: im_livechat.discuss_channel_action
 NEW ir.actions.act_window: im_livechat.discuss_channel_action_from_livechat_channel
@@ -61,11 +60,19 @@ DEL ir.model.access: im_livechat.access_chatbot_script
 DEL ir.model.access: im_livechat.access_chatbot_script_step
 DEL ir.model.access: im_livechat.access_livechat_channel
 DEL ir.model.access: im_livechat.access_livechat_channel_rule
+# NOTHING TO DO
+
 NEW ir.model.constraint: im_livechat.constraint_discuss_channel_livechat_operator_id
 DEL ir.model.constraint: im_livechat.constraint_mail_channel_livechat_operator_id
+# DONE: pre-migration: deleted safely old constraint (we don't have renaming mechanism)
+
 NEW ir.rule: im_livechat.ir_rule_discuss_channel_group_im_livechat_group_manager (noupdate)
 NEW ir.rule: im_livechat.ir_rule_discuss_channel_member_group_im_livechat_group_manager (noupdate)
+# NOTHING TO DO
+
 DEL ir.rule: im_livechat.im_livechat_rule_manager_read_all_mail_channel (noupdate)
+# DONE: post-migration: deleted safely
+
 NEW ir.ui.view: im_livechat.discuss_channel_view_form
 NEW ir.ui.view: im_livechat.discuss_channel_view_search
 NEW ir.ui.view: im_livechat.discuss_channel_view_tree
