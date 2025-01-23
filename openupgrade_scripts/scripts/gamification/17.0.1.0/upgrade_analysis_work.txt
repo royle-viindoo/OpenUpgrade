@@ -13,7 +13,7 @@ gamification / gamification.karma.tracking / gain (integer)                : NEW
 
 gamification / gamification.karma.tracking / origin_ref (reference)        : NEW hasdefault: default
 gamification / gamification.karma.tracking / origin_ref_model_name (selection): NEW selection_keys: function, isfunction: function, stored
-# DONE: pre-migration: filled with create_uid
+# DONE: pre-migration: filled with user_id
 
 gamification / gamification.karma.tracking / reason (text)                 : NEW hasdefault: default
 # NOTHING TO DO: let's use default one. Should we create/fill in pre-migration too?

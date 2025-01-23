@@ -17,7 +17,7 @@ def new_tracking_fields(env):
         ALTER TABLE gamification_karma_tracking
             ADD COLUMN IF NOT EXISTS origin_ref varchar;
         UPDATE gamification_karma_tracking
-        SET origin_ref = 'res.users,' || create_uid;
+        SET origin_ref = 'res.users,' || user_id;
         """,
     )
     openupgrade.logged_query(

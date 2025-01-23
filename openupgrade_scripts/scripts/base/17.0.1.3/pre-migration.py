@@ -7,7 +7,10 @@ from openupgradelib import openupgrade
 
 from odoo import tools
 
-from odoo.addons.openupgrade_scripts.apriori import merged_modules, renamed_modules
+from odoo.addons.openupgrade_scripts.apriori import (  # pylint: disable=odoo-addons-relative-import
+    merged_modules,
+    renamed_modules,
+)
 
 _logger = logging.getLogger(__name__)
 
