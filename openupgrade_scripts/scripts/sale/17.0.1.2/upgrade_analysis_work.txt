@@ -18,7 +18,7 @@ sale         / res.company              / sale_quotation_onboarding_state (selec
 # NOTHING TO DO
 
 sale         / sale.order               / locked (boolean)              : NEW hasdefault: default
-# DONE post-migration: set locked if SO was created by a user in the auto done group
+# DONE post-migration: set locked if state was done
 
 sale         / sale.order               / activity_user_id (many2one)   : not related anymore
 sale         / sale.order               / activity_user_id (many2one)   : now a function
@@ -29,8 +29,11 @@ sale         / sale.order               / journal_id (many2one)         : NEW re
 sale         / sale.order               / message_main_attachment_id (many2one): DEL relation: ir.attachment
 sale         / sale.order               / prepayment_percent (float)    : NEW hasdefault: compute
 sale         / sale.order               / rating_ids (one2many)         : NEW relation: rating.rating
+# NOTHING TO DO
+
 sale         / sale.order               / state (selection)             : selection_keys is now '['cancel', 'draft', 'sale', 'sent']' ('['cancel', 'done', 'draft', 'sale', 'sent']')
-# DONE post-migration: map state 'done' to 'sale', lock as described above
+# DONE: pre-migration: copy 'state' field for preserving old values
+# DONE: post-migration: map state 'done' to 'sale', lock as described above
 
 sale         / sale.order.line          / price_reduce (float)          : DEL
 # NOTHING TO DO

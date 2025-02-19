@@ -1,24 +1,20 @@
 # Copyright 2024 Viindoo Technology Joint Stock Company (Viindoo)
+# Copyright 2024 Holger Brunn
+# Copyright 2025 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openupgradelib import openupgrade
 
 
 def _sale_order_populate_locked_field(env):
-    """
-    Set state of sale orders in state 'done' to 'sale'
-    Lock them if the the group sale.group_auto_done_setting
-    is inherited by the user group
-    """
-    auto_done_group = env.ref("sale.group_auto_done_setting")
+    """Set state of sale orders in state 'done' to 'sale' and lock them."""
     openupgrade.logged_query(
         env.cr,
         """
         UPDATE sale_order
-        SET locked = locked or create_uid = ANY (%s), state = 'sale'
+        SET locked = True, state = 'sale'
         WHERE state = 'done'
         """,
-        (auto_done_group.users.ids,),
     )
 
 
