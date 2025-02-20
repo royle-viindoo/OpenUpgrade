@@ -7,7 +7,7 @@ sale_management / sale.order.template      / prepayment_percent (float)    : NEW
 ---XML records in module 'sale_management'---
 digest.tip: sale_management.digest_tip_sale1_management_0 (noupdate switched)
 digest.tip: sale_management.digest_tip_sale_management_1 (noupdate switched)
-# NOTHING TO DO
+# DONE: pre-mgiration: Switch noupdate flag
 
 NEW ir.model.access: sale_management.access_sale_order_option_invoice
 NEW ir.model.access: sale_management.access_sale_order_option_readonly
