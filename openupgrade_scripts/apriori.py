@@ -41,6 +41,7 @@ merged_modules = {
     "l10n_es_irnr_sii": "l10n_es_aeat_sii_oca",
     # OCA/maintenance
     "maintenance_plan": "maintenance",
+    "maintenance_plan_activity": "maintenance",
     # OCA/purchase-workflow
     "purchase_discount": "purchase",
     # OCA/social
