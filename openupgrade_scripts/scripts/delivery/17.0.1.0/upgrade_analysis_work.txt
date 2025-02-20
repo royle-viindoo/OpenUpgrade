@@ -1,11 +1,11 @@
 ---Models in module 'delivery'---
 model choose.delivery.package (moved to stock_delivery) [column['model_type']]
-# DONE: in migration script of module stock_delivery
+# DONE: pre-migration: moved to stock_delivery
 
 ---Fields in module 'delivery'---
 delivery     / delivery.carrier         / fixed_margin (float)          : NEW
 delivery     / delivery.carrier         / invoice_policy (selection)    : selection_keys is now '['estimated']' ('['estimated', 'real']')
-# NOTHING TO DO:
+# NOTHING TO DO
 
 delivery     / sale.order               / shipping_weight (float)       : NEW hasdefault: compute
 # NOTHING TO DO: new features
@@ -14,7 +14,7 @@ delivery     / stock.move.line          / carrier_id (many2one)         : is now
 # DONE: pre-migration: Add new column & set value for it
 
 delivery     / stock.move.line          / carrier_name (char)           : DEL
-# NOTHING TO DO:
+# NOTHING TO DO
 
 delivery     / product.product          / country_of_origin (many2one)  : module is now 'stock_delivery' ('delivery')
 delivery     / product.product          / hs_code (char)                : module is now 'stock_delivery' ('delivery')

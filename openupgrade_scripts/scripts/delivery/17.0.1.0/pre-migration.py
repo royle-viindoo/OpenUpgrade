@@ -1,17 +1,5 @@
 from openupgradelib import openupgrade
 
-_new_fields = [
-    (
-        "carrier_id",  # Field name
-        "stock.move.line",  # Model name
-        "stock_move_line",  # Table name
-        "many2one",  # Odoo Field type (in lower case)
-        False,  # [Optional] SQL type (if custom fields)
-        "delivery",  # Module name
-        False,  # [Optional] Default value
-    )
-]
-
 _xmlids_renames = [
     (
         "delivery.act_delivery_trackers_url",
@@ -45,6 +33,10 @@ _xmlids_renames = [
         "delivery.menu_delivery_zip_prefix",
         "stock_delivery.menu_delivery_zip_prefix",
     ),
+    (
+        "delivery.model_choose_delivery_package",
+        "stock_delivery.model_choose_delivery_package",
+    ),
 ]
 
 
@@ -60,6 +52,13 @@ def _fill_stock_move_line_carrier_id(env):
     openupgrade.logged_query(
         env.cr,
         """
+        ALTER TABLE stock_move_line
+        ADD COLUMN IF NOT EXISTS carrier_id INTEGER;
+        """,
+    )
+    openupgrade.logged_query(
+        env.cr,
+        """
         UPDATE stock_move_line sml
         SET carrier_id = sp.carrier_id
         FROM stock_picking sp
@@ -71,6 +70,12 @@ def _fill_stock_move_line_carrier_id(env):
 @openupgrade.migrate()
 def migrate(env, version):
     openupgrade.rename_xmlids(env.cr, _xmlids_renames)
-    openupgrade.add_fields(env, _new_fields)
     _delete_sql_constraints(env)
     _fill_stock_move_line_carrier_id(env)
+    openupgrade.logged_query(  # just to be sure
+        env.cr,
+        """
+        UPDATE ir_module_module
+        SET state='to install'
+        WHERE name = 'stock_delivery' AND state='uninstalled'""",
+    )
