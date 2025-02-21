@@ -89,6 +89,25 @@ def _mail_template_convert_report_template_m2o_to_m2m(env):
     )
 
 
+def _fill_mail_message_outgoing(env):
+    # set outgoing messages
+    group = env.ref("base.group_user")
+    openupgrade.logged_query(
+        env.cr,
+        f"""
+        UPDATE mail_message mm
+        SET message_type = 'email_outgoing'
+        FROM mail_mail mail, res_partner rp
+        JOIN res_users ru ON ru.partner_id = rp.id
+        JOIN res_groups_users_rel rel ON rel.uid = ru.id
+            AND rel.gid = {group.id}
+        WHERE mm.message_type = 'email'
+        AND mm.message_id like '%-openerp-' || mm.res_id || '-' || mm.model || '@%'
+        AND (mm.author_id = rp.id OR mail.mail_message_id = mm.id)
+        """,
+    )
+
+
 def _mail_activity_plan_template(env):
     """If the OCA mail_activity_plan module was installed, we create the
     mail.activity.plan.template records.
@@ -140,4 +159,5 @@ def migrate(env, version):
     _fill_res_company_alias_domain_id(env)
     _mail_alias_fill_alias_full_name(env)
     _mail_template_convert_report_template_m2o_to_m2m(env)
+    _fill_mail_message_outgoing(env)
     _mail_activity_plan_template(env)
