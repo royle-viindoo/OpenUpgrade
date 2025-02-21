@@ -8,7 +8,8 @@ renamed_modules = {
     "note": "project_todo",
     "website_sale_delivery_mondialrelay": "website_sale_mondialrelay",
     # odoo/enterprise
-    # OCA/...
+    # OCA/social
+    "mail_activity_unlink_log": "mail_activity_cancel_tracking",
 }
 
 # Merged modules contain a mapping from old module names to other,
