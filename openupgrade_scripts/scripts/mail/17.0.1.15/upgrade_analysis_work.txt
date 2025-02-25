@@ -120,7 +120,8 @@ mail         / mail.shortcode           / message_ids (many2one)        : DEL re
 # NOTHING TO DO: following commit https://github.com/odoo/odoo/pull/138938/commits/94b71f74ba20733110c123e1c02df9a384fe9d74
 
 mail         / mail.message             / message_type (selection)      : selection_keys is now '['auto_comment', 'comment', 'email', 'email_outgoing', 'notification', 'user_notification']' ('['comment', 'email', 'notification', 'user_notification']')
-# NOTHING TO DO: well when odoo backport https://github.com/odoo/odoo/pull/149576 in 15, nothing to do either because there is no way to detect and fill for 'auto_common' and 'email_outgoing'
+# NOTHING TO DO (auto_comment): well when odoo backport https://github.com/odoo/odoo/pull/149576 in 15, nothing to do because there is no way to detect and fill for 'auto_comment'
+# DONE (email_outgoing): post-migration: set 'email_outgoing' emails using message_id
 
 mail         / mail.message             / pinned_at (datetime)          : NEW
 # NOTHING TO DO: new feature to pin message
