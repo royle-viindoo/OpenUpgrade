@@ -13,14 +13,7 @@ _fields_renames = [
     ),
 ]
 
-_l10n_generic_coa_tax_group_xmlid = [
-    "l10n_generic_coa.tax_group_15",
-]
-
-_l10n_generic_coa_tax_xmlid = [
-    "l10n_generic_coa.sale_tax_template",
-    "l10n_generic_coa.purchase_tax_template",
-]
+_l10n_generic_coa_tax_group_xmlid = "account.tax_group_15"
 
 
 def _map_account_report_filter_account_type(env):
@@ -53,7 +46,7 @@ def _generic_coa_rename_xml_id(env):
     in order to avoid duplication
     """
     _dummy, template_id = env["ir.model.data"]._xmlid_to_res_model_res_id(
-        "l10n_generic_coa.configurable_chart_template",
+        "account.configurable_chart_template",
     )
     if not template_id:
         return
@@ -65,14 +58,15 @@ def _generic_coa_rename_xml_id(env):
     )
     xmlids_renames = []
     for (company_id,) in env.cr.fetchall():
-        for tax_group_xmlid in _l10n_generic_coa_tax_group_xmlid:
-            new_xmlid = f"account.{company_id}_" + tax_group_xmlid.split(".")[1]
-            xmlids_renames.append((tax_group_xmlid, new_xmlid))
-        for tax_xmlid in _l10n_generic_coa_tax_xmlid:
-            old_xmlid = f"l10n_generic_coa.{company_id}_" + tax_xmlid.split(".")[1]
-            new_xmlid = f"account.{company_id}_" + tax_xmlid.split(".")[1]
-            xmlids_renames.append((old_xmlid, new_xmlid))
+        old_xml_id = _l10n_generic_coa_tax_group_xmlid
+        new_xmlid = (
+            f"account.{company_id}_" + _l10n_generic_coa_tax_group_xmlid.split(".")[1]
+        )
+        xmlids_renames.append((old_xml_id, new_xmlid))
     openupgrade.rename_xmlids(env.cr, xmlids_renames)
+    openupgrade.set_xml_ids_noupdate_value(
+        env, "account", [_l10n_generic_coa_tax_group_xmlid.split(".")[1]], False
+    )
 
 
 def _convert_account_tax_description(env):
@@ -270,7 +264,7 @@ def _remove_obsolete_constraints(env):
 def migrate(env, version):
     _map_account_report_filter_account_type(env)
     _generic_coa_rename_xml_id(env)
-    # Drop triagram index on name column of account.account
+    # Drop trigram index on name column of account.account
     # to avoid error when loading registry, it will be recreated
     openupgrade.logged_query(
         env.cr,
