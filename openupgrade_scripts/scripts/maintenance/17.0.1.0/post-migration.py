@@ -19,9 +19,9 @@ def _maintenance_plan(env):
             repeat_unit = COALESCE(mp.interval_step, 'year'),
             repeat_type='until',
             repeat_until = (
-                CURRENT_DATE +  interval ''
+                CURRENT_DATE + (''
                 || COALESCE(mp.maintenance_plan_horizon, 1) || ' '
-                || COALESCE(mp.planning_step, 'year')
+                || COALESCE(mp.planning_step, 'year'))::interval
             )::date
             FROM maintenance_plan mp
             WHERE mr.maintenance_plan_id = mp.id""",
