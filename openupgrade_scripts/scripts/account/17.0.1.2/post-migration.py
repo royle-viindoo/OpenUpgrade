@@ -541,7 +541,7 @@ def _rename_coa_elements_xmlids(env):
                 'account.account',
                 'account.fiscal.position',
                 'account.group',
-                'account.tax',
+                'account.tax'
             )
             AND name LIKE '{company.id}_%'
             """,
