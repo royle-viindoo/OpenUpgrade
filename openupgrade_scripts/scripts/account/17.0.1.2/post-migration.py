@@ -518,6 +518,36 @@ def _map_chart_template_id_to_chart_template(
     )
 
 
+def _rename_coa_elements_xmlids(env):
+    """On v17, when you load a CoA into a company, the CoA elements are still given an
+    XML-ID with the company ID + `_` + the original template XML-ID, but now, instead of
+    putting the module containing the template, all of them are put with the module
+    `account`. Reference:
+
+    https://github.com/odoo/odoo/blob/b9abe46c1492b09e369434e76ec8196c6b02dd19/
+    addons/account/models/chart_template.py#L608
+
+    Thus, we need to rename the module for all the existing CoA elements XML-IDs with
+    this pattern.
+    """
+    for company in env["res.company"].search([]):
+        openupgrade.logged_query(
+            env.cr,
+            f"""
+            UPDATE ir_model_data
+            SET module='account'
+            WHERE module <> 'account'
+            AND model IN (
+                'account.account',
+                'account.fiscal.position',
+                'account.group',
+                'account.tax',
+            )
+            AND name LIKE '{company.id}_%'
+            """,
+        )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _account_payment_term_migration(env)
@@ -542,3 +572,4 @@ def migrate(env, version):
     _account_tax_group_migration(env)
     _map_chart_template_id_to_chart_template(env, "res_company")
     _map_chart_template_id_to_chart_template(env, "account_report")
+    _rename_coa_elements_xmlids(env)
