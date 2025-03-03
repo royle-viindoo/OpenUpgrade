@@ -60,11 +60,18 @@ merged_modules = {
 # only used here for upgrade_analysis
 renamed_models = {
     # odoo
+    "mail.channel": "discuss.channel",
+    "mail.channel.member": "discuss.channel.member",
+    "mail.channel.rtc.session": "discuss.channel.rtc.session",
+    "mailing.contact.subscription": "mailing.subscription",
+    "payment.icon": "payment.method",
+    "restaurant.printer": "pos.printer",
     # OCA/...
 }
 
 # only used here for upgrade_analysis
 merged_models = {
     # odoo
+    "repair.line": "stock.move",
     # OCA/...
 }

@@ -216,8 +216,6 @@ mail         / res.users.settings       / user_id (many2one)            : module
 # NOTHING TO DO: done in base migration scripts
 
 ---XML records in module 'mail'---
-NEW discuss.channel: mail.channel_all_employees (noupdate)
-NEW discuss.channel.member: mail.channel_member_general_channel_for_admin (noupdate)
 NEW ir.actions.act_window: mail.discuss_channel_action_view
 NEW ir.actions.act_window: mail.discuss_channel_member_action
 NEW ir.actions.act_window: mail.discuss_channel_rtc_session_action
@@ -394,10 +392,6 @@ DEL ir.ui.view: mail.view_mail_alias_form
 DEL ir.ui.view: mail.view_mail_alias_search
 DEL ir.ui.view: mail.view_mail_alias_tree
 # NOTHING TO DO
-
-DEL mail.channel: mail.channel_all_employees (noupdate)
-DEL mail.channel.member: mail.channel_member_general_channel_for_admin (noupdate)
-# DONE: post-migration: safe removal
 
 NEW res.groups: mail.group_mail_notification_type_inbox (noupdate)
 # NOTHING TO DO

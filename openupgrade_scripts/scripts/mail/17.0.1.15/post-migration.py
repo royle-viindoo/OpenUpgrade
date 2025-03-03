@@ -8,8 +8,6 @@ _deleted_xml_records = [
     "mail.ir_rule_mail_channel_member_group_user",
     "mail.mail_channel_admin",
     "mail.mail_channel_rule",
-    "mail.channel_all_employees",
-    "mail.channel_member_general_channel_for_admin",
 ]
 
 
