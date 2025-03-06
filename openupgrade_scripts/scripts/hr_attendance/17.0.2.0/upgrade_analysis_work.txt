@@ -1,6 +1,12 @@
 ---Models in module 'hr_attendance'---
 obsolete model hr.attendance.report [sql_view]
 ---Fields in module 'hr_attendance'---
+hr_attendance / hr.attendance            / message_follower_ids (one2many): NEW relation: mail.followers
+hr_attendance / hr.attendance            / message_ids (one2many)        : NEW relation: mail.message
+hr_attendance / hr.attendance            / rating_ids (one2many)         : NEW relation: rating.rating
+hr_attendance / hr.attendance            / website_message_ids (one2many): NEW relation: mail.message
+# NOTHING TO DO
+
 hr_attendance / hr.attendance            / in_browser (char)             : NEW
 hr_attendance / hr.attendance            / in_city (char)                : NEW
 hr_attendance / hr.attendance            / in_country_name (char)        : NEW
@@ -8,8 +14,6 @@ hr_attendance / hr.attendance            / in_ip_address (char)          : NEW
 hr_attendance / hr.attendance            / in_latitude (float)           : NEW
 hr_attendance / hr.attendance            / in_longitude (float)          : NEW
 hr_attendance / hr.attendance            / in_mode (selection)           : NEW selection_keys: ['kiosk', 'manual', 'systray']
-hr_attendance / hr.attendance            / message_follower_ids (one2many): NEW relation: mail.followers
-hr_attendance / hr.attendance            / message_ids (one2many)        : NEW relation: mail.message
 hr_attendance / hr.attendance            / out_browser (char)            : NEW
 hr_attendance / hr.attendance            / out_city (char)               : NEW
 hr_attendance / hr.attendance            / out_country_name (char)       : NEW
@@ -17,19 +21,27 @@ hr_attendance / hr.attendance            / out_ip_address (char)         : NEW
 hr_attendance / hr.attendance            / out_latitude (float)          : NEW
 hr_attendance / hr.attendance            / out_longitude (float)         : NEW
 hr_attendance / hr.attendance            / out_mode (selection)          : NEW selection_keys: ['kiosk', 'manual', 'systray']
+# NOTHING TO DO: new feature (Geolocation information)
+
 hr_attendance / hr.attendance            / overtime_hours (float)        : NEW isfunction: function, stored
-hr_attendance / hr.attendance            / rating_ids (one2many)         : NEW relation: rating.rating
-hr_attendance / hr.attendance            / website_message_ids (one2many): NEW relation: mail.message
-# NOTHING TO DO
+# DONE: pre-migration: Pre-create the column for not triggering the method for each record (as it is costly)
+# DONE: post-migration: Fill column in one call
 
 hr_attendance / hr.employee              / attendance_manager_id (many2one): NEW relation: res.users
 # NOTHING TO DO
 
 hr_attendance / res.company              / attendance_from_systray (boolean): NEW hasdefault: default
+# DONE: pre-migration: fill default values
+
 hr_attendance / res.company              / attendance_kiosk_key (char)   : NEW hasdefault: default
+# DONE: post-migration: fill default values
+
 hr_attendance / res.company              / attendance_kiosk_use_pin (boolean): NEW
+DEL res.groups: hr_attendance.group_hr_attendance_use_pin
+DONE: post-migration: fill if user was in group hr_attendance.group_hr_attendance_use_pin
+
 hr_attendance / res.company              / hr_attendance_display_overtime (boolean): NEW
-# NOTHING TO DO
+# DONE: post-migration: maintain v16 usability, which was using hr_attendance_overtime
 
 ---XML records in module 'hr_attendance'---
 NEW ir.actions.act_window: hr_attendance.hr_attendance_reporting
@@ -58,13 +70,15 @@ NEW ir.rule: hr_attendance.hr_attendance_rule_attendance_officer_overtime_restri
 NEW ir.rule: hr_attendance.hr_attendance_rule_attendance_overtime_admin (noupdate)
 NEW ir.rule: hr_attendance.hr_attendance_rule_attendance_overtime_simple_user (noupdate)
 NEW ir.rule: hr_attendance.hr_attendance_rule_attendance_simple_user (noupdate)
+# NOTHING TO DO
+
 DEL ir.rule: hr_attendance.hr_attendance_report_rule_multi_company (noupdate)
 DEL ir.rule: hr_attendance.hr_attendance_rule_attendance_employee (noupdate)
 DEL ir.rule: hr_attendance.hr_attendance_rule_attendance_manager (noupdate)
 DEL ir.rule: hr_attendance.hr_attendance_rule_attendance_manual (noupdate)
 DEL ir.rule: hr_attendance.hr_attendance_rule_attendance_overtime_employee (noupdate)
 DEL ir.rule: hr_attendance.hr_attendance_rule_attendance_overtime_manager (noupdate)
-# NOTHING TO DO
+# DONE: post-migration: safely delete
 
 NEW ir.ui.menu: hr_attendance.menu_hr_attendance_reporting
 DEL ir.ui.menu: hr_attendance.menu_hr_attendance_attendances_overview
@@ -83,9 +97,12 @@ DEL ir.ui.view: hr_attendance.hr_attendance_report_view_search
 # NOTHING TO DO
 
 NEW res.groups: hr_attendance.group_hr_attendance_officer
-NEW res.groups: hr_attendance.group_hr_attendance_own_reader
-DEL res.groups: hr_attendance.group_hr_attendance
-DEL res.groups: hr_attendance.group_hr_attendance_kiosk
-DEL res.groups: hr_attendance.group_hr_attendance_use_pin
 DEL res.groups: hr_attendance.group_hr_attendance_user
+# DONE: pre-migration: rename group
+
+NEW res.groups: hr_attendance.group_hr_attendance_own_reader
+DEL res.groups: hr_attendance.group_hr_attendance_kiosk
+# DONE: pre-migration: rename group
+
+DEL res.groups: hr_attendance.group_hr_attendance
 # NOTHING TO DO
