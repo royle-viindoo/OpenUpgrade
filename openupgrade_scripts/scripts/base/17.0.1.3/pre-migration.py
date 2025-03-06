@@ -50,7 +50,7 @@ def _fill_ir_server_object_lines_into_action_server(cr):
         cr,
         """
         ALTER TABLE ir_act_server
-            ADD COLUMN IF NOT EXISTS old_ias_id VARCHAR,
+            ADD COLUMN IF NOT EXISTS old_ias_id INTEGER,
             ADD COLUMN IF NOT EXISTS evaluation_type VARCHAR,
             ADD COLUMN IF NOT EXISTS resource_ref VARCHAR,
             ADD COLUMN IF NOT EXISTS selection_value INTEGER,
@@ -66,73 +66,69 @@ def _fill_ir_server_object_lines_into_action_server(cr):
     openupgrade.logged_query(
         cr,
         """
-        INSERT INTO ir_act_server
-        (
-            old_ias_id,
-            evaluation_type,
-            update_field_id,
-            update_path,
-            update_related_model_id,
-            value,
-            resource_ref,
-            selection_value,
-            update_boolean_value,
-            update_m2m_operation,
-            binding_type,
-            state,
-            type,
-            usage,
-            model_id,
-            name
+        WITH sub AS (
+            INSERT INTO ir_act_server
+            (
+                old_ias_id,
+                evaluation_type,
+                update_field_id,
+                update_path,
+                update_related_model_id,
+                value,
+                resource_ref,
+                selection_value,
+                update_boolean_value,
+                update_m2m_operation,
+                binding_type,
+                state,
+                type,
+                usage,
+                model_id,
+                name
+            )
+            SELECT
+                ias.id,
+                CASE
+                    WHEN isol.evaluation_type = 'equation' then 'equation'
+                    ELSE 'value'
+                END,
+                imf.id,
+                imf.name,
+                im.id,
+                CASE WHEN isol.evaluation_type = 'equation'
+                    THEN isol.value
+                    ELSE NULL
+                END,
+                CASE WHEN imf.ttype in ('many2one', 'many2many')
+                    THEN imf.relation || ',' || isol.value
+                    ELSE NULL
+                END,
+                imfs.id,
+                CASE WHEN imf.ttype = 'boolean'
+                    THEN isol.value::bool
+                    ELSE NULL
+                END,
+                'add',
+                'action',
+                'object_write',
+                'ir.actions.server',
+                'ir_actions_server',
+                ias.model_id,
+                ias.name
+            FROM ir_act_server ias
+            JOIN ir_server_object_lines isol ON isol.server_id = ias.id
+            JOIN ir_model_fields imf ON imf.id = isol.col1
+            LEFT JOIN ir_model im ON im.model = imf.relation
+            LEFT JOIN ir_model_fields_selection imfs
+                ON imf.id = imfs.field_id AND imfs.value = isol.value
+            WHERE ias.state = 'object_write'
+            RETURNING id, old_ias_id
         )
-        SELECT
-            ias.id,
-            CASE
-                WHEN isol.evaluation_type = 'equation' then 'equation'
-                ELSE 'value'
-            END,
-            imf.id,
-            imf.name,
-            im.id,
-            CASE WHEN isol.evaluation_type = 'equation'
-                THEN isol.value
-                ELSE NULL
-            END,
-            CASE WHEN imf.ttype in ('many2one', 'many2many')
-                THEN imf.relation || ',' || isol.value
-                ELSE NULL
-            END,
-            imfs.id,
-            CASE WHEN imf.ttype = 'boolean'
-                THEN isol.value::bool
-                ELSE NULL
-            END,
-            'add',
-            'action',
-            'object_write',
-            'ir.actions.server',
-            'ir_actions_server',
-            ias.model_id,
-            ias.name
-        FROM ir_act_server ias
-        JOIN ir_server_object_lines isol ON isol.server_id = ias.id
-        JOIN ir_model_fields imf ON imf.id = isol.col1
-        LEFT JOIN ir_model im ON im.model = imf.relation
-        LEFT JOIN ir_model_fields_selection imfs
-            ON imf.id = imfs.field_id AND imfs.value = isol.value
-        WHERE ias.state = 'object_write'
-        RETURNING id, old_ias_id
+        INSERT INTO rel_server_actions (action_id, server_id)
+        SELECT sub.id as action_id, sub.old_ias_id as server_id
+        FROM sub
         """,
     )
-    for row in cr.fetchall():
-        cr.execute(
-            """
-            INSERT INTO rel_server_actions
-            (action_id, server_id)
-            VALUES (%s, %s)
-            """,
-            (row[0], row[1]),
-        )
     openupgrade.logged_query(
         cr,
         """UPDATE ir_act_server ias
