@@ -234,15 +234,17 @@ def _pre_create_account_report_active(env):
     """
     Precreate column with default value true, then switch back to false
     """
-    env.cr.execute(
+    openupgrade.logged_query(
+        env.cr,
         """
         ALTER TABLE account_report ADD COLUMN active boolean DEFAULT true
-        """
+        """,
     )
-    env.cr.execute(
+    openupgrade.logged_query(
+        env.cr,
         """
-        ALTER TABLE account_report ALTER COLUMN active SET DEFAULT false
-        """
+        ALTER TABLE account_report ALTER COLUMN active DROP DEFAULT
+        """,
     )
 
 
