@@ -46,13 +46,14 @@ def _remove_if_applicable_base_pricelist(env):
             openupgrade.delete_records_safely_by_xml_id(env, ["product.list0"])
             return
     openupgrade.logged_query(
-        env.cr, "DELETE FROM ir_model_date WHERE module = 'product' AND name='list0'"
+        env.cr, "DELETE FROM ir_model_data WHERE module = 'product' AND name='list0'"
     )
 
 
 @openupgrade.migrate()
 def migrate(env, version):
     _preserve_pricelist_order(env)
+    _remove_if_applicable_base_pricelist(env)
     openupgrade.load_data(env, "product", "17.0.1.2/noupdate_changes.xml")
     openupgrade.logged_query(
         env.cr,
