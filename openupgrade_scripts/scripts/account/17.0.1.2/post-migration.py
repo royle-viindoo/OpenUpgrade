@@ -3,6 +3,8 @@
 
 from openupgradelib import openupgrade
 
+from odoo import models
+
 from odoo.addons.base.models.ir_property import TYPE2FIELD as ir_property_TYPE2FIELD
 
 _deleted_xml_records = [
@@ -418,8 +420,13 @@ def _account_tax_group_migration(env):
             )
 
             if tax_group_name:
-                new_imd = imd.copy({"res_id": new_tax_group.id})
-                new_imd.write({"name": f"{company_id}_{tax_group_name}"})
+                models.BaseModel.copy(
+                    imd,
+                    {
+                        "res_id": new_tax_group.id,
+                        "name": f"{company_id}_{tax_group_name}",
+                    },
+                )
 
             openupgrade.logged_query(
                 env.cr,
