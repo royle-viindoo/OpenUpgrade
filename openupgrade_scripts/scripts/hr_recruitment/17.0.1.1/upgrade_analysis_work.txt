@@ -20,10 +20,8 @@ hr_recruitment / hr.applicant             / rating_ids (one2many)         : NEW 
 # NOTHING TO DO: new fields
 
 hr_recruitment / hr.applicant.refuse.reason / _order                        : _order is now 'sequence' ('id')
-# NOTHING TO DO: new field sequence used to order
-
 hr_recruitment / hr.applicant.refuse.reason / sequence (integer)            : NEW hasdefault: default
-# DONE: pre-migration: pre-create column with default value
+# DONE: pre-migration: pre-create column and assign id as sequence for preserving previous order
 
 hr_recruitment / hr.job                   / applicant_properties_definition (properties_definition): NEW
 # NOTHING TO DO: new properties field
