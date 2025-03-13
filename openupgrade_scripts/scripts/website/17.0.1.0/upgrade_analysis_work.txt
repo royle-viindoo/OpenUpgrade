@@ -5,6 +5,8 @@ new model website.controller.page
 ---Fields in module 'website'---
 website      / ir.ui.view               / controller_page_ids (one2many): NEW relation: website.controller.page
 website      / website                  / social_tiktok (char)          : NEW hasdefault: default
+# NOTHING TO DO
+
 website      / website.controller.page  / _inherits                     : NEW _inherits: {'ir.ui.view': 'view_id'}
 website      / website.controller.page  / default_layout (selection)    : NEW selection_keys: ['grid', 'list'], hasdefault: default
 website      / website.controller.page  / is_published (boolean)        : NEW hasdefault: default
@@ -15,10 +17,14 @@ website      / website.controller.page  / page_type (selection)         : NEW se
 website      / website.controller.page  / record_domain (char)          : NEW
 website      / website.controller.page  / view_id (many2one)            : NEW relation: ir.ui.view, required
 website      / website.controller.page  / website_id (many2one)         : NEW relation: website, isrelated: related, stored
+# NOTHING TO DO: new model
+
 website      / website.menu             / controller_page_id (many2one) : NEW relation: website.controller.page
 website      / website.page             / header_text_color (char)      : NEW
-website      / website.page             / url (char)                    : now required
 # NOTHING TO DO
+
+website      / website.page             / url (char)                    : now required
+# DONE: pre-migration: assure is filled
 
 ---XML records in module 'website'---
 NEW ir.actions.act_window: website.action_website_controller_pages_list
@@ -49,9 +55,6 @@ ir.attachment: website.library_image_15 (noupdate switched)
 ir.attachment: website.library_image_16 (noupdate switched)
 ir.attachment: website.library_image_17 (noupdate switched)
 ir.attachment: website.library_image_18 (noupdate switched)
-# NOTHING TO DO
-
-NEW ir.attachment: website.library_image_team
 ir.attachment: website.s_background_image_01 (noupdate switched)
 ir.attachment: website.s_background_image_02 (noupdate switched)
 ir.attachment: website.s_background_image_03 (noupdate switched)
@@ -62,8 +65,6 @@ ir.attachment: website.s_background_image_07 (noupdate switched)
 ir.attachment: website.s_background_image_08 (noupdate switched)
 ir.attachment: website.s_background_image_09 (noupdate switched)
 ir.attachment: website.s_banner_default_image (noupdate switched)
-NEW ir.attachment: website.s_banner_default_image_2
-NEW ir.attachment: website.s_banner_default_image_3
 ir.attachment: website.s_blockquote_cover_default_image (noupdate switched)
 ir.attachment: website.s_blockquote_default_image (noupdate switched)
 ir.attachment: website.s_carousel_default_image_1 (noupdate switched)
@@ -136,13 +137,16 @@ ir.attachment: website.s_reference_demo_image_2 (noupdate switched)
 ir.attachment: website.s_reference_demo_image_3 (noupdate switched)
 ir.attachment: website.s_reference_demo_image_4 (noupdate switched)
 ir.attachment: website.s_reference_demo_image_5 (noupdate switched)
-NEW ir.attachment: website.s_text_cover_default_image
 ir.attachment: website.s_text_image_default_image (noupdate switched)
 ir.attachment: website.s_three_columns_default_image_1 (noupdate switched)
 ir.attachment: website.s_three_columns_default_image_2 (noupdate switched)
 ir.attachment: website.s_three_columns_default_image_3 (noupdate switched)
-# NOTHING TO DO
+# DONE: pre-migration: switched noupdate
 
+NEW ir.attachment: website.library_image_team
+NEW ir.attachment: website.s_banner_default_image_2
+NEW ir.attachment: website.s_banner_default_image_3
+NEW ir.attachment: website.s_text_cover_default_image
 NEW ir.model.access: website.access_seo_public_employee
 NEW ir.model.access: website.access_seo_public_portal
 NEW ir.model.access: website.access_seo_public_public
