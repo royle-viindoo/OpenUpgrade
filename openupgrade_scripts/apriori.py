@@ -63,6 +63,7 @@ merged_modules = {
 # only used here for upgrade_analysis
 renamed_models = {
     # odoo
+    "hr.leave.stress.day": "hr.leave.mandatory.day",
     "mail.channel": "discuss.channel",
     "mail.channel.member": "discuss.channel.member",
     "mail.channel.rtc.session": "discuss.channel.rtc.session",
