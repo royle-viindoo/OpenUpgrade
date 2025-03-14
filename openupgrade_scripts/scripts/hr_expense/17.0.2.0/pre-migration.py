@@ -18,8 +18,8 @@ _fields_renames = [
     (
         "hr.expense",
         "hr_expense",
+        "unit_amount",
         "price_unit",
-        "unit_price",
     ),
     (
         "hr.expense",
@@ -72,10 +72,21 @@ def _hr_expense_update_state(env):
         env.cr,
         """
         UPDATE hr_expense expense
+        SET state = 'submitted'
+        FROM hr_expense_sheet sheet
+        WHERE expense.sheet_id = sheet.id AND
+            expense.state in ('reported', 'done') AND
+            sheet.account_move_id IS NULL
+        """,
+    )
+    openupgrade.logged_query(
+        env.cr,
+        """
+        UPDATE hr_expense expense
         SET state = 'reported'
         FROM hr_expense_sheet sheet
         WHERE expense.sheet_id = sheet.id AND
-        sheet.state = 'draft'
+            sheet.state = 'draft'
         """,
     )
 
@@ -121,7 +132,7 @@ def _hr_expense_sheet_journal(env):
             JOIN account_payment_method method
                 ON method.id = method_line.payment_method_id
         WHERE sheet.bank_journal_id = journal.id
-        AND method.payment_type = 'outbound'
+            AND method.payment_type = 'outbound'
         """,
     )
     openupgrade.logged_query(
@@ -136,11 +147,11 @@ def _hr_expense_sheet_journal(env):
         env.cr,
         """
         UPDATE hr_expense_sheet sheet
-        SET journal_id = CASE
-        WHEN bank_journal_id IS NOT NULL
-        AND expense.payment_mode = 'company_account' THEN bank_journal_id
+        SET journal_id = sheet.bank_journal_id
         FROM hr_expense expense
-        WHERE expense.sheet_id = sheet.id
+        WHERE expense.sheet_id = sheet.id AND
+            expense.payment_mode = 'company_account' AND
+            sheet.bank_journal_id IS NOT NULL
         """,
     )
 
@@ -151,3 +162,4 @@ def migrate(env, version):
     openupgrade.rename_fields(env, _fields_renames)
     _hr_expense_update_state(env)
     _hr_expense_sheet_fill_approval_state(env)
+    _hr_expense_sheet_journal(env)
