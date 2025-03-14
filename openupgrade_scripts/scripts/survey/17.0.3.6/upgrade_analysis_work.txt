@@ -3,7 +3,7 @@
 survey       / survey.question          / is_conditional (boolean)      : DEL
 survey       / survey.question          / triggering_answer_id (many2one): DEL relation: survey.question.answer
 survey       / survey.question          / triggering_answer_ids (many2many): NEW relation: survey.question.answer
-# DONE: post-migration: transform many2one to many2many
+# DONE: post-migration: empty triggering_answer_id when is_condition is not checked + transform many2one to many2many
 
 survey       / survey.question          / triggering_question_id (many2one): DEL relation: survey.question
 # NOTHING TO DO: there is a m2m non-stored computed instead
