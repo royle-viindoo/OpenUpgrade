@@ -66,7 +66,7 @@ DEL ir.rule: website_event_questions.ir_rule_event_question_answer_event_user [r
 DEL ir.rule: website_event_questions.ir_rule_event_question_answer_published [renamed to website_event module] (noupdate)
 DEL ir.rule: website_event_questions.ir_rule_event_question_event_user [renamed to website_event module] (noupdate)
 DEL ir.rule: website_event_questions.ir_rule_event_question_published [renamed to website_event module] (noupdate)
-# DONE: renamed in pre-migration
+# NOTHING TO DO: The merge of website_event_questions into website_event already performs the XML-IDs renaming
 
 NEW ir.ui.view: website_event.event_empty_events_svg
 NEW ir.ui.view: website_event.event_question_view_form
