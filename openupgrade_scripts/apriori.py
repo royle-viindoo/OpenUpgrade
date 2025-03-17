@@ -42,6 +42,7 @@ merged_modules = {
     # OCA/hr-attendance
     "hr_attendance_geolocation": "hr_attendance",
     # OCA/l10n-spain
+    "l10n_es_dua": "l10n_es",
     "l10n_es_irnr": "l10n_es",
     "l10n_es_irnr_sii": "l10n_es_aeat_sii_oca",
     # OCA/maintenance
