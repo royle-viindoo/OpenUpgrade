@@ -19,10 +19,14 @@ website_slides / slide.channel            / visibility (selection)        : sele
 # NOTHING TO DO
 
 website_slides / slide.channel.partner    / active (boolean)              : NEW hasdefault: default
+# DONE: pre-migration: precreate column and fill with True
+
 website_slides / slide.channel.partner    / completed (boolean)           : DEL
-website_slides / slide.channel.partner    / last_invitation_date (datetime): NEW
 website_slides / slide.channel.partner    / member_status (selection)     : NEW required, selection_keys: ['completed', 'invited', 'joined', 'ongoing']
-# NOTHING TO DO
+# DONE: pre-migration: fill using completion field
+
+website_slides / slide.channel.partner    / last_invitation_date (datetime): NEW
+# NOTHING TO DO: new feature used with new 'invited' option of member_status
 
 website_slides / slide.slide              / message_main_attachment_id (many2one): DEL relation: ir.attachment
 website_slides / slide.slide              / rating_ids (one2many)         : NEW relation: rating.rating
@@ -65,9 +69,11 @@ NEW ir.rule: website_slides.rule_slide_channel_visibility_public_user (noupdate)
 NEW ir.rule: website_slides.rule_slide_channel_visibility_signed_in_user (noupdate)
 NEW ir.rule: website_slides.rule_slide_slide_public_user (noupdate)
 NEW ir.rule: website_slides.rule_slide_slide_signed_in_user (noupdate)
+# NOTHING TO DO
+
 DEL ir.rule: website_slides.rule_slide_channel_not_website (noupdate)
 DEL ir.rule: website_slides.rule_slide_slide_not_website (noupdate)
-# NOTHING TO DO
+# DONE: post-migration: safely delete
 
 NEW ir.ui.view: website_slides.course_slides_list_placeholder
 NEW ir.ui.view: website_slides.gamification_karma_tracking_view_search
