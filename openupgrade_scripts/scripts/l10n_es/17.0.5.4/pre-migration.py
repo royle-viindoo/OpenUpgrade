@@ -27,7 +27,7 @@ def _pre_create_and_fill_l10n_es_is_simplified(env):
     )
 
 
-def _xml_id_renaming_account_tax_tamplate(env):
+def _xml_id_renaming_account_tax_template(env):
     # In 17.0 the tax template xml_id of Intra-Community (Goods) is changed. With
     # this method the xml_id is set correctly.
     imds = env["ir.model.data"].search(
@@ -59,8 +59,57 @@ def _remove_xml_id_account_fiscal_position(env):
         )
 
 
+def _handle_dua_transition(env):
+    """Handle if you had l10n_es_dua module from OCA/l10n-spain installed."""
+    openupgrade.rename_xmlids(
+        env.cr,
+        [
+            ("l10n_es.producto_dua_valoracion_21", "l10n_es.product_dua_valuation_21"),
+            ("l10n_es.producto_dua_valoracion_10", "l10n_es.product_dua_valuation_10"),
+            ("l10n_es.producto_dua_valoracion_4", "l10n_es.product_dua_valuation_4"),
+            (
+                "l10n_es.producto_dua_valoracion_21_product_template",
+                "l10n_es.product_dua_valuation_21_product_template",
+            ),
+            (
+                "l10n_es.producto_dua_valoracion_10_product_template",
+                "l10n_es.product_dua_valuation_10_product_template",
+            ),
+            (
+                "l10n_es.producto_dua_valoracion_4_product_template",
+                "l10n_es.product_dua_valuation_4_product_template",
+            ),
+        ],
+    )
+    record = env.ref("l10n_es.producto_dua_compensacion", False)
+    if record:
+        record.active = False
+    # Tax groups
+    imds = env["ir.model.data"].search(
+        [
+            ("name", "=like", "%_tax_group_dua_exento"),
+            ("model", "=", "account.tax.group"),
+        ]
+    )
+    for imd in imds:
+        imd.name = imd.name.replace("tax_group_dua_exento", "tax_group_dua_exempt")
+    # Taxes
+    imds = env["ir.model.data"].search(
+        [
+            ("name", "=like", "%_account_tax_template_p_dua0"),
+            ("module", "=", "account"),
+            ("model", "=", "account.tax"),
+        ]
+    )
+    for imd in imds:
+        imd.name = imd.name.replace(
+            "account_tax_template_p_dua0", "account_tax_template_p_dua_exempt"
+        )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     _pre_create_and_fill_l10n_es_is_simplified(env)
-    _xml_id_renaming_account_tax_tamplate(env)
+    _xml_id_renaming_account_tax_template(env)
     _remove_xml_id_account_fiscal_position(env)
+    _handle_dua_transition(env)
