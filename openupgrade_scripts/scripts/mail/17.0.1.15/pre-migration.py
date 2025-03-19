@@ -11,34 +11,26 @@ _tables_renames = [
     ("mail_channel", "discuss_channel"),
     ("mail_channel_member", "discuss_channel_member"),
     ("mail_channel_rtc_session", "discuss_channel_rtc_session"),
+    ("mail_channel_res_groups_rel", "discuss_channel_res_groups_rel"),
 ]
 _fields_renames = [
     (
-        "discuss.channel",
-        "discuss_channel",
+        "mail.tracking.value",
+        "mail_tracking_value",
         "field",
         "field_id",
     ),
-    ("mail.tracking.value", "mail_tracking_value", "field", "field_id"),
 ]
-
-
-def _discuss_channel_fill_allow_public_upload(env):
-    openupgrade.logged_query(
-        env.cr,
-        """
-        ALTER TABLE discuss_channel
-        ADD COLUMN IF NOT EXISTS allow_public_upload BOOLEAN;
-        """,
-    )
-    openupgrade.logged_query(
-        env.cr,
-        """
-        UPDATE discuss_channel
-        SET allow_public_upload = True
-        WHERE channel_type = 'livechat'
-        """,
-    )
+_columns_renames = {
+    "discuss_channel_res_groups_rel": [
+        ("mail_channel_id", "discuss_channel_id"),
+    ],
+}
+_columns_copies = {
+    "mail_template": [
+        ("report_template", None, None),
+    ],
+}
 
 
 def _mail_alias_fill_multiple_values(env):
@@ -59,14 +51,9 @@ def _mail_alias_fill_multiple_values(env):
         env.cr,
         """
         UPDATE mail_alias
-        SET alias_incoming_local = True
-        """,
-    )
-    openupgrade.logged_query(
-        env.cr,
-        """
-        UPDATE mail_alias
-        SET alias_status = 'not_tested'
+        SET
+        alias_incoming_local = True,
+        alias_status = 'valid'
         """,
     )
 
@@ -81,6 +68,16 @@ def _mail_tracking_value_update_monetary_tracking_values(env):
         WHERE old_value_monetary IS NOT NULL
             OR new_value_monetary IS NOT NULL;
         """,
+    )
+
+
+def _mail_gateway_allowed(env):
+    """Set some dummy value so that the not null constraint can be created"""
+    env.cr.execute(
+        """
+        UPDATE mail_gateway_allowed SET email='admin@example.com'
+        WHERE email IS NULL
+        """
     )
 
 
@@ -109,15 +106,48 @@ def _company_update_email_colors(env):
     )
 
 
+def _mail_activity_plan(env):
+    """If the OCA mail_activity_plan module is installed, we convert the existing data
+    to adapt them to the standard.
+    """
+    if not openupgrade.table_exists(env.cr, "mail_activity_plan"):
+        return
+    _mail_activity_plan_fields_renames = [
+        (
+            "mail.activity.plan",
+            "mail_activity_plan",
+            "model",
+            "res_model",
+        ),
+        (
+            "mail.activity.plan",
+            "mail_activity_plan",
+            "model_id",
+            "res_model_id",
+        ),
+    ]
+    openupgrade.rename_fields(env, _mail_activity_plan_fields_renames)
+    openupgrade.remove_tables_fks(
+        env.cr,
+        [
+            "mail_activity_plan_activity_type",
+            "mail_activity_plan_mail_activity_plan_activity_type_rel",
+        ],
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
     openupgrade.rename_models(env.cr, _models_renames)
     openupgrade.rename_tables(env.cr, _tables_renames)
     openupgrade.rename_fields(env, _fields_renames)
-    _discuss_channel_fill_allow_public_upload(env)
+    openupgrade.rename_columns(env.cr, _columns_renames)
+    openupgrade.copy_columns(env.cr, _columns_copies)
     _mail_alias_fill_multiple_values(env)
     _mail_tracking_value_update_monetary_tracking_values(env)
     _company_update_email_colors(env)
+    _mail_gateway_allowed(env)
+    _mail_activity_plan(env)
     # create column to avoid model mail.alias is loaded before model res.company
     openupgrade.logged_query(
         env.cr,

@@ -1,26 +1,22 @@
 ---Models in module 'mail'---
 obsolete model mail.channel
-# DONE: renamed to discuss.channel in pre-migration
+new model discuss.channel
+# DONE: pre-migration: Renamed
 
 obsolete model mail.channel.member
-# DONE: renamed to discuss.channel.member in pre-migration
+new model discuss.channel.member
+# DONE: pre-migration: Renamed
 
 obsolete model mail.channel.rtc.session
-# DONE: renamed to discuss.channel.rtc.session in pre-migration
+new model discuss.channel.rtc.session
+# DONE: pre-migration: Renamed
 
 model res.users.settings (moved to base)
-new model discuss.channel
-# DONE: renamed from mail.channel in pre-migration
-
-new model discuss.channel.member
-# DONE: renamed from mail.channel.member in pre-migration
-
-new model discuss.channel.rtc.session
-# DONE: renamed from mail.channel.rtc.session in pre-migration
+# NOTHING TO DO: Done on `base`
 
 new model discuss.gif.favorite
 new model discuss.voice.metadata
-# NOTHING TO DO: new feature
+# NOTHING TO DO: new features
 
 new model mail.activity.plan
 new model mail.activity.plan.template
@@ -31,7 +27,7 @@ new model mail.activity.schedule [transient]
 
 new model mail.alias.domain
 new model mail.alias.mixin.optional [abstract]
-# DONE: create new record from ir.config_parameter and fill in post-migration
+# DONE: post-migration: create new record from ir.config_parameter and fill
 
 new model mail.thread.main.attachment [abstract]
 # NOTHING TO DO: split from mail.thread
@@ -43,67 +39,19 @@ new model mail.tracking.duration.mixin [abstract]
 # NOTHING TO DO: new feature
 
 ---Fields in module 'mail'---
-mail         / discuss.channel          / active (boolean)              : NEW hasdefault: default
-# NOTHING TO DO: renamed model
-
 mail         / discuss.channel          / allow_public_upload (boolean) : NEW hasdefault: default
-# DONE pre-migration: set True for channel_type = 'livechat' because customer need to upload some documents
-
-mail         / discuss.channel          / channel_member_ids (one2many) : NEW relation: discuss.channel.member
-mail         / discuss.channel          / channel_type (selection)      : NEW required, selection_keys: ['channel', 'chat', 'group']
-mail         / discuss.channel          / default_display_mode (selection): NEW selection_keys: ['video_full_screen']
-mail         / discuss.channel          / description (text)            : NEW
-mail         / discuss.channel          / group_ids (many2many)         : NEW relation: res.groups
-mail         / discuss.channel          / group_public_id (many2one)    : NEW relation: res.groups, hasdefault: compute
-mail         / discuss.channel          / image_128 (binary)            : NEW attachment: True
-mail         / discuss.channel          / message_follower_ids (one2many): NEW relation: mail.followers
-mail         / discuss.channel          / message_ids (one2many)        : NEW relation: mail.message
-mail         / discuss.channel          / name (char)                   : NEW required
-# NOTHING TO DO: renamed model
+# DONE: post-migration: set True for channel_type = 'livechat' because customer need to upload some documents
 
 mail         / discuss.channel          / pinned_message_ids (one2many) : NEW relation: mail.message
 # NOTHING TO DO: new feature to pin message
-
-mail         / discuss.channel          / rtc_session_ids (one2many)    : NEW relation: discuss.channel.rtc.session
-# NOTHING TO DO: renamed model
 
 mail         / discuss.channel          / sfu_channel_uuid (char)       : NEW
 mail         / discuss.channel          / sfu_server_url (char)         : NEW
 # NOTHING TO DO: new feature
 
-mail         / discuss.channel          / uuid (char)                   : NEW hasdefault: default
-# NOTHING TO DO: renamed model
-
-mail         / discuss.channel.member   / channel_id (many2one)         : NEW relation: discuss.channel, required
-mail         / discuss.channel.member   / custom_channel_name (char)    : NEW
-# NOTHING TO DO: renamed model
-
 mail         / discuss.channel.member   / custom_notifications (selection): NEW selection_keys: ['mentions', 'no_notif']
 mail         / discuss.channel.member   / mute_until_dt (datetime)      : NEW
 # NOTHING TO DO: new feature
-
-mail         / discuss.channel.member   / fetched_message_id (many2one) : NEW relation: mail.message
-mail         / discuss.channel.member   / fold_state (selection)        : NEW selection_keys: ['closed', 'folded', 'open'], hasdefault: default
-mail         / discuss.channel.member   / guest_id (many2one)           : NEW relation: mail.guest
-mail         / discuss.channel.member   / is_minimized (boolean)        : NEW
-mail         / discuss.channel.member   / is_pinned (boolean)           : NEW hasdefault: default
-mail         / discuss.channel.member   / last_interest_dt (datetime)   : NEW hasdefault: default
-mail         / discuss.channel.member   / last_seen_dt (datetime)       : NEW
-# NOTHING TO DO: renamed model
-
-mail         / discuss.channel.member   / partner_id (many2one)         : NEW relation: res.partner
-mail         / discuss.channel.member   / rtc_inviting_session_id (many2one): NEW relation: discuss.channel.rtc.session
-mail         / discuss.channel.member   / rtc_session_ids (one2many)    : NEW relation: discuss.channel.rtc.session
-mail         / discuss.channel.member   / seen_message_id (many2one)    : NEW relation: mail.message
-# NOTHING TO DO: renamed model
-
-mail         / discuss.channel.rtc.session / channel_id (many2one)         : NEW relation: discuss.channel, isrelated: related, stored
-mail         / discuss.channel.rtc.session / channel_member_id (many2one)  : NEW relation: discuss.channel.member, required
-mail         / discuss.channel.rtc.session / is_camera_on (boolean)        : NEW
-mail         / discuss.channel.rtc.session / is_deaf (boolean)             : NEW
-mail         / discuss.channel.rtc.session / is_muted (boolean)            : NEW
-mail         / discuss.channel.rtc.session / is_screen_sharing_on (boolean): NEW
-# NOTHING TO DO: renamed model
 
 mail         / discuss.gif.favorite     / tenor_gif_id (char)           : NEW required
 mail         / discuss.voice.metadata   / attachment_id (many2one)      : NEW relation: ir.attachment
@@ -131,57 +79,23 @@ mail         / mail.activity.plan.template / responsible_type (selection)  : NEW
 mail         / mail.activity.plan.template / sequence (integer)            : NEW hasdefault: default
 mail         / mail.activity.plan.template / summary (char)                : NEW hasdefault: compute
 mail         / mail.activity.type       / keep_done (boolean)           : NEW
-# NOTHING TO DO: new feature
+# NOTHING TO DO: new feature like the existing OCA module https://github.com/OCA/social/tree/16.0/mail_activity_plan
 
 mail         / mail.alias               / alias_full_name (char)        : NEW isfunction: function, stored
-# DONE pre and post migration: create column in pre and fill value in post
+# DONE: pre-migration: create column
+# DONE: post-migration: fill value
 
 mail         / mail.alias               / alias_incoming_local (boolean): NEW hasdefault: default
-# DONE pre-migration: create column and set to True following to commit https://github.com/odoo/odoo/pull/76734/commits/b1a3613ffca3b79304a4c7b9aad05d76a7113460
+# DONE: pre-migration: create column and set to True following to commit https://github.com/odoo/odoo/pull/76734/commits/b1a3613ffca3b79304a4c7b9aad05d76a7113460
 
 mail         / mail.alias               / alias_status (selection)      : NEW selection_keys: ['invalid', 'not_tested', 'valid'], isfunction: function, stored
-# DONE pre-migration: create column and set to 'not_tested' (it will set to 'valid' later when message has been processed)
+# DONE: pre-migration: create column and set to 'not_tested' (it will set to 'valid' later when message has been processed)
 
 mail         / mail.alias               / alias_user_id (many2one)      : DEL relation: res.users
 # NOTHING TO DO: following https://github.com/odoo/odoo/pull/138213
 
 mail         / mail.blacklist           / message_main_attachment_id (many2one): DEL relation: ir.attachment
 # NOTHING TO DO
-
-mail         / mail.channel             / active (boolean)              : DEL
-mail         / mail.channel             / channel_member_ids (one2many) : DEL relation: mail.channel.member
-mail         / mail.channel             / channel_type (selection)      : DEL required, selection_keys: ['channel', 'chat', 'group']
-mail         / mail.channel             / default_display_mode (selection): DEL selection_keys: ['video_full_screen']
-mail         / mail.channel             / description (text)            : DEL
-mail         / mail.channel             / group_ids (many2many)         : DEL relation: res.groups
-mail         / mail.channel             / group_public_id (many2one)    : DEL relation: res.groups
-mail         / mail.channel             / image_128 (binary)            : DEL attachment: True
-mail         / mail.channel             / message_follower_ids (one2many): DEL relation: mail.followers
-mail         / mail.channel             / message_ids (one2many)        : DEL relation: mail.message
-mail         / mail.channel             / message_main_attachment_id (many2one): DEL relation: ir.attachment
-mail         / mail.channel             / name (char)                   : DEL required
-mail         / mail.channel             / rtc_session_ids (one2many)    : DEL relation: mail.channel.rtc.session
-mail         / mail.channel             / uuid (char)                   : DEL
-mail         / mail.channel.member      / channel_id (many2one)         : DEL relation: mail.channel, required
-mail         / mail.channel.member      / custom_channel_name (char)    : DEL
-mail         / mail.channel.member      / fetched_message_id (many2one) : DEL relation: mail.message
-mail         / mail.channel.member      / fold_state (selection)        : DEL selection_keys: ['closed', 'folded', 'open']
-mail         / mail.channel.member      / guest_id (many2one)           : DEL relation: mail.guest
-mail         / mail.channel.member      / is_minimized (boolean)        : DEL
-mail         / mail.channel.member      / is_pinned (boolean)           : DEL
-mail         / mail.channel.member      / last_interest_dt (datetime)   : DEL
-mail         / mail.channel.member      / last_seen_dt (datetime)       : DEL
-mail         / mail.channel.member      / partner_id (many2one)         : DEL relation: res.partner
-mail         / mail.channel.member      / rtc_inviting_session_id (many2one): DEL relation: mail.channel.rtc.session
-mail         / mail.channel.member      / rtc_session_ids (one2many)    : DEL relation: mail.channel.rtc.session
-mail         / mail.channel.member      / seen_message_id (many2one)    : DEL relation: mail.message
-mail         / mail.channel.rtc.session / channel_id (many2one)         : DEL relation: mail.channel
-mail         / mail.channel.rtc.session / channel_member_id (many2one)  : DEL relation: mail.channel.member, required
-mail         / mail.channel.rtc.session / is_camera_on (boolean)        : DEL
-mail         / mail.channel.rtc.session / is_deaf (boolean)             : DEL
-mail         / mail.channel.rtc.session / is_muted (boolean)            : DEL
-mail         / mail.channel.rtc.session / is_screen_sharing_on (boolean): DEL
-# NOTHING TO DO: renamed model
 
 mail         / mail.gateway.allowed     / email (char)                  : now required
 # DONE pre-migration: fill dummy value if Null found
@@ -190,7 +104,7 @@ mail         / mail.guest               / channel_ids (many2many)       : relati
 # NOTHING TO DO
 
 mail         / mail.guest               / channel_ids (many2many)       : table is now 'discuss_channel_member' ('mail_channel_member')
-# DONE pre-migration: rename table
+# DONE: pre-migration: rename table
 
 mail         / mail.link.preview        / og_site_name (char)           : NEW
 # NOTHING TO DO: if it really need to be fill, just loop through the mail.link.preview records that either not image or video and use 'get_link_preview_from_html'
@@ -206,7 +120,8 @@ mail         / mail.shortcode           / message_ids (many2one)        : DEL re
 # NOTHING TO DO: following commit https://github.com/odoo/odoo/pull/138938/commits/94b71f74ba20733110c123e1c02df9a384fe9d74
 
 mail         / mail.message             / message_type (selection)      : selection_keys is now '['auto_comment', 'comment', 'email', 'email_outgoing', 'notification', 'user_notification']' ('['comment', 'email', 'notification', 'user_notification']')
-# NOTHING TO DO: well when odoo backport https://github.com/odoo/odoo/pull/149576 in 15, nothing to do either because there is no way to detect and fill for 'auto_common' and 'email_outgoing'
+# NOTHING TO DO (auto_comment): well when odoo backport https://github.com/odoo/odoo/pull/149576 in 15, nothing to do because there is no way to detect and fill for 'auto_comment'
+# DONE (email_outgoing): post-migration: set 'email_outgoing' emails using message_id
 
 mail         / mail.message             / pinned_at (datetime)          : NEW
 # NOTHING TO DO: new feature to pin message
@@ -247,7 +162,7 @@ mail         / mail.template            / report_name (char)            : DEL
 
 mail         / mail.template            / report_template (many2one)    : DEL relation: ir.actions.report
 mail         / mail.template            / report_template_ids (many2many): NEW relation: ir.actions.report
-# DONE pre-migraton: m2o to m2m
+# DONE post-migraton: m2o to m2m
 
 mail         / mail.template            / user_id (many2one)            : NEW relation: res.users
 # NOTHING TO DO: new feature
@@ -261,11 +176,11 @@ mail         / mail.tracking.value      / tracking_sequence (integer)   : DEL
 
 mail         / mail.tracking.value      / field (many2one)              : DEL relation: ir.model.fields, required
 mail         / mail.tracking.value      / field_id (many2one)           : NEW relation: ir.model.fields
-# DONE pre-migration: rename field
+# DONE: pre-migration: rename field
 
 mail         / mail.tracking.value      / new_value_monetary (float)    : DEL
 mail         / mail.tracking.value      / old_value_monetary (float)    : DEL
-# TODO pre-migration: fill value into old/new_value_float
+# DONE: pre-migration: fill value into old/new_value_float
 
 mail         / mail.alias.domain        / bounce_alias (char)           : NEW required, hasdefault: default
 mail         / mail.alias.domain        / catchall_alias (char)         : NEW required, hasdefault: default
@@ -278,11 +193,11 @@ mail         / mail.alias               / alias_domain (char)           : now re
 mail         / mail.alias               / alias_domain_id (many2one)    : NEW relation: mail.alias.domain, hasdefault: default
 mail         / res.company              / alias_domain_id (many2one)    : NEW relation: mail.alias.domain, hasdefault: default
 mail         / res.company              / alias_domain_name (char)      : NEW isrelated: related, stored
-# DONE: create new record from ir.config_parameter and fill in post-migration
+# DONE: post-migration: create new record from ir.config_parameter and fill it
 
 mail         / res.company              / email_primary_color (char)    : NEW hasdefault: compute
 mail         / res.company              / email_secondary_color (char)  : NEW hasdefault: compute
-# DONE pre-migration: update these field according to company primary and secondary color
+# DONE: pre-migration: update these field according to company primary and secondary color
 
 mail         / res.partner              / activity_user_id (many2one)   : not related anymore
 mail         / res.partner              / activity_user_id (many2one)   : now a function
@@ -298,11 +213,9 @@ mail         / res.users                / res_users_settings_ids (one2many): mod
 mail         / res.users.settings       / _order                        : module is now 'base' ('mail')
 mail         / res.users.settings       / display_name (char)           : module is now 'base' ('mail')
 mail         / res.users.settings       / user_id (many2one)            : module is now 'base' ('mail')
-# NOTHING TODO
+# NOTHING TO DO: done in base migration scripts
 
 ---XML records in module 'mail'---
-NEW discuss.channel: mail.channel_all_employees (noupdate)
-NEW discuss.channel.member: mail.channel_member_general_channel_for_admin (noupdate)
 NEW ir.actions.act_window: mail.discuss_channel_action_view
 NEW ir.actions.act_window: mail.discuss_channel_member_action
 NEW ir.actions.act_window: mail.discuss_channel_rtc_session_action
@@ -408,7 +321,7 @@ DEL ir.rule: mail.ir_rule_mail_channel_member_group_system (noupdate)
 DEL ir.rule: mail.ir_rule_mail_channel_member_group_user (noupdate)
 DEL ir.rule: mail.mail_channel_admin (noupdate)
 DEL ir.rule: mail.mail_channel_rule (noupdate)
-# NOTHING TO DO: removed in post-migration
+# DONE: post-migration: safe removal
 
 DEL ir.rule: mail.res_users_settings_rule_admin [renamed to base module] (noupdate)
 DEL ir.rule: mail.res_users_settings_rule_user [renamed to base module] (noupdate)
@@ -479,10 +392,6 @@ DEL ir.ui.view: mail.view_mail_alias_form
 DEL ir.ui.view: mail.view_mail_alias_search
 DEL ir.ui.view: mail.view_mail_alias_tree
 # NOTHING TO DO
-
-DEL mail.channel: mail.channel_all_employees (noupdate)
-DEL mail.channel.member: mail.channel_member_general_channel_for_admin (noupdate)
-# NOTHING TO DO: removed in post-migration
 
 NEW res.groups: mail.group_mail_notification_type_inbox (noupdate)
 # NOTHING TO DO

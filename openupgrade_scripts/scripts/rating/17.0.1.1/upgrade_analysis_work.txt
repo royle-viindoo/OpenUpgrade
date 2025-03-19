@@ -18,6 +18,6 @@ rating       / product.pricelist        / rating_ids (one2many)         : NEW re
 rating       / product.product          / rating_ids (one2many)         : previously in module website_sale
 rating       / product.template         / rating_ids (one2many)         : previously in module website_sale
 rating       / res.partner              / rating_ids (one2many)         : NEW relation: rating.rating
-# NOTHING TO DO: handled by ORM
+# NOTHING TO DO: new features
 
 ---XML records in module 'rating'---

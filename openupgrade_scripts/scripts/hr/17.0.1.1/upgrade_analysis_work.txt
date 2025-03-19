@@ -7,12 +7,12 @@ obsolete model hr.plan.wizard [transient]
 # NOTHING TO DO
 
 ---Fields in module 'hr'---
-hr           / discuss.channel          / subscription_department_ids (many2many): NEW relation: hr.department
-hr           / mail.channel             / subscription_department_ids (many2many): DEL relation: hr.department
-# NOTHING TO DO
+hr           / mail.channel             / subscription_department_ids (many2many): column1 is now 'discuss_channel_id' ('mail_channel_id') [hr_department_mail_channel_rel]
+hr           / mail.channel             / subscription_department_ids (many2many): table is now 'discuss_channel_hr_department_rel' ('hr_department_mail_channel_rel')
+# DONE: pre-migration: Rename table and column
 
 hr           / hr.contract.type         / code (char)                   : NEW hasdefault: compute
-# TODO pre-migration: create column and fill value using 'name'
+# DONE: pre-migration: Column created and filled with the name. It wouldn't be too much burden to let the ORM compute, being few records, but let's do it by SQL anyway.
 
 hr           / hr.contract.type         / country_id (many2one)         : NEW relation: res.country
 # NOTHING TO DO: new feature
@@ -35,7 +35,7 @@ hr           / hr.plan.activity.type    / responsible_id (many2one)     : DEL re
 hr           / hr.plan.activity.type    / summary (char)                : DEL
 hr           / mail.activity.plan       / department_id (many2one)      : NEW relation: hr.department, hasdefault: compute
 hr           / mail.activity.plan.template / responsible_type (False)      : NEW selection_keys: ['coach', 'employee', 'manager', 'on_demand', 'other'], mode: modify
-# DONE pre-migration: move data into mail.activity.plan
+# DONE: pre-migration: move data into mail.activity.plan
 
 hr           / hr.department            / rating_ids (one2many)         : NEW relation: rating.rating
 # NOTHING TO DO
@@ -49,6 +49,8 @@ hr           / hr.employee              / activity_user_id (many2one)   : now a 
 
 hr           / hr.employee              / employee_properties (properties): NEW hasdefault: compute
 hr           / res.company              / employee_properties_definition (properties_definition): NEW
+# NOTHING TO DO: new feature for assigning properties
+
 hr           / hr.employee              / private_car_plate (char)      : NEW
 # NOTHING TO DO: new feature
 
@@ -64,15 +66,15 @@ hr           / hr.employee              / private_state_id (many2one)   : NEW re
 hr           / hr.employee              / private_street (char)         : NEW
 hr           / hr.employee              / private_street2 (char)        : NEW
 hr           / hr.employee              / private_zip (char)            : NEW
-# DONE pre_migration: create column and fill value from address_home_id and merge merge 'address_home_id' into 'work_contact_id' at end-migration
+# DONE: post-migration: fill values from address_home_id to the employee fields, and anonymize the information on the res.partner record
 
 hr           / hr.employee              / rating_ids (one2many)         : NEW relation: rating.rating
 hr           / hr.job                   / message_main_attachment_id (many2one): DEL relation: ir.attachment
 hr           / hr.job                   / rating_ids (one2many)         : NEW relation: rating.rating
-# NOTHING TO DO:
+# NOTHING TO DO: New rating inheritance
 
 hr           / hr.work.location         / location_type (selection)     : NEW required, selection_keys: ['home', 'office', 'other'], hasdefault: default
-# TODO pre-migration: create column and update it with default value
+# DONE: pre-migration: Pre-created and filled with the value 'office', which is fine according previous version behavior.
 
 ---XML records in module 'hr'---
 NEW hr.contract.type: hr.contract_type_full_time (noupdate)
@@ -83,7 +85,10 @@ NEW hr.contract.type: hr.contract_type_temporary (noupdate)
 # NOTHING TO DO
 
 DEL hr.department: hr.dep_sales (noupdate)
-# DONE: removed in pre-migration
+DEL ir.rule: hr.hr_plan_activity_type_company_rule (noupdate)
+DEL ir.rule: hr.hr_plan_company_rule (noupdate)
+DEL res.partner: hr.res_partner_admin_private_address (noupdate)
+# DONE: post-migration: removed safely
 
 DEL hr.plan: hr.offboarding_plan (noupdate)
 DEL hr.plan: hr.onboarding_plan (noupdate)
@@ -92,7 +97,14 @@ DEL hr.plan.activity.type: hr.offboarding_take_back_hr_materials (noupdate)
 DEL hr.plan.activity.type: hr.onboarding_plan_training (noupdate)
 DEL hr.plan.activity.type: hr.onboarding_setup_it_materials (noupdate)
 DEL hr.plan.activity.type: hr.onboarding_training (noupdate)
-# DONE: renamed in pre-migration and removed in post-migration
+NEW mail.activity.plan: hr.offboarding_plan (noupdate)
+NEW mail.activity.plan: hr.onboarding_plan (noupdate)
+NEW mail.activity.plan.template: hr.offboarding_setup_compute_out_delais (noupdate)
+NEW mail.activity.plan.template: hr.offboarding_take_back_hr_materials (noupdate)
+NEW mail.activity.plan.template: hr.onboarding_plan_training (noupdate)
+NEW mail.activity.plan.template: hr.onboarding_setup_it_materials (noupdate)
+NEW mail.activity.plan.template: hr.onboarding_training (noupdate)
+# DONE: pre-migration: Reassign XML-IDs to the new mail.activity.plan* records
 
 NEW hr.work.location: hr.home_work_location (noupdate)
 NEW hr.work.location: hr.home_work_office (noupdate)
@@ -116,15 +128,9 @@ DEL ir.model.constraint: hr.constraint_hr_employee_user_uniq
 DEL ir.model.constraint: hr.constraint_hr_job_name_company_uniq
 DEL ir.model.constraint: hr.constraint_hr_job_no_of_recruitment_positive
 NEW ir.rule: hr.ir_rule_hr_contract_type_multi_company (noupdate)
-NEW ir.rule: hr.ir_rule_res_partner_bank_employees (noupdate)
-NEW ir.rule: hr.ir_rule_res_partner_bank_internal_users (noupdate)
 NEW ir.rule: hr.mail_plan_rule_group_hr_manager (noupdate)
 NEW ir.rule: hr.mail_plan_templates_rule_group_hr_manager (noupdate)
 # NOTHING TO DO
-
-DEL ir.rule: hr.hr_plan_activity_type_company_rule (noupdate)
-DEL ir.rule: hr.hr_plan_company_rule (noupdate)
-# DONE: removed in pre-migration
 
 NEW ir.ui.menu: hr.menu_resource_calendar_view
 NEW ir.ui.view: hr.discuss_channel_view_form
@@ -145,14 +151,4 @@ DEL ir.ui.view: hr.mail_channel_view_form_
 DEL ir.ui.view: hr.plan_wizard
 DEL ir.ui.view: hr.view_employee_form_smartbutton
 DEL ir.ui.view: hr.view_partner_tree2
-NEW mail.activity.plan: hr.offboarding_plan (noupdate)
-NEW mail.activity.plan: hr.onboarding_plan (noupdate)
-NEW mail.activity.plan.template: hr.offboarding_setup_compute_out_delais (noupdate)
-NEW mail.activity.plan.template: hr.offboarding_take_back_hr_materials (noupdate)
-NEW mail.activity.plan.template: hr.onboarding_plan_training (noupdate)
-NEW mail.activity.plan.template: hr.onboarding_setup_it_materials (noupdate)
-NEW mail.activity.plan.template: hr.onboarding_training (noupdate)
 # NOTHING TO DO
-
-DEL res.partner: hr.res_partner_admin_private_address (noupdate)
-# DONE: removed in pre-migration

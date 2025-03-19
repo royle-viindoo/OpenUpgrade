@@ -13,44 +13,50 @@ product      / product.attribute        / display_type (selection)      : select
 # NOTHING TO DO: add new selection: multi
 
 product      / product.attribute.value  / default_extra_price (float)   : NEW
+# NOTHING TO DO: new feature for filling with this value the product variant attribute values created from this
+
 product      / product.attribute.value  / image (binary)                : NEW attachment: True
+# NOTHING TO DO: new feature for having an image linked to this value
+
 product      / product.category         / product_properties_definition (properties_definition): NEW
-# NOTHING TO DO: new feature
+product      / product.template         / product_properties (properties): NEW hasdefault: compute
+# NOTHING TO DO: new feature for having properties on products
 
 product      / product.document         / _inherits                     : NEW _inherits: {'ir.attachment': 'ir_attachment_id'}
 product      / product.document         / active (boolean)              : NEW hasdefault: default
 product      / product.document         / ir_attachment_id (many2one)   : NEW relation: ir.attachment, required
-# NOTHING TO DO: fields in new model
+product      / product.product          / product_document_ids (one2many): NEW relation: product.document
+product      / product.template         / product_document_ids (one2many): NEW relation: product.document
+# DONE: post-migration: populated with attachments on product.template and product.product
 
 product      / product.packaging        / product_id (many2one)         : now required
-# NOTHING TO DO
+# DONE: pre-migration: delete records with no product_id, as they are not valid
 
 product      / product.pricelist        / _order                        : _order is now 'sequence asc, id asc' ('sequence asc, id desc')
+# DONE: post-migration: Write sequence for making sure the old pricelist order is preserved
+
 product      / product.pricelist        / activity_ids (one2many)       : NEW relation: mail.activity
 product      / product.pricelist        / message_follower_ids (one2many): NEW relation: mail.followers
 product      / product.pricelist        / message_ids (one2many)        : NEW relation: mail.message
-# NOTHING TO DO
+# NOTHING TO DO: Chatter + activity new feature
 
 product      / product.pricelist.item   / active (boolean)              : DEL
-# NOTHING TO DO
+# NOTHING TO DO: It was a related stored of the pricelist active, so not adding value
 
 product      / product.product          / activity_user_id (many2one)   : not related anymore
 product      / product.product          / activity_user_id (many2one)   : now a function
 product      / product.product          / message_main_attachment_id (many2one): DEL relation: ir.attachment
-product      / product.product          / product_document_ids (one2many): NEW relation: product.document
 # NOTHING TO DO
 
 product      / product.supplierinfo     / discount (float)              : NEW
 # NOTHING TO DO
 
 product      / product.tag              / color (integer)               : type is now 'char' ('integer')
-# DONE: handled in pre-migration
+# DONE: pre-migration: converted to the corresponding hexadecimal values
 
 product      / product.template         / activity_user_id (many2one)   : not related anymore
 product      / product.template         / activity_user_id (many2one)   : now a function
 product      / product.template         / message_main_attachment_id (many2one): DEL relation: ir.attachment
-product      / product.template         / product_document_ids (one2many): NEW relation: product.document
-product      / product.template         / product_properties (properties): NEW hasdefault: compute
 # NOTHING TO DO
 
 product      / product.template.attribute.line / _order                        : _order is now 'sequence, attribute_id, id' ('attribute_id, id')
@@ -88,4 +94,4 @@ DEL ir.ui.view: product.report_producttemplatelabel
 # NOTHING TO DO
 
 DEL product.pricelist: product.list0 (noupdate)
-DONE: delete in post-migration
+DONE: post-migration: Only remove it if it wasn't not touched and it contains the basic rule. If not, we remove the XML-ID and preserve it
