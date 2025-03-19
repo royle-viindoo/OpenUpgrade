@@ -3,6 +3,8 @@
 hr_expense   / account.bank.statement.line / expense_sheet_id (one2many)   : type is now 'many2one' ('one2many')
 hr_expense   / account.move             / expense_sheet_id (one2many)   : type is now 'many2one' ('one2many')
 hr_expense   / account.payment          / expense_sheet_id (one2many)   : type is now 'many2one' ('one2many')
+hr_expense   / hr.expense.sheet         / account_move_id (many2one)    : DEL relation: account.move
+hr_expense   / hr.expense.sheet         / account_move_ids (one2many)   : NEW relation: account.move
 # DONE pre-migration: set expense_sheet_id for each account_move_id present at hr.expense.sheet
 
 hr_expense   / hr.employee              / filter_for_expense (boolean)  : NEW
@@ -21,30 +23,27 @@ hr_expense   / hr.expense               / amount_tax_company (float)    : DEL
 hr_expense   / hr.expense               / is_refused (boolean)          : DEL
 # NOTHING TO DO: dead code https://github.com/odoo/odoo/pull/110518
 
+hr_expense   / hr.expense               / unit_amount (float)           : DEL required
 hr_expense   / hr.expense               / price_unit (float)            : NEW required, isfunction: function, stored
-# DONE pre-migration: rename to unit_price
+# DONE pre-migration: rename to price_unit
 
 hr_expense   / hr.expense               / reference (char)              : DEL
 hr_expense   / hr.expense               / sample (boolean)              : DEL
 # NOTHING TO DO: deprecated field https://github.com/odoo/odoo/pull/130244/commits/266b482264576903cf736ffe2bddfc71f7a7a4ec
 
 hr_expense   / hr.expense               / state (selection)             : selection_keys is now '['approved', 'done', 'draft', 'refused', 'reported', 'submitted']' ('['approved', 'done', 'draft', 'refused', 'reported']')
+# DONE pre-migration: if any expense has expense sheet and the sheet doesn't have account move and the expense is on reported or done state, then update state of expense to 'submitted' https://github.com/odoo/odoo/commit/8f9ca3e29e21596cd317d976edaf454cd0f33bf1
 # DONE pre-migration: if any expense has expense sheet and the sheet is on draft state, then update state of expense to 'reported'
 
 hr_expense   / hr.expense               / tax_amount (float)            : NEW isfunction: function, stored
 hr_expense   / hr.expense               / tax_amount_currency (float)   : NEW isfunction: function, stored
-# DONE pre-migration: rename from  amount_tax_company, amount_tax
+# DONE pre-migration: rename from amount_tax_company, amount_tax
 
 hr_expense   / hr.expense               / total_amount_company (float)  : DEL
 hr_expense   / hr.expense               / total_amount_currency (float) : NEW hasdefault: compute
-hr_expense   / hr.expense               / unit_amount (float)           : DEL required
 hr_expense   / hr.expense               / untaxed_amount (float)        : DEL
 hr_expense   / hr.expense               / untaxed_amount_currency (float): NEW isfunction: function, stored
 # DONE pre-migration: total_amount_company -> total_amount, total_amount -> total_amount_currency, untaxed_amount -> untaxed_amount_currency
-
-hr_expense   / hr.expense.sheet         / account_move_id (many2one)    : DEL relation: account.move
-hr_expense   / hr.expense.sheet         / account_move_ids (one2many)   : NEW relation: account.move
-# DONE pre-migration: set expense_sheet_id for each account_move_id present at hr.expense.sheet
 
 hr_expense   / hr.expense.sheet         / activity_user_id (many2one)   : not related anymore
 hr_expense   / hr.expense.sheet         / activity_user_id (many2one)   : now a function
@@ -61,17 +60,15 @@ hr_expense   / hr.expense.sheet         / approval_state (selection)    : NEW se
 # DONE pre-migration: create column and fill value according to state of expense sheet
 
 hr_expense   / hr.expense.sheet         / bank_journal_id (many2one)    : DEL relation: account.journal
-# TODO: update outbout payment method line of bank_journal_id into 'payment_method_line_id', https://github.com/odoo/odoo/pull/110518/
+hr_expense   / hr.expense.sheet         / payment_method_line_id (many2one): NEW relation: account.payment.method.line, hasdefault: compute
+# DONE: pre-migration: update outbound payment method line of bank_journal_id into 'payment_method_line_id', https://github.com/odoo/odoo/pull/110518/
 
 hr_expense   / hr.expense.sheet         / department_id (many2one)      : now related
 # NOTHING TO DO
 
 hr_expense   / hr.expense.sheet         / employee_journal_id (many2one): NEW relation: account.journal, hasdefault: default
 hr_expense   / hr.expense.sheet         / journal_id (many2one)         : now a function
-# DONE pre-migration: fill value by 'journal_id' then update 'journal_id' by 'payment_method_line_id.jounal_id' if 'paid by company (bank_journal_id)', https://github.com/odoo/odoo/pull/110518/
-
-hr_expense   / hr.expense.sheet         / payment_method_line_id (many2one): NEW relation: account.payment.method.line, hasdefault: compute
-# DONE: update outbount payment method line of bank_journal_id into 'payment_method_line_id', https://github.com/odoo/odoo/pull/110518/
+# DONE pre-migration: fill value by 'employee_journal_id' then update 'journal_id' by 'payment_method_line_id.journal_id' if 'paid by company (bank_journal_id)', https://github.com/odoo/odoo/pull/110518/
 
 hr_expense   / hr.expense.sheet         / rating_ids (one2many)         : NEW relation: rating.rating
 hr_expense   / hr.expense.sheet         / state (selection)             : now a function

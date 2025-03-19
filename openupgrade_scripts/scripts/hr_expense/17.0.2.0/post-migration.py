@@ -20,5 +20,14 @@ def _company_update_company_expense_allowed_payment_method_line(env):
 
 @openupgrade.migrate()
 def migrate(env, version):
-    openupgrade.load_data(env, "hr_expense", "17.0.2.0/noupdate_changes.xml")
     _company_update_company_expense_allowed_payment_method_line(env)
+    openupgrade.load_data(env, "hr_expense", "17.0.2.0/noupdate_changes.xml")
+    openupgrade.delete_record_translations(
+        env.cr,
+        "hr_expense",
+        (
+            "hr_expense_template_refuse_reason",
+            "hr_expense_template_register",
+            "hr_expense_template_register_no_user",
+        ),
+    )

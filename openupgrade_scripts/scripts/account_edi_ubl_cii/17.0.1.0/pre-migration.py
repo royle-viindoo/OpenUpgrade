@@ -1,20 +1,19 @@
-# Copyright 2024 Viindoo Technology Joint Stock Company (Viindoo)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from openupgradelib import openupgrade
 
 
-def _res_partner_create_column(env):
+def _res_partner_create_columns(env):
     openupgrade.logged_query(
         env.cr,
         """
         ALTER TABLE res_partner
         ADD COLUMN IF NOT EXISTS peppol_eas VARCHAR,
         ADD COLUMN IF NOT EXISTS peppol_endpoint VARCHAR,
-        ADD COLUMN IF NOT EXISTS ubl_cii_format VARCHAR;
+        ADD COLUMN IF NOT EXISTS ubl_cii_format VARCHAR
         """,
     )
 
 
 @openupgrade.migrate()
 def migrate(env, version):
-    _res_partner_create_column(env)
+    _res_partner_create_columns(env)

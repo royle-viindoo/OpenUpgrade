@@ -3,7 +3,6 @@
 from openupgradelib import openupgrade
 
 from odoo import api, models
-from odoo.tools import mute_logger
 
 from odoo.addons.base.models.ir_model import (
     IrModel,
@@ -34,11 +33,7 @@ IrModel._drop_table = _drop_table
 def _drop_column(self):
     """Never drop columns"""
     for field in self:
-        if (
-            not field.store
-            or field.name in models.MAGIC_COLUMNS
-            or self.env.get(field.model) is None
-        ):
+        if field.name in models.MAGIC_COLUMNS:
             continue
         openupgrade.message(
             self.env.cr,
@@ -66,19 +61,6 @@ def _module_data_uninstall(self, modules_to_remove):
 
 _module_data_uninstall._original_method = IrModelData._module_data_uninstall
 IrModelData._module_data_uninstall = _module_data_uninstall
-
-
-@api.model
-def _process_end(self, modules):
-    """Don't warn about upgrade conventions from Odoo
-    ('fields should be explicitly removed by an upgrade script')
-    """
-    with mute_logger("odoo.addons.base.models.ir_model"):
-        return IrModelData._process_end._original_method(self, modules)
-
-
-_process_end._original_method = IrModelData._process_end
-IrModelData._process_end = _process_end
 
 
 def _module_data_uninstall(self):

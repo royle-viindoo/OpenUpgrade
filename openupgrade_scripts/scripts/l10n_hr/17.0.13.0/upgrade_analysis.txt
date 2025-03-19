@@ -1688,6 +1688,101 @@ DEL account.fiscal.position.template: l10n_hr.account_fiscal_position_template_r
 DEL account.fiscal.position.template: l10n_hr.account_fiscal_position_template_rrif_3
 DEL account.fiscal.position.template: l10n_hr.account_fiscal_position_template_rrif_4
 DEL account.fiscal.position.template: l10n_hr.account_fiscal_position_template_rrif_domairpartneri0
+DEL account.fiscal.position.template: l10n_hr_euro.fiscal_position_hr_eu (noupdate)
+DEL account.fiscal.position.template: l10n_hr_euro.fiscal_position_hr_eu_out (noupdate)
+DEL account.fiscal.position.template: l10n_hr_euro.fiscal_position_hr_exempt (noupdate)
+DEL account.fiscal.position.template: l10n_hr_euro.fiscal_position_hr_national (noupdate)
+DEL account.fiscal.position.template: l10n_hr_euro.fiscal_position_hr_person_private (noupdate)
+DEL account.group.template: l10n_hr_euro.hr_group_0
+DEL account.group.template: l10n_hr_euro.hr_group_00
+DEL account.group.template: l10n_hr_euro.hr_group_01
+DEL account.group.template: l10n_hr_euro.hr_group_02
+DEL account.group.template: l10n_hr_euro.hr_group_03
+DEL account.group.template: l10n_hr_euro.hr_group_04
+DEL account.group.template: l10n_hr_euro.hr_group_05
+DEL account.group.template: l10n_hr_euro.hr_group_06
+DEL account.group.template: l10n_hr_euro.hr_group_07
+DEL account.group.template: l10n_hr_euro.hr_group_08
+DEL account.group.template: l10n_hr_euro.hr_group_1
+DEL account.group.template: l10n_hr_euro.hr_group_10
+DEL account.group.template: l10n_hr_euro.hr_group_11
+DEL account.group.template: l10n_hr_euro.hr_group_12
+DEL account.group.template: l10n_hr_euro.hr_group_13
+DEL account.group.template: l10n_hr_euro.hr_group_14
+DEL account.group.template: l10n_hr_euro.hr_group_15
+DEL account.group.template: l10n_hr_euro.hr_group_19
+DEL account.group.template: l10n_hr_euro.hr_group_2
+DEL account.group.template: l10n_hr_euro.hr_group_20
+DEL account.group.template: l10n_hr_euro.hr_group_21
+DEL account.group.template: l10n_hr_euro.hr_group_22
+DEL account.group.template: l10n_hr_euro.hr_group_23
+DEL account.group.template: l10n_hr_euro.hr_group_24
+DEL account.group.template: l10n_hr_euro.hr_group_25
+DEL account.group.template: l10n_hr_euro.hr_group_26
+DEL account.group.template: l10n_hr_euro.hr_group_28
+DEL account.group.template: l10n_hr_euro.hr_group_29
+DEL account.group.template: l10n_hr_euro.hr_group_3
+DEL account.group.template: l10n_hr_euro.hr_group_30
+DEL account.group.template: l10n_hr_euro.hr_group_31
+DEL account.group.template: l10n_hr_euro.hr_group_32
+DEL account.group.template: l10n_hr_euro.hr_group_35
+DEL account.group.template: l10n_hr_euro.hr_group_36
+DEL account.group.template: l10n_hr_euro.hr_group_37
+DEL account.group.template: l10n_hr_euro.hr_group_4
+DEL account.group.template: l10n_hr_euro.hr_group_40
+DEL account.group.template: l10n_hr_euro.hr_group_41
+DEL account.group.template: l10n_hr_euro.hr_group_42
+DEL account.group.template: l10n_hr_euro.hr_group_43
+DEL account.group.template: l10n_hr_euro.hr_group_44
+DEL account.group.template: l10n_hr_euro.hr_group_45
+DEL account.group.template: l10n_hr_euro.hr_group_46
+DEL account.group.template: l10n_hr_euro.hr_group_47
+DEL account.group.template: l10n_hr_euro.hr_group_48
+DEL account.group.template: l10n_hr_euro.hr_group_49
+DEL account.group.template: l10n_hr_euro.hr_group_5
+DEL account.group.template: l10n_hr_euro.hr_group_50
+DEL account.group.template: l10n_hr_euro.hr_group_51
+DEL account.group.template: l10n_hr_euro.hr_group_52
+DEL account.group.template: l10n_hr_euro.hr_group_53
+DEL account.group.template: l10n_hr_euro.hr_group_54
+DEL account.group.template: l10n_hr_euro.hr_group_59
+DEL account.group.template: l10n_hr_euro.hr_group_6
+DEL account.group.template: l10n_hr_euro.hr_group_60
+DEL account.group.template: l10n_hr_euro.hr_group_61
+DEL account.group.template: l10n_hr_euro.hr_group_62
+DEL account.group.template: l10n_hr_euro.hr_group_63
+DEL account.group.template: l10n_hr_euro.hr_group_64
+DEL account.group.template: l10n_hr_euro.hr_group_65
+DEL account.group.template: l10n_hr_euro.hr_group_66
+DEL account.group.template: l10n_hr_euro.hr_group_67
+DEL account.group.template: l10n_hr_euro.hr_group_68
+DEL account.group.template: l10n_hr_euro.hr_group_69
+DEL account.group.template: l10n_hr_euro.hr_group_7
+DEL account.group.template: l10n_hr_euro.hr_group_70
+DEL account.group.template: l10n_hr_euro.hr_group_71
+DEL account.group.template: l10n_hr_euro.hr_group_72
+DEL account.group.template: l10n_hr_euro.hr_group_73
+DEL account.group.template: l10n_hr_euro.hr_group_74
+DEL account.group.template: l10n_hr_euro.hr_group_75
+DEL account.group.template: l10n_hr_euro.hr_group_76
+DEL account.group.template: l10n_hr_euro.hr_group_77
+DEL account.group.template: l10n_hr_euro.hr_group_78
+DEL account.group.template: l10n_hr_euro.hr_group_79
+DEL account.group.template: l10n_hr_euro.hr_group_8
+DEL account.group.template: l10n_hr_euro.hr_group_80
+DEL account.group.template: l10n_hr_euro.hr_group_81
+DEL account.group.template: l10n_hr_euro.hr_group_82
+DEL account.group.template: l10n_hr_euro.hr_group_83
+DEL account.group.template: l10n_hr_euro.hr_group_9
+DEL account.group.template: l10n_hr_euro.hr_group_90
+DEL account.group.template: l10n_hr_euro.hr_group_91
+DEL account.group.template: l10n_hr_euro.hr_group_92
+DEL account.group.template: l10n_hr_euro.hr_group_93
+DEL account.group.template: l10n_hr_euro.hr_group_94
+DEL account.group.template: l10n_hr_euro.hr_group_95
+DEL account.group.template: l10n_hr_euro.hr_group_96
+DEL account.group.template: l10n_hr_euro.hr_group_99
+DEL account.report: l10n_hr_euro.tax_report [renamed to l10n_hr_kuna module]
 NEW account.report.column: l10n_hr.tax_report_tax_amount [renamed from l10n_hr_euro module]
 NEW account.report.column: l10n_hr.tax_report_tax_base [renamed from l10n_hr_euro module]
 DEL account.report.column: l10n_hr.tax_report_balance [renamed to l10n_hr_kuna module]

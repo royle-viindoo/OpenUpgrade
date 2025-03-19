@@ -5,4 +5,3 @@ utm          / utm.campaign             / active (boolean)              : NEW ha
 
 ---XML records in module 'utm'---
 NEW ir.ui.view: utm.utm_stage_view_form
-# NOTHING TO DO

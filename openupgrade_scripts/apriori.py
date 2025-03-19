@@ -8,13 +8,14 @@ renamed_modules = {
     "note": "project_todo",
     "website_sale_delivery_mondialrelay": "website_sale_mondialrelay",
     # odoo/enterprise
-    # OCA/...
     # Viindoo/tvtmaaddons
     "to_website_recaptcha_signup": "viin_recaptcha_signup",
     "viin_mail_channel_privacy": "viin_discuss_channel_privacy",
     # Viindoo/customer-pecc3
     "viin_pecc3_project_template_document": "viin_pecc3_project_document",
     "viin_project_role_progress": "viin_pecc3_project_role_progress",
+    # OCA/social
+    "mail_activity_unlink_log": "mail_activity_cancel_tracking",
 }
 
 # Merged modules contain a mapping from old module names to other,
@@ -39,13 +40,34 @@ merged_modules = {
     "purchase_price_diff": "purchase_stock",
     "web_kanban_gauge": "web",
     "website_event_crm_questions": "website_event_crm",
+    "website_event_questions": "website_event",
     "website_sale_delivery": "website_sale",
     "website_sale_loyalty_delivery": "website_sale_loyalty",
     "website_sale_stock_product_configurator": "website_sale_product_configurator",
+    # OCA/account-invoicing
+    "account_invoice_fiscal_position_update": "account",
+    # OCA/hr-attendance
+    "hr_attendance_geolocation": "hr_attendance",
+    # OCA/l10n-spain
+    "l10n_es_dua": "l10n_es",
+    "l10n_es_irnr": "l10n_es",
+    "l10n_es_irnr_sii": "l10n_es_aeat_sii_oca",
+    # OCA/maintenance
+    "base_maintenance_config": "maintenance",
+    "maintenance_plan": "maintenance",
+    "maintenance_plan_activity": "maintenance",
+    "maintenance_plan_employee": "maintenance",
+    # OCA/purchase-workflow
+    "purchase_discount": "purchase",
+    # OCA/social
+    "mail_activity_plan": "mail",
+    # OCA/stock-logistics-warehouse
+    "stock_lot_filter_available": "stock",
     # OCA/web
     "web_advanced_search": "web",
     "web_chatter_position": "web",
     "web_listview_range_select": "web",
+    "web_pwa_oca": "web",
     # OCA/...
     # Viindoo/tvtmaaddons
     "to_location_warehouse": "viin_stock",
@@ -86,11 +108,19 @@ merged_modules = {
 # only used here for upgrade_analysis
 renamed_models = {
     # odoo
+    "hr.leave.stress.day": "hr.leave.mandatory.day",
+    "mail.channel": "discuss.channel",
+    "mail.channel.member": "discuss.channel.member",
+    "mail.channel.rtc.session": "discuss.channel.rtc.session",
+    "mailing.contact.subscription": "mailing.subscription",
+    "payment.icon": "payment.method",
+    "restaurant.printer": "pos.printer",
     # OCA/...
 }
 
 # only used here for upgrade_analysis
 merged_models = {
     # odoo
+    "repair.line": "stock.move",
     # OCA/...
 }

@@ -1,4 +1,5 @@
 # Copyright 2024 Viindoo Technology Joint Stock Company (Viindoo)
+# Copyright 2024 Le Filament (https://le-filament.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openupgradelib import openupgrade

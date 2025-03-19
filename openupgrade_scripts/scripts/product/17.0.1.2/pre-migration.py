@@ -1,11 +1,25 @@
 # Copyright 2024 Viindoo Technology Joint Stock Company (Viindoo)
+# Copyright 2024 Hunki enterprises - Holger Brunn
+# Copyright 2024 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from openupgradelib import openupgrade
 
 
+def _clean_incorrect_packaging_records(env):
+    """If there's any record of this kind, it's invalid and maybe a leftover of a
+    non-cascade removal operation. Let's clean the table. There's a chance that this
+    package was used elsewhere, so this will crash, but in that case, it seems legit to
+    do it, for checking what's going on.
+    """
+    openupgrade.logged_query(
+        env.cr, "DELETE FROM product_packaging WHERE product_id IS NULL"
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version):
+    _clean_incorrect_packaging_records(env)
     openupgrade.logged_query(
         env.cr,
         """
