@@ -26,7 +26,31 @@ def add_helper_repair_move_rel(env):
     sql.create_index(env.cr, index_name, "stock_move", ['"old_repair_line_id"'])
 
 
+def map_repair_order_state(env):
+    openupgrade.logged_query(
+        env.cr,
+        """
+        UPDATE repair_order
+        SET state = CASE WHEN state = 'ready' THEN 'confirmed' ELSE 'done'
+        WHERE state in ('ready', '2binvoiced')
+        """,
+    )
+
+
+def fill_repair_order_schedule_date(env):
+    openupgrade.logged_query(
+        env.cr,
+        """
+        UPDATE repair_order
+        SET schedule_date = create_date
+        WHERE schedule_date IS NULL
+        """,
+    )
+
+
 @openupgrade.migrate()
 def migrate(env, version=None):
     openupgrade.remove_tables_fks(env.cr, ["repair_line", "repair_fee"])
     add_helper_repair_move_rel(env)
+    map_repair_order_state(env)
+    fill_repair_order_schedule_date(env)

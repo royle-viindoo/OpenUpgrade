@@ -76,17 +76,21 @@ repair       / repair.order             / quotation_notes (html)        : DEL
 repair       / repair.order             / rating_ids (one2many)         : NEW relation: rating.rating
 repair       / repair.order             / recycle_location_id (many2one): NEW relation: stock.location, required, hasdefault: compute
 repair       / repair.order             / repaired (boolean)            : DEL
+# NOTHING TO DO
+
 repair       / repair.order             / schedule_date (date)          : now required
 repair       / repair.order             / schedule_date (date)          : type is now 'datetime' ('date')
+# DONE: pre-migration: set as create_date if null
+
 repair       / repair.order             / state (selection)             : selection_keys is now '['cancel', 'confirmed', 'done', 'draft', 'under_repair']' ('['2binvoiced', 'cancel', 'confirmed', 'done', 'draft', 'ready', 'under_repair']')
+# DONE: pre-migration: map 'ready' to 'confirmed', '2binvoiced' to 'done'
+
 repair       / repair.order             / under_warranty (boolean)      : NEW
 repair       / repair.order             / sale_order_line_id (many2one) : NEW relation: sale.order.line
 repair       / sale.order               / repair_order_ids (one2many)   : NEW relation: repair.order
 repair       / stock.picking            / is_repairable (boolean)       : not related anymore
 repair       / stock.picking            / is_repairable (boolean)       : now a function
-# TODO: post-migration: fill some new fields (to check which ones)
-# TODO: post-migration: create sale orders (and sale order lines) for invoiced repair orders that don't have sale orders
-# TODO: post-migration: link repair invoices with the sale orders (same for invoice lines and sale order lines)
+# NOTHING TO DO
 
 repair       / stock.picking.type       / code (False)                  : NEW selection_keys: ['incoming', 'internal', 'mrp_operation', 'outgoing', 'repair_operation'], mode: modify
 repair       / stock.picking.type       / default_recycle_location_dest_id (many2one): NEW relation: stock.location, hasdefault: compute
