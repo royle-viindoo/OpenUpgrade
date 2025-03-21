@@ -3,7 +3,13 @@
 from openupgradelib import openupgrade
 
 from odoo.tools import sql
+from odoo.tools.sql import column_exists, create_column
 
+
+def create_column_repair_type_id(env):
+    if not column_exists(env.cr, "stock_warehouse", "repair_type_id"):
+        create_column(env.cr, "stock_warehouse", "repair_type_id", "int4")
+        
 
 def add_helper_repair_move_rel(env):
     openupgrade.logged_query(
@@ -31,7 +37,7 @@ def map_repair_order_state(env):
         env.cr,
         """
         UPDATE repair_order
-        SET state = CASE WHEN state = 'ready' THEN 'confirmed' ELSE 'done'
+        SET state = CASE WHEN state = 'ready' THEN 'confirmed' ELSE 'done' END
         WHERE state in ('ready', '2binvoiced')
         """,
     )
@@ -51,6 +57,7 @@ def fill_repair_order_schedule_date(env):
 @openupgrade.migrate()
 def migrate(env, version=None):
     openupgrade.remove_tables_fks(env.cr, ["repair_line", "repair_fee"])
+    create_column_repair_type_id(env)
     add_helper_repair_move_rel(env)
     map_repair_order_state(env)
     fill_repair_order_schedule_date(env)
